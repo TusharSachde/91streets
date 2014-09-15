@@ -475,8 +475,18 @@ span.textOn {
     filter: grayscale(80%);
 }
 .incategory+.incategory {
-    margin-left:5px;
+    margin-left: 5px;
 }
-.row.row {
+.row+.row {
     margin-top: 5px;
+}
+.tabs-striped.tabs-light .tab-item.tab-item-active,
+.tabs-striped.tabs-light .tab-item.active,
+.tabs-striped.tabs-light .tab-item.activated {
+    color: #df4a39;
+    border-color: #df4a39;
+    -webkit-transition: all 300ms;
+}
+.tabs-striped .tab-item + .tab-item:before {
+    border-left: 0px solid #ccc;
 }
