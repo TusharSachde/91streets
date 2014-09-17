@@ -1,6 +1,13 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function ($scope) {})
+.controller('HomeCtrl', function ($scope, $ionicSlideBoxDelegate) {
+    $scope.nextSlide = function() {
+        $ionicSlideBoxDelegate.next();
+    };
+    $scope.prevSlide = function() {
+        $ionicSlideBoxDelegate.previous();
+    };
+})
 
 .controller('NotificationCtrl', function ($scope) {})
 

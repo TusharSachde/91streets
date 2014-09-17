@@ -26,10 +26,7 @@ textarea {
 }
 .bar .title {
     font-family: 'Rochester';
-    font-size: 32px;
-}
-.bar {
-    height: 50px;
+    font-size: 27px;
 }
 .tab-item.tab-item-active,
 .tab-item.active,
@@ -485,8 +482,21 @@ span.textOn {
 .tabs-striped.tabs-light .tab-item.activated {
     color: #df4a39;
     border-color: #df4a39;
-    -webkit-transition: all 300ms;
 }
 .tabs-striped .tab-item + .tab-item:before {
     border-left: 0px solid #ccc;
+}
+.store-icon p {
+    font-size: 10px;
+}
+.store-icon>.col {
+    color: #4B4A4A;
+}
+
+.image-scroll>.col-25+.col-25 {
+    margin-left: 5px;
+}
+.panel-title a {
+    width: 100%;
+    display: block;
 }
