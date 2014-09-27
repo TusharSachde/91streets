@@ -2,10 +2,10 @@
     <ion-content class="has-header">
         <div class="padding">
             <p>Select products that you wish to buy and we shall let you know about offers information and store information where you can buy your products from!</p>
-        
 
-        <h4>Your Bag:</h4>
-        <span ng-repeat="cloths in clothing|filter:'true'">{{cloths.name}}<span ng-hide="$last">,</span></span>
+
+            <h4>Your Bag:</h4>
+            <span ng-repeat="cloths in clothing|filter:'true'">{{cloths.name}}<span ng-hide="$last">,</span></span>
         </div>
         <accordion>
             <accordion-group is-open="status.open">
@@ -21,8 +21,6 @@
                     </li>
                 </ul>
             </accordion-group>
-
-
         </accordion>
 
         <div class="padding">
