@@ -1,26 +1,19 @@
-angular.module('starter.services', [])
+var adminurl = "http://mafiawarloots.com/91street/index.php/";
 
-/**
- * A simple example service that returns some data.
- */
-.factory('Friends', function() {
-  // Might use a resource here that returns a JSON array
+var myservices = angular.module('myservices', [])
 
-  // Some fake testing data
-  var friends = [
-    { id: 0, name: 'Scruff McGruff' },
-    { id: 1, name: 'G.I. Joe' },
-    { id: 2, name: 'Miss Frizzle' },
-    { id: 3, name: 'Ash Ketchum' }
-  ];
-
-  return {
-    all: function() {
-      return friends;
-    },
-    get: function(friendId) {
-      // Simple index lookup
-      return friends[friendId];
+.factory('MyServices', function ($http, $location) {
+    
+    var useremail ="";
+    return {
+        getuseremail: function() {
+            return useremail;
+        },
+        setuseremail: function(user) {
+            useremail = user;
+        },
+        getcategories: function () {
+            return $http.get(adminurl + 'site/getallcategories', {});
+        },
     }
-  }
 });

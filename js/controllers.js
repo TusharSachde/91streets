@@ -1,12 +1,22 @@
-angular.module('starter.controllers', [])
+//angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic','myservices'])
 
-.controller('HomeCtrl', function ($scope, $ionicSlideBoxDelegate) {
+.controller('HomeCtrl', function ($scope, $stateParams, MyServices) {
     $scope.nextSlide = function() {
         $ionicSlideBoxDelegate.next();
     };
     $scope.prevSlide = function() {
         $ionicSlideBoxDelegate.previous();
     };
+    
+    $scope.categorydata = [];
+    var ongetcategoriessuccess = function (data, status) {
+        console.log("DATA SUCCESS");
+        console.log(data);
+        $scope.categorydata = data;
+    };
+    MyServices.getcategories().success(ongetcategoriessuccess);
+    
 })
 
 .controller('NotificationCtrl', function ($scope) {})
