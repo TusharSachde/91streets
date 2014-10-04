@@ -1,5 +1,5 @@
 //angular.module('starter.controllers', [])
-angular.module('starter.controllers', ['ionic','myservices'])
+angular.module('starter.controllers', ['ionic','myservices','ngCordova'])
 
 .controller('HomeCtrl', function ($scope, $stateParams, MyServices) {
     $scope.nextSlide = function() {
@@ -11,7 +11,6 @@ angular.module('starter.controllers', ['ionic','myservices'])
     
     $scope.categorydata = [];
     var ongetcategoriessuccess = function (data, status) {
-        console.log("DATA SUCCESS");
         console.log(data);
         $scope.categorydata = data;
     };
