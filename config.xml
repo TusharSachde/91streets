@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.helloworld" version="1.0.0" versionCode="1">
+
+    <name>91streets</name>
+
+    <description>
+        Shopping deiscount
+    </description>
+
+    <author href="http://wohlig.com" email="info@wohlig.com">
+        Wohlig Technologies
+    </author>
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+    <gap:platform name="winphone" />
+
+    <icon src="img/logo.png"/>
+    <gap:splash src="img/splash.png" />
+
+    <preference name="phonegap-version" value="3.5.0" />
+    <preference name="permissions" value="none"/>
+    <preference name="fullscreen" value="false"/>
+    <preference name="orientation" value="portrait" />
+    <preference name="splash-screen-duration" value="10000"/>
+    <preference name="android-minSdkVersion" value="7" />
+    <preference name="LoadUrlTimeoutValue" value="100000" />
+    <access origin="*" />
+    <!-- allow all pages, use for development -->
+    <access origin="*.pushwoosh.com" />
+    <!-- allow pushwoosh service -->
+    
+    <gap:plugin name="org.apache.cordova.file"  />
+    <gap:plugin name="org.apache.cordova.file-transfer"  />
+    <gap:plugin name="org.apache.cordova.device" />
+    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.0.2" />
+    <gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.0" />
+    <gap:plugin name="org.apache.cordova.geolocation" version="4.3.0" />
+    
+    <feature name="http://api.phonegap.com/1.0/file"/>
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <feature name="http://api.phonegap.com/1.0/notification"/>
+
+
+
+</widget>

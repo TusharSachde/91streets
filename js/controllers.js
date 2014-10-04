@@ -39,7 +39,29 @@ angular.module('starter.controllers', ['ionic','myservices','ngCordova'])
     }];
 })
 
-.controller('StoreListCtrl', function ($scope) {})
+.controller('StoreListCtrl', function ($scope, $cordovaGeolocation, $ionicPopup) {
+
+    //Alert
+    $scope.showAlert = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Unable to find location',
+            template: 'Please turn on your GPS'
+        });
+    };
+    
+    //Location
+    $cordovaGeolocation
+    .getCurrentPosition()
+    .then(function (position) {
+        var lat  = position.coords.latitude
+        var long = position.coords.longitude
+        }, function(err) {
+        $scope.showAlert();
+    });
+
+
+
+})
 
 .controller('StorePageCtrl', function ($scope) {})
 
