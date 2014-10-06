@@ -2,23 +2,6 @@
     <ion-content class="has-header">
 
         <!--        {{location.latitude|number:0}} {{location.longitude|number:0}}-->
-
-        <!--
-        <div class="list">
-
-            <a class="item item-avatar" href="#/tab/storelist/storepage">
-                <img src="img/adidas.jpg">
-                <span class="item-note">
-                    39KM
-                </span>
-                <h2>Adidas</h2>
-                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
-                <p>High Street Pheonix Lower Parel</p>
-            </a>
-            
-
-        </div>
--->
         <ion-list>
             <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in brands">
                 <img src="{{brand.brandlogo|imagepath}}">
