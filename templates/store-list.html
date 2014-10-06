@@ -1,7 +1,9 @@
-<ion-view title="Store List">
+<ion-view title="Brands">
     <ion-content class="has-header">
-    
-    
+
+        <!--        {{location.latitude|number:0}} {{location.longitude|number:0}}-->
+
+        <!--
         <div class="list">
 
             <a class="item item-avatar" href="#/tab/storelist/storepage">
@@ -13,46 +15,24 @@
                 <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
                 <p>High Street Pheonix Lower Parel</p>
             </a>
-            <a class="item item-avatar" href="#/tab/storelist/storepage">
-                <img src="img/pj.jpg">
-                <span class="item-note">
-                    39KM
-                </span>
-                <h2>Pepe Jeans</h2>
-                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
-                <p>High Street Pheonix Lower Parel</p>
-            </a>
-            <a class="item item-avatar" href="#/tab/storelist/storepage">
-                <img src="img/mk.jpg">
-                <span class="item-note">
-                    39KM
-                </span>
-                <h2>Michael Kors</h2>
-                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
-                <p>High Street Pheonix Lower Parel</p>
-            </a>
-            <a class="item item-avatar" href="#/tab/storelist/storepage">
-                <img src="img/cygnus.jpg">
-                <span class="item-note">
-                    39KM
-                </span>
-                <h2>Cygnus</h2>
-                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
-                <p>High Street Pheonix Lower Parel</p>
-            </a>
-            <a class="item item-avatar" href="#/tab/storelist/storepage">
-                <img src="img/cinepolis.jpg">
-                <span class="item-note">
-                    39KM
-                </span>
-                <h2>Cinepolis</h2>
-                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
-                <p>High Street Pheonix Lower Parel</p>
-            </a>
+            
 
         </div>
-    
-
+-->
+        <ion-list>
+            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.brandid}}" ng-repeat="brand in brands">
+                <img src="{{brand.brandlogo|imagepath}}">
+                <span class="item-note">
+                    39KM
+                </span>
+                <h2>{{brand.brandname}}</h2>
+                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
+                <p>
+                    <span ng-hide="!brand.address">{{brand.address}}</span>
+                    <span ng-show="!brand.address">{{brand.storeaddress}}</span>
+                </p>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>
 
