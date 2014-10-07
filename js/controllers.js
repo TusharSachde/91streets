@@ -3,6 +3,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate) {
     
     // Create the login modal that we will use later
+    $scope.clickRegister = function() {
+        $scope.modal.hide();
+        $ionicModal.fromTemplateUrl('templates/register.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.modal.show();
+        });
+    }
+    
+    
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope
     }).then(function (modal) {
