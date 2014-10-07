@@ -2,10 +2,19 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate) {
     
-    // Create the login modal that we will use later
-    $scope.clickRegister = function() {
-        $scope.modal.hide();
-        $ionicModal.fromTemplateUrl('templates/register.html', {
+    // Create the login modal
+    $scope.checkButton = function(check) {
+        var page = 'login';
+        if (check == 'register')
+        {
+            page = "register";
+            $scope.modal.hide();
+        }
+        else
+        {
+            page = "login";
+        }
+        $ionicModal.fromTemplateUrl('templates/'+page+'.html', {
             scope: $scope
         }).then(function (modal) {
             $scope.modal = modal;
@@ -13,13 +22,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         });
     }
     
+    $scope.checkButton('login');
     
-    $ionicModal.fromTemplateUrl('templates/login.html', {
-        scope: $scope
-    }).then(function (modal) {
-        $scope.modal = modal;
-        $scope.modal.show();
-    });
+    //Register User
+    var onregistersuccess = function(data,status) {
+        $scope.checkButton('login');   
+    }
+    $scope.submitRegister = function(data)
+    {
+        MyServices.registeruser(data.name, data.lastname, data.email, data.password).success(onregistersuccess)
+    };
+    
     // Triggered in the login modal to close it
     $scope.closeLogin = function () {
         $scope.modal.hide();
@@ -41,7 +54,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     {
         if(data != "false")
         {
-            userdata = data;
+            $scope.userdata = data;
         };
     };
     

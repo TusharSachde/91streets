@@ -54,14 +54,10 @@ var myservices = angular.module('myservices', [])
             });
         },
         registeruser: function (firstname, lastname, email, password) {
-            return $http.post(adminurl + 'registeruser?firstname=' + firstname + '&lastname=' + lastname + '&email=' + email + '&password=' + password, {}, {
-                withCredentials: true
-            });
+            return $http.get(adminurl + 'createuser?name=' + firstname + '&sirname=' + lastname + '&email=' + email + '&password=' + password, {});
         },
         loginuser: function (email, password) {
-            return $http.post(adminurl + 'loginuser?email=' + email + '&password=' + password, {}, {
-                withCredentials: true
-            });
+            return $http.get(adminurl + 'checkfrontendlogin?email=' + email + '&password=' + password, {});
         },
         logout: function () {
             return $http.post(adminurl + 'logout', {}, {

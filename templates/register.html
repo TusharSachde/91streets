@@ -6,18 +6,24 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <form ng-submit="doLogin()">
+        <form ng-submit="submitRegister(loginData);">
             <div class="list">
                 <label class="item item-input">
-                    <input type="email" ng-model="loginData.email" placeholder="Email Address">
+                    <input type="text" ng-model="loginData.name" placeholder="Name" required>
                 </label>
                 <label class="item item-input">
-                    <input type="password" ng-model="loginData.password" placeholder="Password">
+                    <input type="text" ng-model="loginData.lastname" placeholder="Last Name" required>
+                </label>
+                <label class="item item-input">
+                    <input type="email" ng-model="loginData.email" placeholder="Email Address" required>
+                </label>
+                <label class="item item-input">
+                    <input type="password" ng-model="loginData.password" placeholder="Password" required>
                 </label>
             </div>
 
             <div class="padding">
-                <button class="button button-block button-balanced" ng-click="">Log in</button>
+                <button class="button button-block button-balanced" type="submit">Submit</button>
             </div>
         </form>
     </ion-content>
