@@ -492,7 +492,9 @@ span.textOn {
 .store-icon>.col {
     color: #4B4A4A;
 }
-
+.store-icon .icon {
+    font-size: 24px;
+}
 .image-scroll>.col-25+.col-25 {
     margin-left: 5px;
 }
@@ -504,6 +506,7 @@ span.textOn {
     color: inherit;
     text-decoration: none;
 }
+/*Image slider*/
 .marker {
     padding: 10px;
     margin: 10px;
@@ -534,4 +537,13 @@ span.textOn {
 .slider {
     width: 100%;
     height: 100%;
+}
+ul.rating li {
+    display: inline;
+    border: 0px;
+    background: none;
+    padding: 5px 10px;
+}
+ul.rating li i {
+    font-size: 30px;
 }

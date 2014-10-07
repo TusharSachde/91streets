@@ -37,6 +37,7 @@
     <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.0.2" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.0" />
     <gap:plugin name="org.apache.cordova.geolocation"  />
+    <gap:plugin name="org.apache.cordova.inappbrowser"  />
     
     <feature name="http://api.phonegap.com/1.0/file"/>
     <feature name="http://api.phonegap.com/1.0/geolocation"/>

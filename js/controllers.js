@@ -73,6 +73,15 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('FavoritesCtrl', function ($scope) {})
 
+.controller('RatingCtrl', function ($scope, $timeout) {
+
+    // set the rate and max variables
+    $scope.rate = 3;
+    $scope.max = 5; 
+
+
+})
+
 .controller('PhotoSliderCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $ionicModal.fromTemplateUrl('templates/image-slider.html', {
         scope: $scope,
@@ -131,4 +140,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.slideChanged = function (index) {
         $scope.slideIndex = index;
     };
-});
+})
+
+;
