@@ -30,7 +30,7 @@ var myservices = angular.module('myservices', [])
                 withCredentials: true
             });
         },
-        seach: function (search) {
+        search: function (search) {
             return $http.post(adminurl + 'getbrandsearch?brandname=' + search, {}, {
                 withCredentials: true
             });
