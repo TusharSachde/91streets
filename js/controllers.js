@@ -83,9 +83,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var onsearchsuccess = function (data, status) {
         $scope.brands = data;
     };
-    $scope.doSearch = function (search) {
-        MyServices.search($scope.datasearch).success(onsearchsuccess);
+    $scope.doSearch = function(data) {
+        MyServices.search(data).success(onsearchsuccess);
     };
+    
     $scope.clearSearch = function() {
         console.log("Click");
         $scope.datasearch = '';
