@@ -1,7 +1,24 @@
-//angular.module('starter.controllers', [])
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
-.controller('HomeCtrl', function ($scope, $stateParams, MyServices) {
+.controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate) {
+    
+    // Create the login modal that we will use later
+    $ionicModal.fromTemplateUrl('templates/login.html', {
+        scope: $scope
+    }).then(function (modal) {
+        $scope.modal = modal;
+        $scope.modal.show();
+    });
+    // Triggered in the login modal to close it
+    $scope.closeLogin = function () {
+        $scope.modal.hide();
+    };
+    // Open the login modal
+    $scope.showlogin = function () {
+        $scope.modal.show();
+    };
+    
+    // Slider Home Tab
     $scope.nextSlide = function () {
         $ionicSlideBoxDelegate.next();
     };
@@ -57,9 +74,22 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //Get brands by category API
     var categoryId = $stateParams.cid;
     var onbrandbycategorysuccess = function (data, status) {
-        $scope.brands=data;
+        $scope.brands = data;
     }
     MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
+    
+    
+    //Search
+    var onsearchsuccess = function (data, status) {
+        $scope.brands = data;
+    };
+    $scope.doSearch = function (search) {
+        MyServices.search($scope.datasearch).success(onsearchsuccess);
+    };
+    $scope.clearSearch = function() {
+        console.log("Click");
+        $scope.datasearch = '';
+    };
 })
 
 .controller('StorePageCtrl', function ($scope, $stateParams, MyServices) {
@@ -78,6 +108,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 })
 
 .controller('FavoritesCtrl', function ($scope) {})
+
+.controller('SearchCtrl', function ($scope) {
+    
+})
 
 .controller('RatingCtrl', function ($scope, $timeout) {
 

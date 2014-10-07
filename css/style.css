@@ -547,3 +547,14 @@ ul.rating li {
 ul.rating li i {
     font-size: 30px;
 }
+.item-complex .item-content, .item-radio .item-content {
+    padding-right: 15px;
+}
+.clear-search {
+    font-size: 18px;
+}
+.button.button-balanced {
+    border-color: #34A847;
+    background-color: #49C45D;
+    color: #fff;
+}

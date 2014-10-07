@@ -1,0 +1,24 @@
+<div class="modal">
+    <ion-header-bar class="bar bar-assertive">
+        <h1 class="title politics">Login</h1>
+        <div class="buttons">
+            <button class="button button-icon ion-ios7-close-empty" ng-click="closeLogin()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="doLogin()">
+            <div class="list">
+                <label class="item item-input">
+                    <input type="email" ng-model="loginData.email" placeholder="Email Address">
+                </label>
+                <label class="item item-input">
+                    <input type="password" ng-model="loginData.password" placeholder="Password">
+                </label>
+            </div>
+
+            <div class="padding">
+                <button class="button button-block button-balanced" ng-click="">Log in</button>
+            </div>
+        </form>
+    </ion-content>
+</div>
