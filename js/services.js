@@ -5,6 +5,7 @@ var myservices = angular.module('myservices', [])
 .factory('MyServices', function ($http, $location) {
     
     var useremail ="";
+    var uservalue = {};
     return {
         getuseremail: function() {
             return useremail;
@@ -63,6 +64,13 @@ var myservices = angular.module('myservices', [])
             return $http.post(adminurl + 'logout', {}, {
                 withCredentials: true
             });
+        },
+        setuser: function (userdata) {
+            uservalue = userdata;
+            $.jStorage.set("user",userdata);
+        },
+        getuser: function(){
+           // var user = $.jStorage.g
         },
     }
 });

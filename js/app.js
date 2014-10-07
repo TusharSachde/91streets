@@ -63,7 +63,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         views: {
             'tab-setting': {
                 templateUrl: 'templates/tab-setting.html',
-                controller: 'SettingCtrl'
+                controller: 'HomeCtrl'
             }
         }
     })

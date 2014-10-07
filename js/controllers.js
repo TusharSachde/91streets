@@ -1,6 +1,7 @@
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate) {
+    $scope.loginData = {};
     
     // Create the login modal
     $scope.checkButton = function(check) {
@@ -22,11 +23,20 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         });
     }
     
-    $scope.checkButton('login');
+    $scope.userdata = user = $.jStorage.get("user");
+    //Page opening, login modal if empty jStorage
+    if(!$scope.userdata)
+    {
+        $scope.checkButton('login');
+    };
     
     //Register User
     var onregistersuccess = function(data,status) {
-        $scope.checkButton('login');   
+        $scope.loginData.email = data.email;
+        $scope.loginData.password = data.passsword;
+        console.log(data);
+        $scope.checkButton('login');
+        
     }
     $scope.submitRegister = function(data)
     {
@@ -55,14 +65,26 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         if(data != "false")
         {
             $scope.userdata = data;
+            MyServices.setuser($scope.userdata);
+            $scope.closeLogin();
         };
+        
     };
     
-    $scope.loginfunction = function(userdata)
+    $scope.doLogin = function(userdata)
     {
-        var username = userdata.email;
+        var useremail = userdata.email;
         var password = userdata.password;        
-        MyServices.loginuser(username, password).success(loginsuccess)
+        MyServices.loginuser(useremail, password).success(loginsuccess)
+    };
+    
+    //Logout function
+    $scope.logout = function()
+    {
+        $.jStorage.flush();
+        $scope.userdata = {};
+        MyServices.setuser($scope.userdata);
+        $.jStorage.deleteKey("user");
     };
 
 })
