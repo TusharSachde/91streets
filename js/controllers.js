@@ -1,48 +1,42 @@
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
-
 .controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate) {
     $scope.loginData = {};
-    
+
     // Create the login modal
-    $scope.checkButton = function(check) {
+    $scope.checkButton = function (check) {
         var page = 'login';
-        if (check == 'register')
-        {
+        if (check == 'register') {
             page = "register";
             $scope.modal.hide();
-        }
-        else
-        {
+        } else {
             page = "login";
         }
-        $ionicModal.fromTemplateUrl('templates/'+page+'.html', {
+        $ionicModal.fromTemplateUrl('templates/' + page + '.html', {
             scope: $scope
         }).then(function (modal) {
             $scope.modal = modal;
             $scope.modal.show();
         });
     }
-    
+
     $scope.userdata = user = $.jStorage.get("user");
     //Page opening, login modal if empty jStorage
-    if(!$scope.userdata)
-    {
+    if (!$scope.userdata) {
         $scope.checkButton('login');
     };
-    
+
     //Register User
-    var onregistersuccess = function(data,status) {
+    var onregistersuccess = function (data, status) {
         $scope.loginData.email = data.email;
         $scope.loginData.password = data.passsword;
         console.log(data);
         $scope.checkButton('login');
-        
+
     }
-    $scope.submitRegister = function(data)
-    {
+    $scope.submitRegister = function (data) {
         MyServices.registeruser(data.name, data.lastname, data.email, data.password).success(onregistersuccess)
     };
-    
+
     // Triggered in the login modal to close it
     $scope.closeLogin = function () {
         $scope.modal.hide();
@@ -51,7 +45,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.showlogin = function () {
         $scope.modal.show();
     };
-    
+
     // Slider Home Tab
     $scope.nextSlide = function () {
         $ionicSlideBoxDelegate.next();
@@ -59,28 +53,24 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.prevSlide = function () {
         $ionicSlideBoxDelegate.previous();
     };
-    
-    var loginsuccess = function(data, status)
-    {
-        if(data != "false")
-        {
+
+    var loginsuccess = function (data, status) {
+        if (data != "false") {
             $scope.userdata = data;
             MyServices.setuser($scope.userdata);
             $scope.closeLogin();
         };
-        
+
     };
-    
-    $scope.doLogin = function(userdata)
-    {
+
+    $scope.doLogin = function (userdata) {
         var useremail = userdata.email;
-        var password = userdata.password;        
+        var password = userdata.password;
         MyServices.loginuser(useremail, password).success(loginsuccess)
     };
-    
+
     //Logout function
-    $scope.logout = function()
-    {
+    $scope.logout = function () {
         $.jStorage.flush();
         $scope.userdata = {};
         MyServices.setuser($scope.userdata);
@@ -131,30 +121,30 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }, function (err) {
             $scope.showAlert();
         });
-    
+
     //Get brands by category API
     var categoryId = $stateParams.cid;
     var onbrandbycategorysuccess = function (data, status) {
         $scope.brands = data;
     }
     MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
-    
-    
+
+
     //Search
     var onsearchsuccess = function (data, status) {
         $scope.brands = data;
     };
-    $scope.doSearch = function(data) {
+    $scope.doSearch = function (data) {
         MyServices.search(data).success(onsearchsuccess);
     };
-    
-    $scope.clearSearch = function() {
+
+    $scope.clearSearch = function () {
         console.log("Click");
         $scope.datasearch = '';
     };
 })
 
-.controller('StorePageCtrl', function ($scope, $stateParams, MyServices) {
+.controller('StorePageCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $timeout) {
     var brandId = $stateParams.bid;
     var ongetbrandsuccess = function (data, status) {
         $scope.branddetails = data.store;
@@ -162,25 +152,53 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     }
     MyServices.getbranddetails(brandId).success(ongetbrandsuccess);
 
-    $scope.sendtowebsite=function(website) {
+    $scope.sendtowebsite = function (website) {
         console.log(website);
         window.open(website, '_system');
+    };
+
+
+    //rating API
+    var onratingsuccess = function(data,status) {
+    }
+    $scope.submitRate = function(userid, storeid, rating) {
+        MyServices.rating(userid, storeid, rating).success(onratingsuccess);
     }
     
+    $scope.user = MyServices.getuser();
+    //Rating
+    $scope.rate = 4;
+    $scope.max = 5;
+    $scope.readonly = true;
+    $scope.showPopup = function () {
+        $scope.data = {}
+        var myPopup = $ionicPopup.show({
+            template: '<rating ng-model="data.newrate" max="max" readonly="false"></rating>',
+            title: 'Your Rating',
+            subTitle: 'Please enter your rating',
+            scope: $scope,
+            buttons: [
+                {
+                    text: 'Cancel'
+                },
+                {
+                    text: '<b>Submit</b>',
+                    type: 'button-balanced',
+                    onTap: function (e) {
+                        $scope.submitRate($scope.branddetails.id,$scope.user.id,$scope.data.newrate);
+                    }
+            },
+        ]
+        });
+
+    };
+                
+
 })
 
 .controller('FavoritesCtrl', function ($scope) {})
 
 .controller('SearchCtrl', function ($scope) {
-    
-})
-
-.controller('RatingCtrl', function ($scope, $timeout) {
-
-    // set the rate and max variables
-    $scope.rate = 3;
-    $scope.max = 5; 
-
 
 })
 
@@ -242,6 +260,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.slideChanged = function (index) {
         $scope.slideIndex = index;
     };
+
 })
 
 ;

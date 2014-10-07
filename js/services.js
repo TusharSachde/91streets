@@ -35,9 +35,7 @@ var myservices = angular.module('myservices', [])
             return $http.get(adminurl + 'getbrandsearch?brandname=' + search, {});
         },
         rating: function (userid, storeid, rating) {
-            return $http.post(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + 'rating' + rating , {}, {
-                withCredentials: true
-            });
+            return $http.get(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + 'rating' + rating , {});
         },
         getfavorites: function (user) {
             return $http.get(adminurl + 'showfavorites?user=' + user, {}, {
@@ -70,6 +68,7 @@ var myservices = angular.module('myservices', [])
             $.jStorage.set("user",userdata);
         },
         getuser: function(){
+            return uservalue;
            // var user = $.jStorage.g
         },
     }
