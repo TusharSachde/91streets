@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.helloworld" version="1.0.0" versionCode="1">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.ninetyone.streets" version="1.0.0" versionCode="1">
 
     <name>91streets</name>
 
     <description>
-        Shopping deiscount
+        Shopping discount
     </description>
 
     <author href="http://wohlig.com" email="info@wohlig.com">
@@ -23,20 +23,25 @@
     <preference name="permissions" value="none"/>
     <preference name="fullscreen" value="false"/>
     <preference name="orientation" value="portrait" />
-    <preference name="splash-screen-duration" value="10000"/>
+    <preference name="android-installLocation" value="internalOnly" />
+    <preference name="ErrorUrl" value=""/>
+    <preference name="BackgroundColor" value="0x000000"/>
+    <preference name="KeepRunning" value="true"/>
+    <preference name="splash-screen-duration" value="5000"/>
     <preference name="android-minSdkVersion" value="7" />
-    <preference name="LoadUrlTimeoutValue" value="100000" />
+    <preference name="LoadUrlTimeoutValue" value="200000" />
+    
     <access origin="*" />
     <!-- allow all pages, use for development -->
     <access origin="*.pushwoosh.com" />
     <!-- allow pushwoosh service -->
     
-    <gap:plugin name="org.apache.cordova.file"  />
-    <gap:plugin name="org.apache.cordova.file-transfer"  />
+    <gap:plugin name="org.apache.cordova.file" />
+    <gap:plugin name="org.apache.cordova.file-transfer" />
     <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.0.2" />
-    <gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.0" />
-    <gap:plugin name="org.apache.cordova.geolocation"  />
+    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" />
+    <gap:plugin name="nl.x-services.plugins.socialsharing" />
+    <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.inappbrowser"  />
     
     <feature name="http://api.phonegap.com/1.0/file"/>
