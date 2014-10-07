@@ -35,18 +35,18 @@ var myservices = angular.module('myservices', [])
                 withCredentials: true
             });
         },
-        rating: function (userid, storeid, review) {
-            return $http.post(adminurl + 'getbrandsearch?brandname=' + search, {}, {
+        rating: function (userid, storeid, rating) {
+            return $http.post(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + 'rating' + rating , {}, {
                 withCredentials: true
             });
         },
-        showfavorites: function (user) {
-            return $http.post(adminurl + 'showfavorites?user=' + user, {}, {
+        getfavorites: function (user) {
+            return $http.get(adminurl + 'showfavorites?user=' + user, {}, {
                 withCredentials: true
             });
         },
-        addtofavorites: function (user, product) {
-            return $http.post(adminurl + 'addtofavorites?user=' + user + '&product=' + product, {}, {
+        like: function (userid, storeid, like) {
+            return $http.post(adminurl + 'addlike?userid=' + userid + '&storeid=' + storeid + 'like' + rating , {}, {
                 withCredentials: true
             });
         },
