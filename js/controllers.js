@@ -25,6 +25,21 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.prevSlide = function () {
         $ionicSlideBoxDelegate.previous();
     };
+    
+    var loginsuccess = function(data, status)
+    {
+        if(data != "false")
+        {
+            userdata = data;
+        };
+    };
+    
+    $scope.loginfunction = function(userdata)
+    {
+        var username = userdata.email;
+        var password = userdata.password;        
+        MyServices.loginuser(username, password).success(loginsuccess)
+    };
 
 })
 
@@ -81,7 +96,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     
     //Search
     var onsearchsuccess = function (data, status) {
-        console.log("success");
         $scope.brands = data;
     };
     $scope.doSearch = function(data) {
