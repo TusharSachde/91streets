@@ -69,6 +69,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.newarrivals = data.newin;
     }
     MyServices.getbranddetails(brandId).success(ongetbrandsuccess);
+
+    $scope.sendtowebsite=function(website) {
+        console.log(website);
+        window.open(website, '_system');
+    }
+    
 })
 
 .controller('FavoritesCtrl', function ($scope) {})

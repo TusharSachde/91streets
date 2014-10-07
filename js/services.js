@@ -31,7 +31,12 @@ var myservices = angular.module('myservices', [])
             });
         },
         seach: function (search) {
-            return $http.post(adminurl + 'searchbyname?search=' + search, {}, {
+            return $http.post(adminurl + 'getbrandsearch?brandname=' + search, {}, {
+                withCredentials: true
+            });
+        },
+        rating: function (userid, storeid, review) {
+            return $http.post(adminurl + 'getbrandsearch?brandname=' + search, {}, {
                 withCredentials: true
             });
         },
