@@ -18,39 +18,19 @@ var myservices = angular.module('myservices', [])
                 params: {
                     id: id
                 }
-            }, {
-                withCredentials: true
             });
         },
-        getbranddetails: function (id) {
-            return $http.get(adminurl + 'getstorebystoreid', {
-                params: {
-                    id: id
-                }
-            }, {
-                withCredentials: true
-            });
+        getbranddetails: function (id, userid) {
+            return $http.get(adminurl + 'getstorebystoreid?id='+ id + '&userid=' + userid, {});
         },
         search: function (search) {
-            return $http.get(adminurl + 'getbrandsearch?brandname=' + search, {});
+            return $http.get(adminurl + 'getbrandsearch?brand=' + search, {});
         },
         rating: function (userid, storeid, rating) {
-            return $http.get(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + 'rating' + rating , {});
-        },
-        getfavorites: function (user) {
-            return $http.get(adminurl + 'showfavorites?user=' + user, {}, {
-                withCredentials: true
-            });
+            return $http.get(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + '&rating=' + rating , {});
         },
         like: function (userid, storeid, like) {
-            return $http.post(adminurl + 'addlike?userid=' + userid + '&storeid=' + storeid + 'like' + rating , {}, {
-                withCredentials: true
-            });
-        },
-        authenticate: function () {
-            return $http.post(adminurl + 'authenticate', {}, {
-                withCredentials: true
-            });
+            return $http.get(adminurl + 'addlike?userid=' + userid + '&brandid=' + storeid + '&like=' + like , {});
         },
         registeruser: function (firstname, lastname, email, password) {
             return $http.get(adminurl + 'createuser?name=' + firstname + '&sirname=' + lastname + '&email=' + email + '&password=' + password, {});
@@ -58,17 +38,13 @@ var myservices = angular.module('myservices', [])
         loginuser: function (email, password) {
             return $http.get(adminurl + 'checkfrontendlogin?email=' + email + '&password=' + password, {});
         },
-        logout: function () {
-            return $http.post(adminurl + 'logout', {}, {
-                withCredentials: true
-            });
-        },
         setuser: function (userdata) {
-            uservalue = userdata;
-            $.jStorage.set("user",userdata);
+            var user = userdata;
+            $.jStorage.set("user", userdata);
         },
         getuser: function(){
-            return uservalue;
+            var userdata = user = $.jStorage.get("user")
+            return userdata;
            // var user = $.jStorage.g
         },
     }

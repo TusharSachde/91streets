@@ -31,6 +31,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.loginData.password = data.passsword;
         console.log(data);
         $scope.checkButton('login');
+        $scope.modal.hide();
 
     }
     $scope.submitRegister = function (data) {
@@ -101,7 +102,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 })
 
 .controller('StoreListCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
-
+    
     //Alert
     $scope.showAlert = function () {
         var alertPopup = $ionicPopup.alert({
@@ -145,29 +146,66 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 })
 
 .controller('StorePageCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $timeout) {
+    $scope.user = MyServices.getuser();
     var brandId = $stateParams.bid;
     var ongetbrandsuccess = function (data, status) {
+        console.log(data);
         $scope.branddetails = data.store;
         $scope.newarrivals = data.newin;
-    }
-    MyServices.getbranddetails(brandId).success(ongetbrandsuccess);
+        data.averagerating=parseFloat(data.averagerating);
+        var decval=data.averagerating-Math.floor(data.averagerating);
+        if(decval<0.5)
+        {
+            $scope.rate = Math.floor(data.averagerating);
+        }
+        else
+        {
+            $scope.rate = data.averagerating;
+        }
+        
+        //like BRAND
+        var likecount = data.like;
+        $scope.checklike = likecount;
+        console.log('Like Counter= '+likecount);
+        $scope.like = function() {
+            if(likecount == 0 || !likecount) {
+                likecount = 1;
+            }
+            else {
+                likecount = 0;
+            };
+            $scope.checklike = likecount;
+            $scope.likeapi($scope.user.id, $scope.branddetails.brandid, likecount);
+            console.log($scope.user.id, $scope.branddetails.brandid, likecount);
+            console.log('Like Counter='+likecount+' '+$scope.checklike);
 
-    $scope.sendtowebsite = function (website) {
-        console.log(website);
-        window.open(website, '_system');
-    };
-
-
-    //rating API
-    var onratingsuccess = function(data,status) {
-    }
-    $scope.submitRate = function(userid, storeid, rating) {
-        MyServices.rating(userid, storeid, rating).success(onratingsuccess);
+        }
     }
     
-    $scope.user = MyServices.getuser();
+    MyServices.getbranddetails(brandId,$scope.user.id).success(ongetbrandsuccess);
+
+    $scope.sendtowebsite = function (website) {
+        window.open(website, '_system');
+    };
+    
+    //like API
+    var likesuccess = function (data,status) {
+        console.log(data+'Liked');
+    }
+    $scope.likeapi = function (userid, brandid, like) {
+        MyServices.like(userid, brandid, like).success(likesuccess);
+    }
+    
+    //rating API
+    var ratesuccess = function (data,status) {
+        
+    }
+    $scope.submitRate = function(userid, storeid, rating) {
+        MyServices.rating(userid, storeid, rating).success(ratesuccess);
+    }
+    
     //Rating
-    $scope.rate = 4;
+    $scope.rate = 0;
     $scope.max = 5;
     $scope.readonly = true;
     $scope.showPopup = function () {
@@ -185,15 +223,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                     text: '<b>Submit</b>',
                     type: 'button-balanced',
                     onTap: function (e) {
-                        $scope.submitRate($scope.branddetails.id,$scope.user.id,$scope.data.newrate);
+                        $scope.submitRate($scope.user.id,$scope.branddetails.id,$scope.data.newrate);
+                        console.log($scope.user.id,$scope.branddetails.id,$scope.data.newrate);
                     }
             },
         ]
         });
 
     };
-                
-
 })
 
 .controller('FavoritesCtrl', function ($scope) {})

@@ -43,7 +43,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         views: {
             'tab-favorites': {
                 templateUrl: 'templates/tab-favorites.html',
-                controller: 'FavoritesCtrl'
+                controller: 'StoreListCtrl'
             }
         }
     })
