@@ -84,7 +84,62 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('SettingCtrl', function ($scope) {})
 
-.controller('ShoppingCtrl', function ($scope) {
+.controller('ShoppingCtrl', function ($scope, MyServices) {
+    $scope.clothing=[];
+    
+    var allcategory = function (data, status){
+        
+        console.log(data);
+        $scope.categories=data;
+        
+//        for(var i=0;i<$scope.categories.length;i++)
+//        {
+//            $scope.subcat={
+//                name:$scope.categories[i].name,
+//                type:"false",
+//                parent:$scope.categories[i].parent
+//            };
+//            $scope.clothing.push($scope.subcat);
+//        }
+//        console.log("pushed data clothing");
+//        console.log($scope.clothing);
+        
+    };
+    MyServices.getcategory().success(allcategory);
+    var subcategory = function(data, status){
+        $scope.clothing=data;
+    };
+    $scope.getsubcategory=function(id){
+        console.log("my id is");
+        console.log(id);
+        MyServices.getsubcategory(id).success(subcategory);
+    };
+    
+    $scope.bigbag=[];
+    $scope.addtobag=function(cloths){
+        if($scope.bigbag=="")
+        {
+            $scope.bigbag.push(cloths);
+        }
+            for(var i=0;i<$scope.bigbag.length;i++){
+                if($scope.bigbag[i].id==cloths.id){
+                    $scope.bigbag[i].splice(i,1);
+                    $scope.in=0;
+                }else{
+                    $scope.in=1;
+                   
+                }
+            }
+        if($scope.in==1){
+            $scope.bigbag.push(cloths);
+        }
+        
+        
+       
+        console.log($scope.bigbag);
+        
+    };
+    
     $scope.oneAtATime = true;
     $scope.clothing = [{
         name: "Casual Wear",
@@ -145,8 +200,19 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 })
 
+
+
 .controller('StorePageCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $timeout) {
     $scope.user = MyServices.getuser();
+    $scope.test="helllooo.....";
+    console.log("storage controller");
+    $scope.user={};
+    console.log($scope.user);
+    if($scope.user==null)
+    {
+        console.log("returning null");
+        $scope.user.id=0;
+    }
     var brandId = $stateParams.bid;
     var ongetbrandsuccess = function (data, status) {
         console.log(data);
@@ -168,6 +234,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.checklike = likecount;
         console.log('Like Counter= '+likecount);
         $scope.like = function() {
+            
             if(likecount == 0 || !likecount) {
                 likecount = 1;
             }

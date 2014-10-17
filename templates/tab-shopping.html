@@ -4,18 +4,17 @@
             <p>Select products that you wish to buy and we shall let you know about offers information and store information where you can buy your products from!</p>
 
 
-            <h4>Your Bag:</h4>
-            <span ng-repeat="cloths in clothing|filter:'true'">{{cloths.name}}<span ng-hide="$last">,</span></span>
+            <span ng-repeat="bagin in bag|filter:'true'">{{bagin.name}}<span ng-hide="$last">,</span></span>
         </div>
-        <accordion>
+        <accordion ng-repeat="category in categories">
             <accordion-group is-open="status.open">
                 <accordion-heading>
-                    Clothing <i class="pull-right ion ion-ios7-arrow-down"></i>
+                    <p >{{category.name}} <i class="pull-right ion ion-ios7-arrow-down"></i></p>
                 </accordion-heading>
                 <ul class="list">
-                    <li class="item item-checkbox" ng-repeat="cloths in clothing">
+                    <li class="item item-checkbox" ng-repeat="cloths in category.subcategory">
                         <label class="checkbox">
-                            <input type="checkbox" ng-model="cloths.type">
+                            <input type="checkbox" ng-model="cloths.type" ng-click="addtobag(cloths);">
                         </label>
                         {{cloths.name}}
                     </li>

@@ -20,6 +20,12 @@ var myservices = angular.module('myservices', [])
                 }
             });
         },
+        getsubcategory: function (id) {
+            return $http.get(adminurl + 'getsubcategory?id='+id, {});
+        },
+        getcategory: function () {
+            return $http.get(adminurl + 'getmaincategory', {});
+        },
         getbranddetails: function (id, userid) {
             return $http.get(adminurl + 'getstorebystoreid?id='+ id + '&userid=' + userid, {});
         },
