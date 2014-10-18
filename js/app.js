@@ -78,6 +78,16 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     })
 
+    .state('tab.shoppingbag', {
+        url: '/shoppingbag',
+        views: {
+            'tab-shopping': {
+                templateUrl: 'templates/tab-shoppingbag.html',
+                controller: 'ShoppingBagCtrl'
+            }
+        }
+    })
+
     .state('tab.storelist', {
         url: '/storelist/:cid',
         views: {
