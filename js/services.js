@@ -20,17 +20,8 @@ var myservices = angular.module('myservices', [])
                 }
             });
         },
-        saveshoppingbag: function (bigbagplan) {
-            return $http.get(adminurl + 'saveshoppingbag?user=' + bigbagplan.user + '&category=' + bigbagplan.category, {});
-        },
-        getshoppingbag: function (id) {
-            return $http.get(adminurl + 'getshoppingbag?user='+id, {});
-        },
         getsubcategory: function (id) {
             return $http.get(adminurl + 'getsubcategory?id='+id, {});
-        },
-        getstorebycategories: function (id) {
-            return $http.get(adminurl + 'getstorebycategories?id='+id, {});
         },
         getcategory: function () {
             return $http.get(adminurl + 'getmaincategory', {});
