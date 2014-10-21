@@ -2,6 +2,26 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     .controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate) {
         $scope.loginData = {};
 
+        //Display Main categories
+        var getcategorysuccess = function(data, status){
+          console.log(data);  
+            $scope.category=data;
+//            $scope.category.leftcategory={};
+//            $scope.category.rightcategory={};
+//            
+//            for(var i=0;i<data.length;i++)
+//            {
+//                if(i%2==0){
+//                    $scope.category.leftcategory=data[i];
+//                    $scope.category.rightcategory=data[i+1];
+//                }
+//            }
+//            console.log($scope.category);
+//            
+        };
+    
+        MyServices.getcategory().success(getcategorysuccess);
+    
         // Create the login modal
         $scope.checkButton = function (check) {
             var page = 'login';

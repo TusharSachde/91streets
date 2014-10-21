@@ -24,36 +24,56 @@
         </label>
         <div class="category">
             <h4 class="assertive">CATEGORIES</h4>
-            <div class="row">
+            <div class="row" ng-repeat="cat1 in category">
                 <div class="col incategory">
-                    <a href="#tab/storelist/4"><img src="img/clothing.jpg" alt="" class="full-image">
-                        <span class="textOn">Clothes</span></a>
+                    <a href="#tab/storelist/{{cat1.id}}"><img src="img/clothing.jpg" alt="" class="full-image">
+                        <span class="textOn">{{cat1.name}}</span></a>
                 </div>
-                <div class="col incategory">
-                    <a href="#tab/storelist/5"><img src="img/footwear.jpg" alt="" class="full-image">
-                        <span class="textOn">Footwear</span></a>
+<!--
+                <div class="col incategory" ng-repeat="cat2 in rightcategory.right">
+                    <a href="#tab/storelist/26"><img src="img/footwear.jpg" alt="" class="full-image">
+                        <span class="textOn">{{cat1.rightcategory.name}}</span></a>
                 </div>
+-->
             </div>
+<!--
             <div class="row">
                 <div class="col incategory">
-                    <a href="#tab/storelist/17"><img src="img/sports.jpg" alt="" class="full-image">
+                    <a href="#tab/storelist/27"><img src="img/sports.jpg" alt="" class="full-image">
                         <span class="textOn">Sports &amp; Fitness</span></a>
                 </div>
                 <div class="col incategory">
-                    <a href="#tab/storelist/12"><img src="img/electronics.jpg" alt="" class="full-image">
+                    <a href="#tab/storelist/32"><img src="img/electronics.jpg" alt="" class="full-image">
                         <span class="textOn">Electronics</span></a>
                 </div>
             </div>
             <div class="row">
                 <div class="col incategory">
-                    <a href="#tab/storelist/22"><img src="img/health.jpg" alt="" class="full-image">
+                    <a href="#tab/storelist/28"><img src="img/health.jpg" alt="" class="full-image">
                         <span class="textOn">Health &amp; Care</span></a>
                 </div>
                 <div class="col incategory">
-                    <a href="#tab/storelist/23"><img src="img/fashion.jpg" alt="" class="full-image">
+                    <a href="#tab/storelist/25"><img src="img/fashion.jpg" alt="" class="full-image">
                         <span class="textOn">Fashion Accesories</span></a>
                 </div>
             </div>
+            <div class="row">
+                <div class="col incategory">
+                    <a href="#tab/storelist/29"><img src="img/health.jpg" alt="" class="full-image">
+                        <span class="textOn">Kids</span></a>
+                </div>
+                <div class="col incategory">
+                    <a href="#tab/storelist/30"><img src="img/fashion.jpg" alt="" class="full-image">
+                        <span class="textOn">Entertainment</span></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col incategory">
+                    <a href="#tab/storelist/31"><img src="img/health.jpg" alt="" class="full-image">
+                        <span class="textOn">Jewellery</span></a>
+                </div>
+            </div>
+-->
 
         </div>
 
