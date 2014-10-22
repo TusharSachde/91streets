@@ -507,6 +507,7 @@ span.textOn {
     text-decoration: none;
 }
 /*Image slider*/
+
 .marker {
     padding: 10px;
     margin: 10px;
@@ -547,7 +548,8 @@ ul.rating li {
 ul.rating li i {
     font-size: 30px;
 }
-.item-complex .item-content, .item-radio .item-content {
+.item-complex .item-content,
+.item-radio .item-content {
     padding-right: 15px;
 }
 .clear-search {
@@ -560,4 +562,7 @@ ul.rating li i {
 }
 .liked {
     color: #DF4E11;
+}
+.accordion-toggle p {
+    margin: 0;
 }

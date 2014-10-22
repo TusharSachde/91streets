@@ -6,18 +6,18 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var getcategorysuccess = function(data, status){
           console.log(data);  
             $scope.category=data;
-//            $scope.category.leftcategory={};
-//            $scope.category.rightcategory={};
-//            
-//            for(var i=0;i<data.length;i++)
-//            {
-//                if(i%2==0){
-//                    $scope.category.leftcategory=data[i];
-//                    $scope.category.rightcategory=data[i+1];
-//                }
-//            }
-//            console.log($scope.category);
-//            
+/*            $scope.category.leftcategory={};
+            $scope.category.rightcategory={};
+            
+            for(var i=0;i<data.length;i++)
+            {
+                if(i%2==0){
+                    $scope.category.leftcategory=data[i];
+                    $scope.category.rightcategory=data[i+1];
+                }
+            }
+            console.log($scope.category);
+    */        
         };
     
         MyServices.getcategory().success(getcategorysuccess);
@@ -234,20 +234,20 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $location.url("/tab/shoppingbag");
     };
 
-    //    $scope.oneAtATime = true;
-    //    $scope.clothing = [{
-    //        name: "Casual Wear",
-    //        type: "true"
-    //    }, {
-    //        name: "Formal Wear",
-    //        type: "false"
-    //    }, {
-    //        name: "Party Wear",
-    //        type: "false"
-    //    }, {
-    //        name: "Sports Wear",
-    //        type: "false"
-    //    }];
+    /*    $scope.oneAtATime = true;
+        $scope.clothing = [{
+            name: "Casual Wear",
+            type: "true"
+        }, {
+            name: "Formal Wear",
+            type: "false"
+        }, {
+            name: "Party Wear",
+            type: "false"
+        }, {
+            name: "Sports Wear",
+            type: "false"
+        }];*/
 })
 
 .controller('ShoppingBagCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
@@ -270,8 +270,23 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 })
 
-.controller('StoreListCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
-
+.controller('StoreListCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
+    //Sort Modal
+    $ionicModal.fromTemplateUrl('templates/sort.html', {
+        id: '1',
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.oModal1 = modal;
+    });
+    $scope.showSort = function () {
+        $scope.oModal1.show();
+    };
+    $scope.hideSort = function () {
+        $scope.oModal1.hide();
+    };
+    
+    
     //Alert
     $scope.showAlert = function () {
         var alertPopup = $ionicPopup.alert({
