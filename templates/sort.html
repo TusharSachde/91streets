@@ -13,29 +13,18 @@
                             </p>
                         </accordion-heading>
                         <ul class="list">
-                            <li class="item item-checkbox">
+                            <li class="item item-checkbox" ng-repeat="cat in subcat">
                                 <label class="checkbox">
-                                    <input type="checkbox" ng-model="dep.men">
+                                    <input type="checkbox" ng-model="cat.type" ng-click="filter(cat);">
                                 </label>
-                                Men
+                                {{cat.name}}
                             </li>
-                            <li class="item item-checkbox">
-                                <label class="checkbox">
-                                    <input type="checkbox" ng-model="dep.women">
-                                </label>
-                                Women
-                            </li>
-                            <li class="item item-checkbox">
-                                <label class="checkbox">
-                                    <input type="checkbox" ng-model="dep.kid">
-                                </label>
-                                Kid
-                            </li>
+                           
                         </ul>
                     </accordion-group>
                 </accordion>
 
-                <button class="button button-assertive button-block" type="submit">Submit</button>
+                <button class="button button-assertive button-block" type="submit" ng-click="hideSort()">Submit</button>
             </div>
         </form>
     </ion-content>

@@ -32,6 +32,9 @@ var myservices = angular.module('myservices', [])
         getstorebycategories: function (id) {
             return $http.get(adminurl + 'getstorebycategories?id='+id, {});
         },
+        getcatarraystore: function (catarray) {
+            return $http.get(adminurl + 'getcatarraystore?catarray='+catarray, {});
+        },
         getcategory: function () {
             return $http.get(adminurl + 'getmaincategory', {});
         },
