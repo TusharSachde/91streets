@@ -26,6 +26,12 @@ var myservices = angular.module('myservices', [])
         getshoppingbag: function (id) {
             return $http.get(adminurl + 'getshoppingbag?user='+id, {});
         },
+        getallstoresbybrandid: function (id) {
+            return $http.get(adminurl + 'getallstoresbybrandid?id='+id, {});
+        },
+        getallbrands: function () {
+            return $http.get(adminurl + 'getallbrands', {});
+        },
         getsubcategory: function (id) {
             return $http.get(adminurl + 'getsubcategory?id='+id, {});
         },
