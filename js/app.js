@@ -98,6 +98,26 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     })
 
+    .state('tab.brandlist', {
+        url: '/brandlist',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/brand-list.html',
+                controller: 'BrandListCtrl'
+            }
+        }
+    })
+    
+    .state('tab.brandstorelist', {
+        url: '/brandstorelist/:id',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/brand-store.html',
+                controller: 'BrandStoreCtrl'
+            }
+        }
+    })
+
     .state('tab.storepage', {
         url: '/storelist/storepage/:bid',
         views: {

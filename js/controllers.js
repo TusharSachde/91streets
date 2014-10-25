@@ -472,6 +472,26 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 })
 
+.controller('BrandListCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+                      $scope.demo="demo";
+                      var brnadsuccess = function(data, status){
+                      console.log(data);
+                      $scope.brands=data;
+                      };
+                      MyServices.getallbrands().success(brnadsuccess);
+                      })
+                      
+.controller('BrandStoreCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+                      $scope.demo="demo";
+                      
+                      var brnadsuccess = function(data, status){
+                      console.log(data);
+                      $scope.brands=data;
+                      };
+                      MyServices.getallstoresbybrandid($stateParams.id).success(brnadsuccess);
+                      })
+                      
+
 .controller('PhotoSliderCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $ionicModal.fromTemplateUrl('templates/image-slider.html', {
         scope: $scope,
