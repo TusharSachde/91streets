@@ -271,6 +271,43 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 })
 
 .controller('StoreListCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
+    
+    var categoryId = $stateParams.cid;
+    $scope.cat=[];
+    //get sub category
+    var subcategorysuccess = function (data, status){
+        console.log(data);
+        $scope.subcat=data;
+    };
+    MyServices.getsubcategory(categoryId).success(subcategorysuccess);
+    //filter
+    $scope.filter=function(cat){
+        
+        if ($scope.cat.length == 0) {
+            $scope.cat.push(cat);
+            $scope.catarray=cat.id;
+        } else {
+            for (var i = 0; i < $scope.cat.length; i++) {
+                if ($scope.cat[i].id == cat.id) {
+                    $scope.cat.splice(i, 1);
+                    $scope.in = 0;
+                } else {
+                    $scope.in = 1;
+
+                }
+            }
+
+            if ($scope.in == 1) {
+                $scope.cat.push(cat);
+                $scope.catarray+=","+cat.id;
+            }
+        }
+
+        console.log($scope.cat);
+        console.log($scope.catarray);
+        
+        
+    };
     //Sort Modal
     $ionicModal.fromTemplateUrl('templates/sort.html', {
         id: '1',
@@ -282,8 +319,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.showSort = function () {
         $scope.oModal1.show();
     };
-    $scope.hideSort = function () {
+    
+    
+    var catarraysuccess = function(data, status){
+        console.log(data);
+        $scope.brands=data;
+    };
+    
+    $scope.hideSort = function (dep) {
+        console.log($scope.catarray);
         $scope.oModal1.hide();
+        MyServices.getcatarraystore($scope.catarray).success(catarraysuccess);
     };
     
     
@@ -308,7 +354,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         });
 
     //Get brands by category API
-    var categoryId = $stateParams.cid;
     var onbrandbycategorysuccess = function (data, status) {
         $scope.brands = data;
     }
