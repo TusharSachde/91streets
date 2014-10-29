@@ -1,6 +1,10 @@
 <ion-view title="91streets">
     <ion-content class="has-header padding">
-
+ <ion-nav-buttons side="right">
+            <button class="button button-icon icon ion-share"  onclick="window.plugins.socialsharing.share('Download 91streets from playstore', '91streets - We help you to shop', 'https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets')"></button>
+           
+        </ion-nav-buttons>
+        
         <ion-slide-box show-pager="false" auto-play="false">
             <ion-slide>
                 <img src="img/slide.png" alt="" class="full-image">
@@ -14,8 +18,8 @@
             <div class="button-bar">
                 <a class="button button-outline button-assertive button-small" href="#/tab/brandlist">Malls</a>
                 <!-- <button class="button button-outline button-assertive button-small" href="#/tab/storelist/all">Shopping</button> -->
-                <button class="button button-outline button-assertive button-small" ng-click="shoppingip()">Shopping</button>
-                <button class="button button-outline button-assertive button-small" href="#/tab/storelist/discount">Discount</button>
+<!--                <button class="button button-outline button-assertive button-small" ng-click="shoppingip()">Shopping</button>-->
+                <button class="button button-outline button-assertive button-small" href="#/tab/brandlist">Discount</button>
             </div>
         </div>
 
@@ -53,19 +57,20 @@
                 </div>
             </div>
             <div class="row">
+               <div class="col incategory">
+                    <a href="#tab/storelist/31"><img src="img/jew.jpg" alt="" class="full-image">
+                        <span class="textOn">Jewellery</span></a>
+                </div>
                 <div class="col incategory">
-                    <a href="#tab/storelist/29"><img src="img/health.jpg" alt="" class="full-image">
+                    <a href="#tab/storelist/29"><img src="img/kids.jpg" alt="" class="full-image">
                         <span class="textOn">Kids</span></a>
                 </div>
-                <div class="col incategory">
-                    <a href="#tab/storelist/30"><img src="img/fashion.jpg" alt="" class="full-image">
-                        <span class="textOn">Entertainment</span></a>
-                </div>
+                
             </div>
             <div class="row">
                 <div class="col incategory">
-                    <a href="#tab/storelist/31"><img src="img/health.jpg" alt="" class="full-image">
-                        <span class="textOn">Jewellery</span></a>
+                    <a href="#tab/storelist/30"><img src="img/ent.jpg" alt="" class="full-image">
+                        <span class="textOn">Entertainment</span></a>
                 </div>
             </div>
 
