@@ -16,37 +16,49 @@
     <gap:platform name="android" />
     <gap:platform name="winphone" />
 
-    <icon src="img/logo.png"/>
+    <icon src="img/logo.png" />
     <gap:splash src="img/splash.png" />
 
-    <preference name="phonegap-version"/>
-    <preference name="permissions" value="none"/>
-    <preference name="fullscreen" value="false"/>
+    <preference name="phonegap-version" />
+    <preference name="permissions" value="none" />
+    <preference name="fullscreen" value="false" />
     <preference name="orientation" value="portrait" />
     <preference name="android-installLocation" value="internalOnly" />
-    <preference name="ErrorUrl" value=""/>
-    <preference name="BackgroundColor" value="0x000000"/>
-    <preference name="KeepRunning" value="true"/>
-    <preference name="splash-screen-duration" value="5000"/>
+    <preference name="ErrorUrl" value="" />
+    <preference name="BackgroundColor" value="0x000000" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="splash-screen-duration" value="5000" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
-    
+
     <access origin="*" />
     <!-- allow all pages, use for development -->
     <access origin="*.pushwoosh.com" />
     <!-- allow pushwoosh service -->
-    
+
     <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.file-transfer" />
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="com.pushwoosh.plugins.pushwoosh" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
     <gap:plugin name="org.apache.cordova.geolocation" />
-    <gap:plugin name="org.apache.cordova.inappbrowser"  />
-    
-    <feature name="http://api.phonegap.com/1.0/file"/>
-    <feature name="http://api.phonegap.com/1.0/geolocation"/>
-    <feature name="http://api.phonegap.com/1.0/notification"/>
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
+
+    <feature name="http://api.phonegap.com/1.0/file" />
+    <feature name="http://api.phonegap.com/1.0/geolocation" />
+    <feature name="http://api.phonegap.com/1.0/notification" />
+    <!-- for iOS -->
+    <feature name="SocialSharing">
+        <param name="ios-package" value="SocialSharing" />
+    </feature>
+    <!-- for Android (you will find one in res/xml) -->
+    <feature name="SocialSharing">
+        <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+    </feature>
+    <!-- for Windows Phone -->
+    <feature name="SocialSharing">
+        <param name="wp-package" value="SocialSharing" />
+    </feature>
 
 
 
