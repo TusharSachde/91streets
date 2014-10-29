@@ -18,7 +18,7 @@
             </div>
             <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in brands">
                 <img src="{{brand.brandlogo|imagepath}}">
-                <span class="item-note">39KM</span>
+                <span class="item-note">{{brand.dist}} KM</span>
                 <h2>{{brand.brandname}}</h2>
                 <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
                 <p>
