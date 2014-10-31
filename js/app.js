@@ -43,7 +43,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         views: {
             'tab-favorites': {
                 templateUrl: 'templates/tab-favorites.html',
-                controller: 'StoreListCtrl'
+                controller: 'FavoritesCtrl'
             }
         }
     })
@@ -108,6 +108,16 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     })
     
+    .state('tab.malllist', {
+        url: '/malllist',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/mall-list.html',
+                controller: 'MallistCtrl'
+            }
+        }
+    })
+    
     .state('tab.brandstorelist', {
         url: '/brandstorelist/:id',
         views: {
@@ -124,6 +134,26 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             'tab-home': {
                 templateUrl: 'templates/store-page.html',
                 controller: 'StorePageCtrl'
+            }
+        }
+    })
+
+    .state('tab.mallpage', {
+        url: '/malllist/mallpage/:id',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/mall-page.html',
+                controller: 'MallPageCtrl'
+            }
+        }
+    })
+
+    .state('tab.mallpagelist', {
+        url: '/mallpagelist/:id/:mid',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/mallpage-list.html',
+                controller: 'MallPageListCtrl'
             }
         }
     })

@@ -29,6 +29,21 @@ var myservices = angular.module('myservices', [])
         getallstoresbybrandid: function (id) {
             return $http.get(adminurl + 'getallstoresbybrandid?id='+id, {});
         },
+        beforeeditmall: function (id) {
+            return $http.get(adminurl + 'beforeeditmall?id='+id, {});
+        },
+        mallcategorystore: function (id,mid) {
+            return $http.get(adminurl + 'mallcategorystore?id='+id+"&mid="+mid, {});
+        },
+        addstorelike: function (user,store) {
+            return $http.get(adminurl + 'addstorelike?user='+user+"&store="+store, {});
+        },
+        mallcategories: function (id) {
+            return $http.get(adminurl + 'mallcategories?id='+id, {});
+        },
+        getallmalls: function () {
+            return $http.get(adminurl + 'getallmalls', {});
+        },
         getallbrands: function () {
             return $http.get(adminurl + 'getallbrands', {});
         },

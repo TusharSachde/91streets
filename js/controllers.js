@@ -473,12 +473,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.sendtowebsite = function (website) {
         window.open(website, '_system');
-    };
+    }
 
     //like API
     var likesuccess = function (data, status) {
         console.log(data + 'Liked');
-    }
+    };
     $scope.likeapi = function (userid, brandid, like) {
         MyServices.like(userid, brandid, like).success(likesuccess);
     }
@@ -486,7 +486,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //rating API
     var ratesuccess = function (data, status) {
 
-    }
+    };
     $scope.submitRate = function (userid, storeid, rating) {
         MyServices.rating(userid, storeid, rating).success(ratesuccess);
     }
@@ -511,16 +511,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                     $scope.submitRate($scope.user.id, $scope.branddetails.id, $scope.data.newrate);
                     console.log($scope.user.id, $scope.branddetails.id, $scope.data.newrate);
                 }
-            }, ]
+            }]
         });
 
     };
-})
-
-.controller('FavoritesCtrl', function ($scope) {})
-
-.controller('SearchCtrl', function ($scope) {
-
 })
 
 .controller('BrandListCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
@@ -532,6 +526,132 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
     MyServices.getallbrands().success(brnadsuccess);
 })
+
+.controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+    $scope.demo = "demo";
+
+})
+
+.controller('MallPageListCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $ionicModal, $ionicSlideBoxDelegate) {
+    console.log($stateParams.mid);
+    $scope.cat = [];
+    
+    //get sub category
+    var subcategorysuccess = function (data, status) {
+        console.log(data);
+        $scope.subcat = data;
+    };
+    MyServices.getsubcategory($stateParams.id).success(subcategorysuccess);
+    //filter
+    $scope.filter = function (cat) {
+
+        if ($scope.cat.length == 0) {
+            $scope.cat.push(cat);
+            $scope.catarray = cat.id;
+        } else {
+            for (var i = 0; i < $scope.cat.length; i++) {
+                if ($scope.cat[i].id == cat.id) {
+                    $scope.cat.splice(i, 1);
+                    $scope.in = 0;
+                } else {
+                    $scope.in = 1;
+
+                }
+            }
+
+            if ($scope.in == 1) {
+                $scope.cat.push(cat);
+                $scope.catarray += "," + cat.id;
+            }
+        }
+
+        console.log($scope.cat);
+        console.log($scope.catarray);
+
+
+    };
+    //Sort Modal
+    $ionicModal.fromTemplateUrl('templates/sort.html', {
+        id: '1',
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.oModal1 = modal;
+    });
+    $scope.showSort = function () {
+        $scope.oModal1.show();
+    };
+
+    var catarraysuccess = function (data, status) {
+        console.log(data);
+        $scope.brands = data;
+    };
+
+    $scope.hideSort = function () {
+        console.log($scope.cat);
+        $scope.categoryarray=$scope.cat[0].id;
+        for(var i=1;i<$scope.cat.length;i++)
+        {
+            $scope.categoryarray += "," + $scope.cat[i].id;
+        }
+        console.log($scope.categoryarray);
+        $scope.oModal1.hide();
+        MyServices.getcatarraystore($scope.catarray).success(catarraysuccess);
+    };
+
+        var mallpagesuccess = function (data, status) {
+            console.log(data);
+            $scope.malllist = data;
+        };
+        MyServices.mallcategorystore($stateParams.id,$stateParams.mid).success(mallpagesuccess);
+})
+
+.controller('MallistCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+    $scope.demo = "demo";
+    $scope.malls = [];
+    var mallsuccess = function (data, status) {
+        console.log(data);
+        $scope.malls = data;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].logo == "") {
+                $scope.malls[i].logo = "img/logo.png";
+            }
+        }
+    };
+    MyServices.getallmalls().success(mallsuccess);
+})
+
+
+.controller('MallPageCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+    $scope.demo = "demo";
+    console.log("mall id");
+    console.log($stateParams.id);
+    $scope.mall = [];
+    $scope.mallcategory = {};
+    var mallsuccess = function (data, status) {
+        console.log(data.mall);
+        $scope.mall = data.mall;
+        if (data.mall.logo == "") {
+            $scope.mall.logo = "img/logo.png";
+        }
+    };
+    MyServices.beforeeditmall($stateParams.id).success(mallsuccess);
+
+    var mallcategorysuccess = function (data, status) {
+        //        console.log("mall category");
+        //        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].name != null & data[i].parent == 0) {
+                $scope.mallcategory[i] = data[i];
+            }
+        }
+        console.log("formated categories");
+        console.log($scope.mallcategory);
+    };
+    MyServices.mallcategories($stateParams.id).success(mallcategorysuccess);
+
+})
+
 
 .controller('BrandStoreCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";

@@ -1,0 +1,56 @@
+<ion-view title="Mall Page">
+    <ion-content class="has-header"> <ion-nav-buttons side="right">
+        </ion-nav-buttons>
+        <div class="storepage">
+            <div class="storeimg">
+                <img src="{{mall.logo}}" alt="" class="full-image storepic-bg">
+            </div>
+            <div class="text-center">
+                <img src="{{mall.logo}}" alt="" class="storepic">
+                <h2>{{mall.brandname}}</h2>
+                <p>
+                    <span ng-hide="!mall.address">{{mall.address}}</span>
+                    <span ng-show="!mall.address">{{mall.storeaddress}}</span>
+                </p>
+            </div>
+            <div class="row text-center store-icon">
+                <div class="col">
+                    <a href="tel:{{mall.contactno}}">
+                        <i class="icon ion-android-call"></i>
+                        <p>Call</p>
+                    </a>
+                </div>
+                <!-- <div class="col" ng-click="like();">
+                    <i class="icon ion-heart" ng-class="{liked: checklike == 1}"></i>
+                    <p>Like<span ng-show="checklike == 1;">d</span></p>
+                </div> -->
+                <div class="col">
+                    <i class="icon ion-android-location"></i>
+                    <p>Locate</p>
+                </div>
+                <div class="col" ng-click="sendtowebsite(mall.website);">
+                    <i class="icon ion-ios7-world-outline"></i>
+                        <p>Website</p>
+                </div>
+                <div class="col">
+                    <i class="icon ion-share"></i>
+                    <p>Share</p>
+                </div>
+            </div>
+
+            
+        <div class="category">
+            <h4 class="assertive">CATEGORIES</h4>
+            <div class="row" ng-repeat="cat in mallcategory">
+                <div class="col incategory">
+                    <a href="#tab/mallpagelist/{{cat.categoryid}}/{{cat.mall}}"><img src="img/clothing.jpg" alt="" class="full-image">
+                        <span class="textOn">{{cat.name}}</span></a>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+
+    </ion-content>
+</ion-view>
