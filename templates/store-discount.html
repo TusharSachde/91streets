@@ -1,4 +1,4 @@
-<ion-view title="Brands">
+<ion-view title="Discount">
     <ion-content class="has-header">
         <ion-nav-buttons side="right">
             
@@ -9,12 +9,7 @@
            <div class="item-divider">
                <button class="button button-clear button-small button-dark" ng-click="showSort();">Filter</button>
                <button class="button button-clear button-small button-dark" ng-click="showsortsort();">Sort</button>
-               <!-- <button class="button button-clear button-small button-dark" ng-click="changesort('brandname',false);">A-Z</button>
-               <button class="button button-clear button-small button-dark" ng-click="changesort('dist',false);">Distance</button>
-               <button class="button button-clear button-small button-dark" ng-click="changesort('rating',true);">Rating</button> -->
-               <button class="button button-clear button-small button-dark" ng-click="showdiscount();">Discount</button>
                <button class="button button-clear button-small button-dark" style="float:right;" ng-click="clear();">Clear Filter &amp; Sort</button>
-               
            </div>
             <div class="item item-input-inset" ng-show="showSearch">
                 <label class="item-input-wrapper">
@@ -23,15 +18,14 @@
                     <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch();"></i>
                 </label>
             </div>
-            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in brands | orderBy:myorder:myorderorder">
-                <img src="{{brand.brandlogo|imagepath}}">
-                <span class="item-note">{{brand.dist}} KM</span>
-                <h2>{{brand.brandname}}</h2>
-                <h3 style="color:#cc2311;">{{brand.header}}</h3>
+            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{store.id}}" ng-repeat="store in listing | orderBy:myorder:myorderorder">
+                <img src="{{store.image|imagepath}}">
+                <span class="item-note">{{store.dist}} KM</span>
+                <h2>{{store.name}}</h2> <strong style="color:#cc2311;">{{store.header}}</strong>
                 <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
                 <p>
-                    <span ng-hide="!brand.address">{{brand.address}}</span>
-                    <span ng-show="!brand.address">{{brand.storeaddress}}</span>
+                    <span ng-hide="!store.address">{{store.address}}</span>
+                    <span ng-show="!store.address">{{store.storeaddress}}</span>
                 </p>
             </ion-item>
         </ion-list>

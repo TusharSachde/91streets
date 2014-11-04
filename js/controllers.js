@@ -271,11 +271,148 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }];*/
 })
 
+.controller('DiscountCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
+
+
+    $scope.cat = [];
+    $scope.catarray = [];
+    
+//    clear filter and sort
+    
+    $scope.clear = function (){
+        MyServices.getallstoresdiscount().success(getdiscount);
+    }
+    
+    var allmaincategory = function (data, status) {
+        console.log(data);
+        $scope.allcat = data;
+    };
+    MyServices.getcategory().success(allmaincategory);
+
+    //filter
+    $scope.filter = function (cat) {
+
+        if ($scope.cat.length == 0) {
+            $scope.cat.push(cat);
+            //            $scope.catarray = cat.id;
+        } else {
+            for (var i = 0; i < $scope.cat.length; i++) {
+                if ($scope.cat[i].id == cat.id) {
+                    $scope.cat.splice(i, 1);
+                    $scope.in = 0;
+                } else {
+                    $scope.in = 1;
+
+                }
+            }
+
+            if ($scope.in == 1) {
+                $scope.cat.push(cat);
+                //                $scope.catarray += "," + cat.id;
+            }
+        }
+
+        console.log($scope.cat);
+        //        console.log($scope.catarray);
+
+
+    };
+
+    $scope.sort = "othersort.html";
+    $scope.myorder = 'name';
+    $scope.myorderorder = false;;
+    $scope.changesort = function (order, orderorder) {
+        $scope.myorder = order;
+        $scope.myorderorder = orderorder;
+    };
+
+
+    $ionicModal.fromTemplateUrl('templates/discountsort.html', {
+        id: '4',
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.oModal4 = modal;
+    });
+    $scope.showsortsort = function () {
+        $scope.oModal4.show();
+    };
+
+    var getdiscount = function (data, status) {
+        console.log(data);
+        $scope.listing = {};
+        $scope.listing = data;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].image == null) {
+                $scope.listing[i].image = "../assets/img/logo.png";
+            }
+            if (data[i].latitude == null & data[i].longitude == null) {
+                $scope.listing[i].dist = 0;
+            } else {
+                $scope.listing[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
+            }
+        }
+    };
+    MyServices.getallstoresdiscount().success(getdiscount);
+
+
+    function showPosition2(position) {
+        var latlon = position.coords.latitude + "," + position.coords.longitude;
+        console.log("Positions:.........");
+        console.log(position.coords);
+        $scope.coords = position.coords;
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+        MyServices.getallstoresdiscount().success(getdiscount);
+    }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition2, showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+
+
+    //Sort Modal
+    $ionicModal.fromTemplateUrl('templates/allfilter.html', {
+        id: '3',
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.oModal3 = modal;
+    });
+    $scope.showSort = function () {
+        $scope.oModal3.show();
+    };
+
+
+    //    var catarraysuccess = function (data, status) {
+    //        console.log(data);
+    //        $scope.brands = data;
+    //    };
+
+    $scope.hideSort = function (dep) {
+        console.log($scope.cat);
+        $scope.catarray = $scope.cat[0].id;
+        for (var i = 1; i < $scope.cat.length; i++) {
+            $scope.catarray += "," + $scope.cat[i].id;
+        }
+        $scope.oModal3.hide();
+        MyServices.getcatarraystoreoffer($scope.catarray).success(getdiscount);
+    };
+})
+
 .controller('ShoppingBagCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
 
     var getshoppingbagg = function (data, status) {
         console.log(data);
-        $scope.listing = data;
+        for (var i = 0; i < data.length; i++) {
+            $scope.listing = data;
+            $scope.listing[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
+            console.log($scope.listing[i].dist);
+        }
+        console.log($scope.listing);
     };
 
     $scope.user = MyServices.getuser();
@@ -291,12 +428,81 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 })
 
+.controller('StoreDetailCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
+
+    var onestore = function (data, status) {
+        console.log(data);
+        $scope.storedetails = {};
+        $scope.storedetails = data;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].image == null) {
+                $scope.storedetails[i].image = "../assets/img/logo.png";
+            }
+            $scope.storedetails[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
+
+        }
+    };
+
+
+    function showPosition2(position) {
+        var latlon = position.coords.latitude + "," + position.coords.longitude;
+        console.log("Positions:.........");
+        console.log(position.coords);
+        $scope.coords = position.coords;
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+        MyServices.getstorebyid($stateParams.id).success(onestore);
+    }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition2, showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+
+
+
+})
+
 .controller('StoreListCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
 
     $scope.brands = [];
     var categoryId = $stateParams.cid;
     $scope.cat = [];
+    $scope.discountstatus = 0;
+    $scope.sort = "othersort.html";
+    $scope.myorder = 'brandname';
+    $scope.myorderorder = false;;
+    $scope.changesort = function (order, orderorder) {
+        $scope.myorder = order;
+        $scope.myorderorder = orderorder;
+    };
+    //show discount fucntion
 
+    $scope.clear = function () {
+        MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
+    }
+    
+    var getdiscount = function (data, status) {
+        for (var i = 0; i < data.length; i++) {
+            $scope.brands = data;
+            $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
+            console.log($scope.brands[i].dist);
+        }
+        console.log($scope.brands);
+    }
+
+    $scope.showdiscount = function () {
+        if ($scope.discountstatus == 0) {
+            MyServices.getstorebycategoryoffers($stateParams.cid).success(getdiscount);
+            $scope.discountstatus = 1;
+        } else {
+            MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
+            $scope.discountstatus = 0;
+        }
+
+    }
     // ip function
 
 
@@ -340,7 +546,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         if ($scope.cat.length == 0) {
             $scope.cat.push(cat);
-            $scope.catarray = cat.id;
+//            $scope.catarray = cat.id;
         } else {
             for (var i = 0; i < $scope.cat.length; i++) {
                 if ($scope.cat[i].id == cat.id) {
@@ -354,14 +560,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
             if ($scope.in == 1) {
                 $scope.cat.push(cat);
-                $scope.catarray += "," + cat.id;
+//                $scope.catarray += "," + cat.id;
             }
         }
 
         console.log($scope.cat);
-        console.log($scope.catarray);
-
-
     };
     //Sort Modal
     $ionicModal.fromTemplateUrl('templates/sort.html', {
@@ -371,20 +574,34 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     }).then(function (modal) {
         $scope.oModal1 = modal;
     });
+    $ionicModal.fromTemplateUrl('templates/othersort.html', {
+        id: '2',
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.oModal2 = modal;
+    });
     $scope.showSort = function () {
         $scope.oModal1.show();
     };
-
-
-    var catarraysuccess = function (data, status) {
-        console.log(data);
-        $scope.brands = data;
+    $scope.showsortsort = function () {
+        $scope.oModal2.show();
     };
 
+
+//    var catarraysuccess = function (data, status) {
+//        console.log(data);
+//        $scope.brands = data;
+//    };
+
     $scope.hideSort = function (dep) {
-        console.log($scope.catarray);
+        console.log($scope.cat);
+        $scope.catarray = $scope.cat[0].id;
+        for (var i = 1; i < $scope.cat.length; i++) {
+            $scope.catarray += "," + $scope.cat[i].id;
+        }
+        MyServices.getcatarraystore($scope.catarray).success(onbrandbycategorysuccess);
         $scope.oModal1.hide();
-        MyServices.getcatarraystore($scope.catarray).success(catarraysuccess);
     };
 
 
@@ -527,15 +744,29 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     MyServices.getallbrands().success(brnadsuccess);
 })
 
-.controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
-    $scope.demo = "demo";
+.controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate, $location) {
+    
+    $scope.user = {};
+    $scope.user = MyServices.getuser();
+    console.log("My information");
+    console.log($scope.user);
+    if ($scope.user == null) {
+        $location.url('/home');
+    }else{
+        MyServices.getuserlike($scope.user.id).success(userlikes);
+    }
+    var userlikes = function (data, status) {
+        console.log(data);
+        $scope.favorites=data;
+    };
+    
 
 })
 
 .controller('MallPageListCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $ionicModal, $ionicSlideBoxDelegate) {
     console.log($stateParams.mid);
     $scope.cat = [];
-    
+
     //get sub category
     var subcategorysuccess = function (data, status) {
         console.log(data);
@@ -589,9 +820,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.hideSort = function () {
         console.log($scope.cat);
-        $scope.categoryarray=$scope.cat[0].id;
-        for(var i=1;i<$scope.cat.length;i++)
-        {
+        $scope.categoryarray = $scope.cat[0].id;
+        for (var i = 1; i < $scope.cat.length; i++) {
             $scope.categoryarray += "," + $scope.cat[i].id;
         }
         console.log($scope.categoryarray);
@@ -599,11 +829,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         MyServices.getcatarraystore($scope.catarray).success(catarraysuccess);
     };
 
-        var mallpagesuccess = function (data, status) {
-            console.log(data);
-            $scope.malllist = data;
-        };
-        MyServices.mallcategorystore($stateParams.id,$stateParams.mid).success(mallpagesuccess);
+    var mallpagesuccess = function (data, status) {
+        console.log(data);
+        $scope.malllist = data;
+    };
+    MyServices.mallcategorystore($stateParams.id, $stateParams.mid).success(mallpagesuccess);
 })
 
 .controller('MallistCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
