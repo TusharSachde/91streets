@@ -645,10 +645,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
 .controller('StorePageCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $timeout) {
+    $scope.user = {};
     $scope.user = MyServices.getuser();
     $scope.test = "helllooo.....";
     console.log("storage controller");
-    $scope.user = {};
     console.log($scope.user);
     if ($scope.user == null) {
         console.log("returning null");
