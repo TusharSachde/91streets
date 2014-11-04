@@ -1,5 +1,6 @@
 <ion-view title="Mall Page">
-    <ion-content class="has-header"> <ion-nav-buttons side="right">
+    <ion-content class="has-header">
+        <ion-nav-buttons side="right">
         </ion-nav-buttons>
         <div class="storepage">
             <div class="storeimg">
@@ -30,7 +31,7 @@
                 </div>
                 <div class="col" ng-click="sendtowebsite(mall.website);">
                     <i class="icon ion-ios7-world-outline"></i>
-                        <p>Website</p>
+                    <p>Website</p>
                 </div>
                 <div class="col">
                     <i class="icon ion-share"></i>
@@ -38,19 +39,15 @@
                 </div>
             </div>
 
-            
-        <div class="category">
-            <h4 class="assertive">CATEGORIES</h4>
-            <div class="row" ng-repeat="cat in mallcategory">
-                <div class="col incategory">
-                    <a href="#tab/mallpagelist/{{cat.categoryid}}/{{cat.mall}}"><img src="img/clothing.jpg" alt="" class="full-image">
-                        <span class="textOn">{{cat.name}}</span></a>
-                </div>
+
+            <div class="category">
+                <h4 class="<as></as>sertive">CATEGORIES</h4>
+                <ion-list ng-repeat="cat in mallcategory">
+                    <ion-item href="#tab/mallpagelist/{{cat.categoryid}}/{{cat.mall}}">{{cat.name}}
+                    </ion-item>
+                </ion-list>
             </div>
 
-        </div>
-
-        </div>
 
     </ion-content>
 </ion-view>
