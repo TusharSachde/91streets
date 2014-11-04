@@ -750,15 +750,16 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.user = MyServices.getuser();
     console.log("My information");
     console.log($scope.user);
+    
+    var userlikes = function (data, status) {
+        console.log(data);
+        $scope.favorites=data;
+    };
     if ($scope.user == null) {
         $location.url('/home');
     }else{
         MyServices.getuserlike($scope.user.id).success(userlikes);
     }
-    var userlikes = function (data, status) {
-        console.log(data);
-        $scope.favorites=data;
-    };
     
 
 })
