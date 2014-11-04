@@ -1,0 +1,42 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-assertive">
+        <h1 class="title">Discount Sort</h1>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="">
+
+            <div class="padding">
+                <accordion>
+                    <accordion-group is-open="status.open">
+                        <accordion-heading>
+                            <p>Sort<i class="pull-right ion ion-ios7-arrow-down"></i>
+                            </p>
+                        </accordion-heading>
+                        <ul class="list">
+                            <li class="item item-checkbox">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="sort" ng-model="atoz"  ng-click="changesort('name',false);">
+                                </label>
+                                A To Z
+                            </li>
+                            <li class="item item-checkbox">
+                                <label class="checkbox">
+                                    <input type="checkbox"  name="sort" ng-model="distact" ng-click="changesort('dist',false);">
+                                </label>
+                                Distance
+                            </li>
+                            <li class="item item-checkbox">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="sort" ng-model="rating" ng-click="changesort('rating',true);">
+                                </label>
+                                Rating
+                            </li>
+                           
+                        </ul>
+                    </accordion-group>
+                </accordion>
+
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

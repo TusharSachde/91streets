@@ -118,6 +118,16 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     })
     
+    .state('tab.discount', {
+        url: '/discount',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/store-discount.html',
+                controller: 'DiscountCtrl'
+            }
+        }
+    })
+    
     .state('tab.brandstorelist', {
         url: '/brandstorelist/:id',
         views: {
@@ -134,6 +144,15 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             'tab-home': {
                 templateUrl: 'templates/store-page.html',
                 controller: 'StorePageCtrl'
+            }
+        }
+    })
+    .state('tab.storedetail', {
+        url: '/storedetail/:id',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/store-detail.html',
+                controller: 'StoreDetailCtrl'
             }
         }
     })
@@ -163,6 +182,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
 
 })
 
+
 .filter('imagepath', function () {
     return function (input) {
         if (input == null) {
@@ -172,6 +192,8 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     };
 });
+
+
 
 var rad = function(x) {
     return x * Math.PI / 180;

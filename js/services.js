@@ -20,6 +20,13 @@ var myservices = angular.module('myservices', [])
                 }
             });
         },
+        getstorebycategoryoffers: function (id) {
+            return $http.get(adminurl + 'getstorebycategoryoffers', {
+                params: {
+                    id: id
+                }
+            });
+        },
         saveshoppingbag: function (bigbagplan) {
             return $http.get(adminurl + 'saveshoppingbag?user=' + bigbagplan.user + '&category=' + bigbagplan.category, {});
         },
@@ -41,6 +48,12 @@ var myservices = angular.module('myservices', [])
         mallcategories: function (id) {
             return $http.get(adminurl + 'mallcategories?id='+id, {});
         },
+        getuserlike: function (id) {
+            return $http.get(adminurl + 'getuserlike?user='+id, {});
+        },
+        getallstoresdiscount: function () {
+            return $http.get(adminurl + 'getallstoresdiscount', {});
+        },
         getallmalls: function () {
             return $http.get(adminurl + 'getallmalls', {});
         },
@@ -52,6 +65,9 @@ var myservices = angular.module('myservices', [])
         },
         getstorebycategories: function (id) {
             return $http.get(adminurl + 'getstorebycategories?id='+id, {});
+        },
+        getcatarraystoreoffer: function (catarray) {
+            return $http.get(adminurl + 'getcatarraystoreoffer?catarray='+catarray, {});
         },
         getcatarraystore: function (catarray) {
             return $http.get(adminurl + 'getcatarraystore?catarray='+catarray, {});

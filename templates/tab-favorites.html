@@ -14,9 +14,17 @@
         </div>
 -->
   <ion-list>
-      <ion-item>
-          Favorites is empty.
-      </ion-item>
+            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="favorite in favorites">
+                <img src="{{favorite.logo|imagepath}}">
+                <span class="item-note">{{favorite.dist}} KM</span>
+                <h2>{{favorite.name}}</h2>
+                <h3 style="color:#cc2311;">{{favorite.header}}</h3>
+                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
+                <p>
+                    <span ng-hide="!brand.address">{{favorite.address}}</span>
+                    <span ng-show="!brand.address">{{favorite.storeaddress}}</span>
+                </p>
+            </ion-item>
   </ion-list>
    
    
