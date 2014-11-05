@@ -47,6 +47,16 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             }
         }
     })
+    
+    .state('tab.favoritesstore', {
+        url: '/favoritesstore',
+        views: {
+            'tab-favorites': {
+                templateUrl: 'templates/favoritesstore-list.html',
+                controller: 'FavoritesStoreCtrl'
+            }
+        }
+    })
 
     .state('tab.notification', {
         url: '/notification',
@@ -191,8 +201,15 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             return "http://mafiawarloots.com/91street/uploads/" + input;
         }
     };
+})
+.filter('isuserlike', function () {
+    return function (input) {
+        if(input==1)
+            return "liked";
+        else
+            return "";
+    };
 });
-
 
 
 var rad = function(x) {
