@@ -72,6 +72,9 @@ var myservices = angular.module('myservices', [])
         getcatarraystore: function (catarray) {
             return $http.get(adminurl + 'getcatarraystore?catarray='+catarray, {});
         },
+        favoritebrands: function () {
+            return $http.get(adminurl + 'favoritebrands', {});
+        },
         getcategory: function () {
             return $http.get(adminurl + 'getmaincategory', {});
         },

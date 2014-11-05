@@ -128,7 +128,60 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     })
 
-.controller('NotificationCtrl', function ($scope) {})
+.controller('FavoritesStoreCtrl', function ($scope, MyServices, $ionicModal, $timeout, $location) {
+
+    $scope.user = MyServices.getuser();
+    $scope.brands = {};
+    console.log($scope.user);
+    
+    $scope.gotofavorites = function () {
+        console.log("gotofavoriteslist clicked");
+        $location.url("tab/favorites");
+    }
+
+    var favoritelisting = function (data, status) {
+        console.log(data);
+        $scope.brands = data;
+        for (var i = 0; i < data.length; i++) {
+            $scope.brands[i].mylike = data[i].like.length;
+            for (var j = 0; j < data[i].like.length; j++){
+                if(data[i].like[j].user==$scope.user.id)
+                {
+                    $scope.brands[i].userlike = 1;
+                }else{
+                    $scope.brands[i].userlike = 0;
+                }
+            }
+        }
+        console.log("liklikliklik");
+        console.log($scope.brands);
+
+    };
+    MyServices.favoritebrands().success(favoritelisting);
+    
+    $scope.likeclass="liked";
+    $scope.nolikeclass="";
+    var ilike = function (data, status){
+        console.log(data);
+    };
+    $scope.like =function(brand){
+        console.log(brand);
+        if(brand.userlike==0)
+        {
+            brand.userlike=1;
+            MyServices.like($scope.user.id,brand.brandid,brand.userlike).success(ilike);
+        }
+        else
+        {
+            brand.userlike=0;
+            MyServices.like($scope.user.id,brand.brandid,brand.userlike).success(ilike);
+        }
+        console.log(brand.userlike);
+        //$scope.$apply();
+    }
+
+})
+    .controller('NotificationCtrl', function ($scope) {})
 
 .controller('SettingCtrl', function ($scope) {})
 
@@ -276,13 +329,13 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.cat = [];
     $scope.catarray = [];
-    
-//    clear filter and sort
-    
-    $scope.clear = function (){
+
+    //    clear filter and sort
+
+    $scope.clear = function () {
         MyServices.getallstoresdiscount().success(getdiscount);
     }
-    
+
     var allmaincategory = function (data, status) {
         console.log(data);
         $scope.allcat = data;
@@ -483,7 +536,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.clear = function () {
         MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
     }
-    
+
     var getdiscount = function (data, status) {
         for (var i = 0; i < data.length; i++) {
             $scope.brands = data;
@@ -546,7 +599,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         if ($scope.cat.length == 0) {
             $scope.cat.push(cat);
-//            $scope.catarray = cat.id;
+            //            $scope.catarray = cat.id;
         } else {
             for (var i = 0; i < $scope.cat.length; i++) {
                 if ($scope.cat[i].id == cat.id) {
@@ -560,7 +613,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
             if ($scope.in == 1) {
                 $scope.cat.push(cat);
-//                $scope.catarray += "," + cat.id;
+                //                $scope.catarray += "," + cat.id;
             }
         }
 
@@ -589,10 +642,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
 
-//    var catarraysuccess = function (data, status) {
-//        console.log(data);
-//        $scope.brands = data;
-//    };
+    //    var catarraysuccess = function (data, status) {
+    //        console.log(data);
+    //        $scope.brands = data;
+    //    };
 
     $scope.hideSort = function (dep) {
         console.log($scope.cat);
@@ -645,10 +698,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
 .controller('StorePageCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $timeout) {
-    $scope.user = {};
+
     $scope.user = MyServices.getuser();
     $scope.test = "helllooo.....";
     console.log("storage controller");
+    $scope.user = {};
     console.log($scope.user);
     if ($scope.user == null) {
         console.log("returning null");
@@ -679,7 +733,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 likecount = 0;
             };
             $scope.checklike = likecount;
-            $scope.likeapi($scope.user.id, $scope.branddetails.brandid, likecount);
+            if (!$scope.user.id || $scope.user.id == 0) {
+                console.log("sorryyy haha...");
+            } else {
+                $scope.likeapi($scope.user.id, $scope.branddetails.brandid, likecount);
+            }
+
             console.log($scope.user.id, $scope.branddetails.brandid, likecount);
             console.log('Like Counter=' + likecount + ' ' + $scope.checklike);
 
@@ -745,22 +804,27 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 })
 
 .controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate, $location) {
-    
+
     $scope.user = {};
     $scope.user = MyServices.getuser();
     console.log("My information");
     console.log($scope.user);
-    
+
     var userlikes = function (data, status) {
         console.log(data);
-        $scope.favorites=data;
+        $scope.favorites = data;
     };
     if ($scope.user == null) {
         $location.url('/home');
-    }else{
+    } else {
         MyServices.getuserlike($scope.user.id).success(userlikes);
     }
-    
+
+
+    $scope.gotofavoriteslist = function () {
+        console.log("gotofavoriteslist clicked");
+        $location.url("tab/favoritesstore");
+    }
 
 })
 
@@ -843,13 +907,44 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var mallsuccess = function (data, status) {
         console.log(data);
         $scope.malls = data;
+        
+        
+        
+        
         for (var i = 0; i < data.length; i++) {
+            if (data[i].latitude != null) {
+                $scope.malls[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
+                console.log($scope.malls[i].dist);
+            } else {
+                $scope.malls[i].dist = 0;
+            }
             if (data[i].logo == "") {
                 $scope.malls[i].logo = "img/logo.png";
             }
         }
     };
-    MyServices.getallmalls().success(mallsuccess);
+    
+    
+    
+    
+    function showPosition2(position) {
+        var latlon = position.coords.latitude + "," + position.coords.longitude;
+        console.log("Positions:.........");
+        console.log(position.coords);
+        $scope.coords = position.coords;
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+        MyServices.getallmalls().success(mallsuccess);
+    }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition2, showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+
+    
 })
 
 
