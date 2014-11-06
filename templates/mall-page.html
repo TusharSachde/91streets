@@ -42,10 +42,16 @@
 
             <div class="category">
                 <h4 class="<as></as>sertive">CATEGORIES</h4>
-                <ion-list ng-repeat="cat in mallcategory">
+                <div class="row" ng-repeat="mallcat in mallcategory">
+                <div class="col incategory" ng-repeat="mallc in mallcat">
+                    <a href="#tab/mallpagelist/{{mallc.categoryid}}/{{mallc.mall}}"><img src="img/clothing.jpg" alt="" class="full-image">
+                        <span class="textOn">{{mallc.name}}</span></a>
+                </div>
+            </div>
+                <!-- <ion-list ng-repeat="cat in mallcategory">
                     <ion-item href="#tab/mallpagelist/{{cat.categoryid}}/{{cat.mall}}">{{cat.name}}
                     </ion-item>
-                </ion-list>
+                </ion-list> -->
             </div>
 
 

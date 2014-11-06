@@ -953,7 +953,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     console.log("mall id");
     console.log($stateParams.id);
     $scope.mall = [];
-    $scope.mallcategory = {};
+    $scope.mallcategory = [];
     var mallsuccess = function (data, status) {
         console.log(data.mall);
         $scope.mall = data.mall;
@@ -968,14 +968,30 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         //        console.log(data);
         for (var i = 0; i < data.length; i++) {
             if (data[i].name != null & data[i].parent == 0) {
-                $scope.mallcategory[i] = data[i];
+                $scope.mallcategory.push(data[i]);
             }
         }
         console.log("formated categories");
         console.log($scope.mallcategory);
+        $scope.mallcategory=partitionarray($scope.mallcategory,2);
     };
     MyServices.mallcategories($stateParams.id).success(mallcategorysuccess);
-
+ function partitionarray(myarray,number) {
+            var arrlength=myarray.length;
+            var newarray=[];
+            var j=-1;
+            for(var i=0;i<arrlength;i++)
+            {
+                if(i%number==0)
+                {
+                    j++;
+                    newarray[j]=[];
+                }
+                newarray[j].push(myarray[i]);
+            }
+            return newarray;
+        };
+    
 })
 
 
