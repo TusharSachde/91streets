@@ -576,11 +576,13 @@ ul.rating li i {
     padding: 10px;
     border-radius: 10px;
     margin: 0px;
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.08);
 }
 .incategory h1 {
     margin: 15px 0;
 }
 button:hover {
     opacity: 0.8;
+}
+.static p {
+    padding: 0 20px;
 }

@@ -1,6 +1,7 @@
-<ion-view title="91streets store detail">
-    <ion-content class="has-header"> <ion-nav-buttons side="right">
-        <button class="button button-icon icon ion-ios7-star" ng-click="showPopup();"></button>
+<ion-view title="91streets">
+    <ion-content class="has-header">
+        <ion-nav-buttons side="right">
+            <button class="button button-icon icon ion-ios7-star" ng-click="showPopup();"></button>
         </ion-nav-buttons>
         <div class="storepage">
             <div class="storeimg">
@@ -24,7 +25,8 @@
                 </div>
                 <div class="col" ng-click="like();">
                     <i class="icon ion-heart" ng-class="{liked: checklike == 1}"></i>
-                    <p>Like<span ng-show="checklike == 1;">d</span></p>
+                    <p>Like<span ng-show="checklike == 1;">d</span>
+                    </p>
                 </div>
                 <div class="col">
                     <i class="icon ion-android-location"></i>
@@ -32,7 +34,7 @@
                 </div>
                 <div class="col" ng-click="sendtowebsite(storedetails.website);">
                     <i class="icon ion-ios7-world-outline"></i>
-                        <p>Website</p>
+                    <p>Website</p>
                 </div>
                 <div class="col">
                     <i class="icon ion-share"></i>

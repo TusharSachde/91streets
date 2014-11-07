@@ -1,11 +1,11 @@
 <ion-view title="My Favorites">
     <ion-content class="has-header">
         <ion-nav-buttons side="right">
-<!--            <a href="#/tab/favoritesstore" class="color:#FFF;"><i class="icon-plus icon-2x"></i></a>-->
-            <button class="button button-icon icon icon-plus" ng-click="gotofavoriteslist()"></button>
+            <!--            <a href="#/tab/favoritesstore" class="color:#FFF;"><i class="icon-plus icon-2x"></i></a>-->
+            <button class="button button-icon icon ion-ios7-plus-empty" ng-click="gotofavoriteslist()"></button>
         </ion-nav-buttons>
 
-<!--
+        <!--
         <div class="list">
 
         <a class="item item-avatar" href="#/tab/storelist/storepage">
@@ -16,23 +16,18 @@
 
         </a>
         </div>
+        href="#/tab/storelist/storepage/{{brand.storeid}}"
 -->
-  <ion-list>
-            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="favorite in favorites">
+        <ion-list>
+            <ion-item class="item-avatar" ng-repeat="favorite in favorites">
                 <img src="{{favorite.logo|imagepath}}">
+                <span class="item-note">{{favorite.userlike}} Likes</span>
                 <h2>{{favorite.name}}</h2>
-                <h3 style="color:#cc2311;">{{favorite.description}}</h3>
-                
-                <span class="item-note">
-                    <h3 style="color:#cc2311;">{{favorite.userlike}} Like</h3>
-                
-                </span>
-                <p>
-                </p>
+                <p>{{favorite.description}}</p>
             </ion-item>
-  </ion-list>
-   
-        
+        </ion-list>
+
+
     </ion-content>
 </ion-view>
 

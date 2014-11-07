@@ -6,6 +6,7 @@
         <form ng-submit="">
 
             <div class="padding">
+               
                 <accordion ng-repeat="maincat in allcat">
                     <accordion-group is-open="status.open">
                         <accordion-heading>
@@ -19,13 +20,14 @@
                                 </label>
                                 {{cat.name}}
                             </li>
-                           
                         </ul>
                     </accordion-group>
                 </accordion>
 
                 <button class="button button-assertive button-block" type="submit" ng-click="hideSort()">Submit</button>
+                
             </div>
+            
         </form>
     </ion-content>
 </ion-modal-view>
