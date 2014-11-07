@@ -41,3 +41,32 @@
 .flaticon-tv21:before {
     content: "\e008";
 }
+
+/*?-Dynamic Classes-?*/
+.flaticon-jewe:before {
+    content: "\e000";
+}
+.flaticon-heal:before {
+    content: "\e001";
+}
+.flaticon-kids:before {
+    content: "\e002";
+}
+.flaticon-ente:before {
+    content: "\e003";
+}
+.flaticon-fash:before {
+    content: "\e004";
+}
+.flaticon-foot:before {
+    content: "\e005";
+}
+.flaticon-soccer43:before {
+    content: "\e006";
+}
+.flaticon-clot:before {
+    content: "\e007";
+}
+.flaticon-ente:before {
+    content: "\e008";
+}
