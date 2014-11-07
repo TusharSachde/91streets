@@ -5,13 +5,7 @@
     <ion-content>
         <form ng-submit="">
 
-            <div class="padding">
-                <accordion>
-                    <accordion-group is-open="status.open">
-                        <accordion-heading>
-                            <p>Sort<i class="pull-right ion ion-ios7-arrow-down"></i>
-                            </p>
-                        </accordion-heading>
+            
                         <ul class="list">
                             <li class="item item-checkbox">
                                 <label class="checkbox">
@@ -21,7 +15,7 @@
                             </li>
                             <li class="item item-checkbox">
                                 <label class="checkbox">
-                                    <input type="checkbox"  name="sort" ng-model="distact" ng-click="changesort('dist',false);">
+                                    <input type="checkbox"  name="sort1" ng-model="distact" ng-click="changesort('dist',false);">
                                 </label>
                                 Distance
                             </li>
@@ -33,10 +27,6 @@
                             </li>
                            
                         </ul>
-                    </accordion-group>
-                </accordion>
-
-            </div>
         </form>
     </ion-content>
 </ion-modal-view>

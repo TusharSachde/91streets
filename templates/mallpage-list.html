@@ -8,6 +8,8 @@
         <ion-list>
            <div class="item-divider">
                <button class="button button-clear button-small button-dark" ng-click="showSort();">Sort</button>
+               <button class="button button-clear button-small button-dark" ng-click="showsortsort();">Filter</button>
+               <button class="button button-clear button-small button-dark" style="float:right;" ng-click="clear();">Clear Filter &amp; Sort
            </div>
             <div class="item item-input-inset" ng-show="showSearch">
                 <label class="item-input-wrapper">
@@ -18,7 +20,6 @@
             </div>
             <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{malll.storeid}}" ng-repeat="malll in malllist">
                 <img src="{{malll.brandlogo|imagepath}}">
-                <span class="item-note">{{malll.dist}} KM</span>
                 <h2>{{malll.brandname}}</h2>
                 <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
                 <p>
