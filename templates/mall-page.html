@@ -3,9 +3,6 @@
         <ion-nav-buttons side="right">
         </ion-nav-buttons>
         <div class="storepage">
-            <div class="storeimg">
-                <img src="{{mall.logo}}" alt="" class="full-image storepic-bg">
-            </div>
             <div class="text-center">
                 <img src="{{mall.logo}}" alt="" class="storepic">
                 <h2>{{mall.brandname}}</h2>
@@ -58,7 +55,8 @@
                 <h4 class="<as></as>sertive">CATEGORIES</h4>
                 <div class="row" ng-repeat="mallcat in mallcategory">
                 <div class="col incategory" ng-repeat="mallc in mallcat">
-                    <a href="#tab/mallpagelist/{{mallc.categoryid}}/{{mallc.mall}}"><img src="img/clothing.jpg" alt="" class="full-image">
+                    <a href="#tab/mallpagelist/{{mallc.categoryid}}/{{mallc.mall}}">
+                       <h1 class="flaticon-{{mallc.class}}"></h1>
                         <span class="textOn">{{mallc.name}}</span></a>
                 </div>
             </div>
