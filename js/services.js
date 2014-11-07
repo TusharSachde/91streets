@@ -39,6 +39,12 @@ var myservices = angular.module('myservices', [])
         beforeeditmall: function (id) {
             return $http.get(adminurl + 'beforeeditmall?id='+id, {});
         },
+        mallalloffers: function (id) {
+            return $http.get(adminurl + 'mallalloffers?id='+id, {});
+        },
+        malloffers: function (id,limit) {
+            return $http.get(adminurl + 'malloffers?id='+id+"&limit="+limit, {});
+        },
         mallcategorystore: function (id,mid) {
             return $http.get(adminurl + 'mallcategorystore?id='+id+"&mid="+mid, {});
         },

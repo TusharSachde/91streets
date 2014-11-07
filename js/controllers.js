@@ -809,10 +809,15 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.user = MyServices.getuser();
     console.log("My information");
     console.log($scope.user);
-
+$scope.favorites = {};
     var userlikes = function (data, status) {
-        console.log(data);
+//        console.log(data);
         $scope.favorites = data;
+        for(var i=0;i<data.length;i++)
+        {
+            $scope.favorites[i].userlike=data[i].like.length;
+        }
+        console.log($scope.favorites);
     };
     if ($scope.user == null) {
         $location.url('/home');
@@ -948,12 +953,36 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 })
 
 
+.controller('PageOffersCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+    
+    var successoffers = function (data, status) {
+        console.log(data);
+        $scope.offers={};
+        $scope.offers=data;
+        for(var i=0;i<data.length;i++)
+        {
+        if (data[i].image == null) {
+            $scope.offers[i].image = "img/logo.png";
+        }
+        }
+    };
+    MyServices.mallalloffers($stateParams.id).success(successoffers)
+    
+})
+
+
 .controller('MallPageCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
     console.log("mall id");
     console.log($stateParams.id);
+    $scope.mallid=$stateParams.id;
     $scope.mall = [];
     $scope.mallcategory = [];
+    var successoffers = function (data, status) {
+        console.log(data);
+        $scope.offers=data;
+    };
+    MyServices.malloffers($stateParams.id,2).success(successoffers)
     var mallsuccess = function (data, status) {
         console.log(data.mall);
         $scope.mall = data.mall;

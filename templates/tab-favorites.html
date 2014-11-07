@@ -21,11 +21,13 @@
             <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="favorite in favorites">
                 <img src="{{favorite.logo|imagepath}}">
                 <h2>{{favorite.name}}</h2>
-                <h3 style="color:#cc2311;">{{favorite.header}}</h3>
-                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
+                <h3 style="color:#cc2311;">{{favorite.description}}</h3>
+                
+                <span class="item-note">
+                    <h3 style="color:#cc2311;">{{favorite.userlike}} Like</h3>
+                
+                </span>
                 <p>
-                    <span ng-hide="!brand.address">{{favorite.address}}</span>
-                    <span ng-show="!brand.address">{{favorite.storeaddress}}</span>
                 </p>
             </ion-item>
   </ion-list>
