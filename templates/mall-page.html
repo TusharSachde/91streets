@@ -37,18 +37,17 @@
             </div>
 
             
-                <div class="item item-text-wrap">
+                <div class="list">
+                   <div class="item item-button-right">
                     <h3>Offers</h3>
-                    <p>Description</p>
-                    <p>Description</p>
-                    <p>Description</p>
+                        <p ng-repeat="offer in offers">{{offer.header}}</p>
+                    <a href="#/tab/pageoffers/{{mallid}}" class="button button-assertive button icon ion-ios7-plus-empty button-outline"></a>
                 </div>
-                
-                <div class="item item-text-wrap">
-                    <h3>Events</h3>
-                    <p>Description</p>
-                    <p>Description</p>
-                    <p>Description</p>
+                    
+                    <div class="item">
+                        <h3>Events</h3>
+                        <p>{{mall.events}}</p>
+                    </div>
                 </div>
             
             <div class="category">
@@ -56,7 +55,7 @@
                 <div class="row" ng-repeat="mallcat in mallcategory">
                 <div class="col incategory" ng-repeat="mallc in mallcat">
                     <a href="#tab/mallpagelist/{{mallc.categoryid}}/{{mallc.mall}}">
-                       <h1 class="flaticon-{{mallc.class}}"></h1>
+                       <h1 class="flaticon-{{mallc.name | fourletter}}"></h1>
                         <span class="textOn">{{mallc.name}}</span></a>
                 </div>
             </div>

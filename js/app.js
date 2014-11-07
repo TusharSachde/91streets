@@ -177,6 +177,16 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     })
 
+    .state('tab.pageoffers', {
+        url: '/pageoffers/:id',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/page-offers.html',
+                controller: 'PageOffersCtrl'
+            }
+        }
+    })
+
     .state('tab.mallpagelist', {
         url: '/mallpagelist/:id/:mid',
         views: {
@@ -208,6 +218,12 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             return "liked";
         else
             return "";
+    };
+})
+.filter('fourletter', function () {
+    return function (input) {
+        return input.substring(0,4);
+            
     };
 });
 
