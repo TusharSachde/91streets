@@ -1,8 +1,8 @@
-<ion-view title="Shopping Bag">
+<ion-view title="Shopping Plan">
     <ion-content class="has-header">
        <ion-nav-buttons side="right">
             
-            <button class="button button-icon icon icon-bag" ng-click="showshoppingbag()">Shopping Bag</button>
+            <button class="button button-icon icon icon-bag" ng-click="showshoppingbag()">View Plan</button>
             
         </ion-nav-buttons>
         
@@ -10,7 +10,7 @@
             <p>Select products that you wish to buy and we shall let you know about offers information and store information where you can buy your products from!</p>
 
             
-        </div>
+        
         <accordion ng-repeat="category in categories">
             <accordion-group is-open="status.open">
                 <accordion-heading>
@@ -27,7 +27,7 @@
             </accordion-group>
         </accordion>
 
-        <div class="padding">
+      
             <button class="button button-assertive button-outline button-block" ng-click="submitplan()">
                 Search
             </button>

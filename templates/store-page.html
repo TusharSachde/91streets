@@ -3,9 +3,6 @@
         <button class="button button-icon icon ion-ios7-star" ng-click="showPopup();"></button>
         </ion-nav-buttons>
         <div class="storepage">
-            <div class="storeimg">
-                <img src="{{branddetails.brandlogo|imagepath}}" alt="" class="full-image storepic-bg">
-            </div>
             <div class="text-center">
                 <img src="{{branddetails.brandlogo|imagepath}}" alt="" class="storepic">
                 <h2>{{branddetails.brandname}}</h2>
@@ -41,6 +38,11 @@
             </div>
 
             <div class="list">
+               <div class="item item-button-right">
+                    <h3>Offers</h3>
+                    <p>Sorry, no offers going on.</p>
+                    <button class="button button-assertive button icon ion-ios7-plus-empty button-outline"></button>
+                </div>
                 <div class="item item-text-wrap">
                     <h3>New Arrivals</h3>
                     <p ng-show="!newarrivals.length">No data found</p>
