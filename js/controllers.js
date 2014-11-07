@@ -882,6 +882,17 @@ $scope.favorites = {};
     $scope.showSort = function () {
         $scope.oModal1.show();
     };
+    //Sort Modal
+    $ionicModal.fromTemplateUrl('templates/discountsort.html', {
+        id: '2',
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.oModal2 = modal;
+    });
+    $scope.showsortsort = function () {
+        $scope.oModal2.show();
+    };
 
     var catarraysuccess = function (data, status) {
         console.log(data);
