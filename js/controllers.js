@@ -3,6 +3,13 @@ var long = 0;
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     .controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate) {
         $scope.loginData = {};
+    
+//    get all city
+    var getcity = function(data, status){
+        console.log(data);
+        $scope.cities=data;
+    };
+    MyServices.viewcity().success(getcity);
         //Display Main categories
 
         //Google Maps API Lat Long
@@ -68,6 +75,16 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
 
         $scope.userdata = user = $.jStorage.get("user");
+    
+        console.log($scope.userdata);
+    
+    var getcityname = function (data, status){
+        console.log(data);
+        $scope.city=data;
+    };
+    if ($scope.userdata) {
+    MyServices.getonecity($scope.userdata.city).success(getcityname);
+    }
         //Page opening, login modal if empty jStorage
         if (!$scope.userdata) {
             $scope.checkButton('login');
@@ -83,7 +100,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         }
         $scope.submitRegister = function (data) {
-            MyServices.registeruser(data.name, data.lastname, data.email, data.password).success(onregistersuccess)
+            MyServices.registeruser(data.name, data.lastname, data.email, data.password, data.city).success(onregistersuccess)
         };
 
         // Triggered in the login modal to close it
@@ -133,6 +150,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.user = MyServices.getuser();
     $scope.brands = {};
     console.log($scope.user);
+    $scope.addlike=0;
     
     $scope.gotofavorites = function () {
         console.log("gotofavoriteslist clicked");
@@ -181,9 +199,26 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     }
 
 })
-    .controller('NotificationCtrl', function ($scope) {})
+    .controller('NotificationCtrl', function ($scope, MyServices, $ionicModal, $timeout, $location) {
+        $scope.userdata = user = $.jStorage.get("user");
+        console.log($scope.userdata);
+        var getnotification = function (data, status) {
+            console.log(data);
+            $scope.notification=data;
+        };
+        MyServices.notification($scope.userdata.id).success(getnotification);
+})
 
 .controller('SettingCtrl', function ($scope) {})
+.controller('InNotificationCtrl', function ($scope, MyServices, $stateParams, $ionicModal, $timeout, $location) {
+    
+    var notificationbrand = function (data, status){
+        console.log(data);
+        $scope.notifications=data;
+    };
+    MyServices.notificationbrandid($stateParams.id).success(notificationbrand);
+    
+})
 
 .controller('ShoppingCtrl', function ($scope, MyServices, $ionicModal, $timeout, $location) {
     $scope.clothing = [];
@@ -871,6 +906,17 @@ $scope.favorites = {};
 
 
     };
+    
+    
+    
+    $scope.myorder = 'name';
+    $scope.myorderorder = false;;
+    $scope.changesort = function (order, orderorder) {
+        $scope.myorder = order;
+        $scope.myorderorder = orderorder;
+    };
+
+    
     //Sort Modal
     $ionicModal.fromTemplateUrl('templates/sort.html', {
         id: '1',
@@ -896,7 +942,7 @@ $scope.favorites = {};
 
     var catarraysuccess = function (data, status) {
         console.log(data);
-        $scope.brands = data;
+        $scope.malllist = data;
     };
 
     $scope.hideSort = function () {
@@ -907,7 +953,7 @@ $scope.favorites = {};
         }
         console.log($scope.categoryarray);
         $scope.oModal1.hide();
-        MyServices.getcatarraystore($scope.catarray).success(catarraysuccess);
+        MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid).success(catarraysuccess);
     };
 
     var mallpagesuccess = function (data, status) {
@@ -915,6 +961,10 @@ $scope.favorites = {};
         $scope.malllist = data;
     };
     MyServices.mallcategorystore($stateParams.id, $stateParams.mid).success(mallpagesuccess);
+    
+    $scope.clear =function(){
+        MyServices.mallcategorystore($stateParams.id, $stateParams.mid).success(mallpagesuccess);
+    }
 })
 
 .controller('MallistCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {

@@ -20,6 +20,11 @@
                 <label class="item item-input">
                     <input type="password" ng-model="loginData.password" placeholder="Password" required>
                 </label>
+                <label class="item item-input">
+                    <select ng-model="loginData.city">
+                        <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
+                    </select>
+                </label>
             </div>
 
             <div class="padding">
