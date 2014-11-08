@@ -1,4 +1,4 @@
-<ion-view title="Brands">
+<ion-view title="Notification">
     <ion-content class="has-header">
         <ion-nav-buttons side="right">
 
@@ -24,15 +24,15 @@
                 </label>
             </div>
             
-            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in brands | orderBy:myorder:myorderorder">
+            <ion-item class="item-avatar" ng-repeat="notif in notifications">
                 <img src="{{brand.brandlogo|imagepath}}">
-                <span class="item-note">{{brand.dist}} KM</span>
-                <h2>{{brand.brandname}}</h2>
-                <h3 class="assertive">{{brand.header}}</h3>
-                <span class="rate"><rating ng-model="rate" max="5" readonly="readonly"></rating></span>
+                <span class="item-note"  ng-show="notif.from!=1">{{notif.from}}  {{notif.to}}</span>
+                <h2>{{notif.storename}}</h2>
+                <h3 ng-show="notif.from!=1">{{notif.name}}</h3>
+                <p ng-show="notif.from==1"><img src="{{notif.name|imagepath}}"></p>
                 <p>
-                    <span ng-hide="!brand.address">{{brand.address}}</span>
-                    <span ng-show="!brand.address">{{brand.storeaddress}}</span>
+                    <span ng-hide="!brand.address">{{notif.address}}</span>
+                    <span ng-show="!brand.address">{{notif.storeaddress}}</span>
                 </p>
             </ion-item>
         </ion-list>

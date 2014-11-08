@@ -48,6 +48,9 @@ var myservices = angular.module('myservices', [])
         mallcategorystore: function (id,mid) {
             return $http.get(adminurl + 'mallcategorystore?id='+id+"&mid="+mid, {});
         },
+        mallcategorystorecat: function (id,mid) {
+            return $http.get(adminurl + 'mallcategorystorecat?id='+id+"&mid="+mid, {});
+        },
         addstorelike: function (user,store) {
             return $http.get(adminurl + 'addstorelike?user='+user+"&store="+store, {});
         },
@@ -69,6 +72,15 @@ var myservices = angular.module('myservices', [])
         getsubcategory: function (id) {
             return $http.get(adminurl + 'getsubcategory?id='+id, {});
         },
+        notification: function (user) {
+            return $http.get(adminurl + 'notification?user='+user, {});
+        },
+        notificationbrandid: function (id) {
+            return $http.get(adminurl + 'notificationbrandid?id='+id, {});
+        },
+        getonecity: function (id) {
+            return $http.get(adminurl + 'getonecity?id='+id, {});
+        },
         getstorebycategories: function (id) {
             return $http.get(adminurl + 'getstorebycategories?id='+id, {});
         },
@@ -80,6 +92,9 @@ var myservices = angular.module('myservices', [])
         },
         favoritebrands: function () {
             return $http.get(adminurl + 'favoritebrands', {});
+        },
+        viewcity: function () {
+            return $http.get(adminurl + 'viewcity', {});
         },
         getcategory: function () {
             return $http.get(adminurl + 'getmaincategory', {});
@@ -96,8 +111,8 @@ var myservices = angular.module('myservices', [])
         like: function (userid, storeid, like) {
             return $http.get(adminurl + 'addlike?userid=' + userid + '&brandid=' + storeid + '&like=' + like , {});
         },
-        registeruser: function (firstname, lastname, email, password) {
-            return $http.get(adminurl + 'createuser?name=' + firstname + '&sirname=' + lastname + '&email=' + email + '&password=' + password, {});
+        registeruser: function (firstname, lastname, email, password, city) {
+            return $http.get(adminurl + 'createuser?name=' + firstname + '&sirname=' + lastname + '&email=' + email + '&password=' + password+'&city='+city, {});
         },
         loginuser: function (email, password) {
             return $http.get(adminurl + 'checkfrontendlogin?email=' + email + '&password=' + password, {});

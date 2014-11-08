@@ -68,6 +68,16 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     })
 
+    .state('tab.innotification', {
+        url: '/innotification/:id',
+        views: {
+            'tab-setting': {
+                templateUrl: 'templates/tab-innotification.html',
+                controller: 'InNotificationCtrl'
+            }
+        }
+    })
+
     .state('tab.setting', {
         url: '/setting',
         views: {
