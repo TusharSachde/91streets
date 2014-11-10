@@ -397,7 +397,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.clear = function() {
         MyServices.getallstoresdiscount().success(getdiscount);
-    }
+    };
 
     var allmaincategory = function(data, status) {
         console.log(data);
@@ -455,10 +455,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
     var getdiscount = function(data, status) {
+        console.log("SUCCESS FUNTION");
+        console.log(data.length);
         console.log(data);
-        $scope.listing = {};
-        scroll = 1;
+        $scope.listing = [];
         $scope.listing = data;
+        scroll = 1;
         $scope.loadMore();
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
@@ -469,8 +471,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             } else {
                 $scope.listing[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
             }
-        }
+        };
     };
+    
     MyServices.getallstoresdiscount().success(getdiscount);
 
     
@@ -482,11 +485,13 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var scroll = 0;
 
     $scope.loadMore = function() {
+        console.log("LOAD MORE");
         if (scroll == 1) {
             var sum = counter + change;
             if (sum > $scope.listing.length) {
                 sum = $scope.listing.length;
-            }
+            };
+                console.log(sum);
             for (var i = counter; i <= sum; i++) {
                 if ($scope.listing[i]) {
                     $scope.dicountItem.push($scope.listing[i]);
@@ -500,12 +505,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions:.........");
+        console.log("Positions");
         console.log(position.coords);
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        MyServices.getallstoresdiscount().success(getdiscount);
+        //MyServices.getallstoresdiscount().success(getdiscount);
     }
 
     if (navigator.geolocation) {
