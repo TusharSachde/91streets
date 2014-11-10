@@ -18,7 +18,7 @@
                     <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch();"></i>
                 </label>
             </div>
-            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{store.id}}" ng-repeat="store in listing | orderBy:myorder:myorderorder">
+            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{store.id}}" ng-repeat="store in dicountItem | orderBy:myorder:myorderorder">
                 <img src="{{store.image|imagepath}}">
                 <span class="item-note">{{store.dist}} KM</span>
                 <h2>{{store.name}}</h2> <strong style="color:#cc2311;">{{store.header}}</strong>
@@ -29,6 +29,10 @@
                 </p>
             </ion-item>
         </ion-list>
+        
+        <ion-infinite-scroll on-infinite="loadMore();" distance="1%" icon="ion-loading-c">
+        </ion-infinite-scroll>
+        
     </ion-content>
 </ion-view>
 

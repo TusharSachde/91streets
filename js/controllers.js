@@ -1,7 +1,7 @@
 var lat = 0;
 var long = 0;
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
-    .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover ) {
+    .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover) {
         $scope.loginData = {};
 
         //    get all city
@@ -457,7 +457,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var getdiscount = function(data, status) {
         console.log(data);
         $scope.listing = {};
+        scroll = 1;
         $scope.listing = data;
+        $scope.loadMore();
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
                 $scope.listing[i].image = "../assets/img/logo.png";
@@ -471,6 +473,30 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
     MyServices.getallstoresdiscount().success(getdiscount);
 
+    
+    
+    // loadmore discount
+    $scope.dicountItem = [];
+    var change = 10;
+    var counter = 0;
+    var scroll = 0;
+
+    $scope.loadMore = function() {
+        if (scroll == 1) {
+            var sum = counter + change;
+            if (sum > $scope.listing.length) {
+                sum = $scope.listing.length;
+            }
+            for (var i = counter; i <= sum; i++) {
+                if ($scope.listing[i]) {
+                    $scope.dicountItem.push($scope.listing[i]);
+                    console.log($scope.dicountItem);
+                };
+            };
+            counter += change + 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        };
+    };
 
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
@@ -589,6 +615,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.brands = [];
     var categoryId = $stateParams.cid;
+    var scroll = 0;
     $scope.cat = [];
     $scope.discountstatus = 0;
     $scope.sort = "othersort.html";
@@ -623,37 +650,59 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
 
     }
-    // ip function
-
 
     //Get brands by category API
     var onbrandbycategorysuccess = function(data, status) {
+
         for (var i = 0; i < data.length; i++) {
             $scope.brands = data;
             $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
             console.log($scope.brands[i].dist);
         }
-        console.log($scope.brands);
-    }
+        scroll = 1;
+        $scope.loadMore();
+        console.log(scroll);
+    };
 
-        function showPosition2(position) {
-            var latlon = position.coords.latitude + "," + position.coords.longitude;
-            console.log("Positions:.........");
-            console.log(position.coords);
-            $scope.coords = position.coords;
-            lat = position.coords.latitude;
-            long = position.coords.longitude;
-            MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
-        }
+    function showPosition2(position) {
+        var latlon = position.coords.latitude + "," + position.coords.longitude;
+        console.log("Positions:.........");
+        console.log(position.coords);
+        $scope.coords = position.coords;
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+        MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
+    };
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition2, showError);
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+    };
 
 
+    //ionic load more
+    $scope.productItem = [];
+    var change = 10;
+    var counter = 0;
+    $scope.brands = [];
 
+    $scope.loadMore = function() {
+        if (scroll == 1) {
+            var sum = counter + change;
+            if (sum > $scope.brands.length) {
+                sum = $scope.brands.length;
+            }
+            for (var i = counter; i <= sum; i++) {
+                if ($scope.brands[i]) {
+                    $scope.productItem.push($scope.brands[i]);
+                    console.log($scope.productItem);
+                };
+            };
+            counter += change + 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        };
+    };
 
     //get sub category
     var subcategorysuccess = function(data, status) {
@@ -686,6 +735,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         console.log($scope.cat);
     };
+
     //Sort Modal
     $ionicModal.fromTemplateUrl('templates/sort.html', {
         id: '1',
@@ -734,8 +784,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
     //Location
-    $cordovaGeolocation
-        .getCurrentPosition()
+    $cordovaGeolocation.getCurrentPosition()
         .then(function(position) {
             var lat = position.coords.latitude;
             var long = position.coords.longitude;
@@ -744,8 +793,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }, function(err) {
             $scope.showAlert();
         });
-
-
 
 
     //Search
@@ -1046,16 +1093,13 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.demo = "demo";
     $scope.malls = [];
     var mallsuccess = function(data, status) {
+        scroll = 1;
         console.log(data);
         $scope.malls = data;
-
-
-
-
+        $scope.loadMore();
         for (var i = 0; i < data.length; i++) {
             if (data[i].latitude != null) {
                 $scope.malls[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
-                console.log($scope.malls[i].dist);
             } else {
                 $scope.malls[i].dist = 0;
             }
@@ -1066,8 +1110,31 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
 
+    MyServices.getallmalls().success(mallsuccess);
+    //ionic load more
+    $scope.mallItem = [];
+    var change = 10;
+    var counter = 0;
+    var scroll = 0;
 
+    $scope.loadMore = function() {
+        if (scroll == 1) {
+            var sum = counter + change;
+            if (sum > $scope.malls.length) {
+                sum = $scope.malls.length;
+            }
+            for (var i = counter; i <= sum; i++) {
+                if ($scope.malls[i]) {
+                    $scope.mallItem.push($scope.malls[i]);
+                    console.log($scope.mallItem);
+                };
+            };
+            counter += change + 1;
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        };
+    };
 
+    // malls api
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
         console.log("Positions:.........");
@@ -1075,7 +1142,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        MyServices.getallmalls().success(mallsuccess);
     }
 
     if (navigator.geolocation) {
