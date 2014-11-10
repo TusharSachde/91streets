@@ -1,8 +1,10 @@
 <ion-view title="91streets">
     <ion-content class="has-header">
+<!--
         <ion-nav-buttons side="right">
-            <button class="button button-icon icon ion-ios7-star" ng-click="showPopup();"></button>
+            <button class="button button-icon icon ion-ios7-star"></button>
         </ion-nav-buttons>
+-->
         <div class="storepage">
             <div class="text-center">
                 <img src="{{branddetails.brandlogo|imagepath}}" alt="" class="storepic">
@@ -11,7 +13,9 @@
                     <span ng-hide="!branddetails.address">{{branddetails.address}}</span>
                     <span ng-show="!branddetails.address">{{branddetails.storeaddress}}</span>
                 </p>
-                <rating ng-model="rate" max="max" readonly="readonly"></rating>
+                <div ng-click="showPopup();">
+                    <rating ng-model="rate" max="max" readonly="readonly"></rating>
+                </div>
             </div>
             <div class="row text-center store-icon">
                 <div class="col">
