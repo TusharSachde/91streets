@@ -1,20 +1,20 @@
 <ion-view title="Notification">
     <ion-content class="has-header">
-        
+        <ion-nav-buttons side="right">
+            <a class="button button-icon icon ion-ios7-plus-empty" href="#/tab/favorites"></a>
+        </ion-nav-buttons>
         <ion-list>
             <ion-item class="item-text-wrap">
                 Like brands to follow them.
                 <br>Receive notifications for discounts and new arrivals in your favorite brands.
             </ion-item>
+        
+            <ion-item ng-repeat="noti in notification" href="#/tab/innotification/{{noti.id}}">
+                
+                {{noti.name}}
+                
+            </ion-item>
+        
         </ion-list>
-        <div class="list">
-        
-            <a class="item item-avatar" ng-repeat="noti in notification" href="#/tab/innotification/{{noti.id}}">
-                
-                <h2>{{noti.name}}</h2>
-                
-            </a>
-        
-        </div>
     </ion-content>
 </ion-view>
