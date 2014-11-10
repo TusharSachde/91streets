@@ -569,7 +569,7 @@ ul.rating li i {
     text-align: center;
 }
 .incategory h1:before {
-    font-size: 60px;
+    font-size: 50px;
     background-color: #ef4e3a;
     color: white;
     background-image: linear-gradient(90deg, #dc353f, #df4a39 80%, #e06334) !important;

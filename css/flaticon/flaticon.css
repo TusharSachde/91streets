@@ -1,45 +1,51 @@
 @font-face {
-    font-family: "Flaticon";
-    src: url("flaticon.eot");
-    src: url("flaticon.eot#iefix") format("embedded-opentype"), url("flaticon.woff") format("woff"), url("flaticon.ttf") format("truetype"), url("flaticon.svg") format("svg");
-    font-weight: normal;
-    font-style: normal;
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
 }
-[class^="flaticon-"]:before,
-[class*=" flaticon-"]:before,
-[class^="flaticon-"]:after,
-[class*=" flaticon-"]:after {
-    font-family: Flaticon;
-    font-size: 20px;
-    font-style: normal;
-    margin-left: 20px;
-}
-.flaticon-diamond1:before {
-    content: "\e000";
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}.flaticon-diamond1:before {
+	content: "\e000";
 }
 .flaticon-drugs5:before {
-    content: "\e001";
+	content: "\e001";
+}
+.flaticon-hair9:before {
+	content: "\e002";
 }
 .flaticon-kids1:before {
-    content: "\e002";
+	content: "\e003";
 }
 .flaticon-movie36:before {
-    content: "\e003";
+	content: "\e004";
 }
 .flaticon-pearl:before {
-    content: "\e004";
+	content: "\e005";
 }
 .flaticon-sandals2:before {
-    content: "\e005";
+	content: "\e006";
 }
 .flaticon-soccer43:before {
-    content: "\e006";
+	content: "\e007";
+}
+.flaticon-sunglasses1:before {
+	content: "\e008";
 }
 .flaticon-tshirt17:before {
-    content: "\e007";
+	content: "\e009";
 }
 .flaticon-tv21:before {
-    content: "\e008";
+	content: "\e00a";
 }
 
 /*?-Dynamic Classes-?*/
@@ -47,26 +53,26 @@
     content: "\e000";
 }
 .flaticon-Heal:before {
-    content: "\e001";
-}
-.flaticon-Kids:before {
     content: "\e002";
 }
-.flaticon-Ente:before {
+.flaticon-Kids:before {
     content: "\e003";
 }
-.flaticon-Fash:before {
+.flaticon-Ente:before {
     content: "\e004";
 }
-.flaticon-Foot:before {
-    content: "\e005";
+.flaticon-Fash:before {
+    content: "\e008";
 }
-.flaticon-Spor:before {
+.flaticon-Foot:before {
     content: "\e006";
 }
-.flaticon-Clot:before {
+.flaticon-Spor:before {
     content: "\e007";
 }
-.flaticon-Ente:before {
-    content: "\e008";
+.flaticon-Clot:before {
+    content: "\e009";
+}
+.flaticon-Elec:before {
+    content: "\e00a";
 }
