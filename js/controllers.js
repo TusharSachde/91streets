@@ -548,7 +548,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 
-
+    // Share
+    $scope.share = function () {
+        console.log('Share');
+        window.plugins.socialsharing.share('Checkout '+$scope.storedetails.brandname+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+    }
 
 
 })
@@ -842,8 +846,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     
     // Share
     $scope.share = function () {
-        window.plugins.socialsharing.share('Checkout '+storedetails.brandname+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
         console.log('Share');
+        window.plugins.socialsharing.share('Checkout '+$scope.storedetails.brandname+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
     }
     
     //Rating
@@ -1125,6 +1129,12 @@ $scope.favorites = {};
             }
             return newarray;
         };
+    
+    // Share
+    $scope.share = function () {
+        console.log('Share');
+        window.plugins.socialsharing.share('Checkout '+$scope.mall.name+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+    }
     
 })
 
