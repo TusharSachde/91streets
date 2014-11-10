@@ -534,7 +534,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions:.........");
+        console.log("Position");
         console.log(position.coords);
         $scope.coords = position.coords;
         lat = position.coords.latitude;
@@ -847,7 +847,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     // Share
     $scope.share = function () {
         console.log('Share');
-        window.plugins.socialsharing.share('Checkout '+$scope.storedetails.brandname+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        window.plugins.socialsharing.share('Checkout '+$scope.branddetails.brandname+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
     }
     
     //Rating
