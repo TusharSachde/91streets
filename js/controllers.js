@@ -735,7 +735,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('StorePageCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $timeout) {
 
     $scope.user = MyServices.getuser();
-    $scope.test = "helllooo.....";
+    $scope.test = "Hello";
     console.log("storage controller");
     $scope.user = {};
     console.log($scope.user);
@@ -764,12 +764,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
             if (likecount == 0 || !likecount) {
                 likecount = 1;
+                $scope.addfavPopup();
             } else {
                 likecount = 0;
+                $scope.remfavPopup();
             };
             $scope.checklike = likecount;
             if (!$scope.user.id || $scope.user.id == 0) {
-                console.log("sorryyy haha...");
+                console.log("What did you do ?");
             } else {
                 $scope.likeapi($scope.user.id, $scope.branddetails.brandid, likecount);
             }
@@ -802,6 +804,37 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         MyServices.rating(userid, storeid, rating).success(ratesuccess);
     }
 
+    // Popups for favorites
+     $scope.addfavPopup = function () {
+        $scope.data = {}
+
+        // An elaborate, custom popup
+        var myPopup = $ionicPopup.show({
+            template: '<div class="text-center"><h1 class="ion-android-checkmark balanced"></h1><p>' + $scope.branddetails.brandname + ' added to favorites!</p>',
+            title: 'Added to favorites!',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 1500);
+    };
+    
+     $scope.remfavPopup = function () {
+        $scope.data = {}
+
+        // An elaborate, custom popup
+        var myPopup = $ionicPopup.show({
+            template: '<div class="text-center"><h1 class="ion-android-close assertive"></h1><p>' + $scope.branddetails.brandname + ' removed from favorites!</p>',
+            title: 'Removed from favorites!',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 1500);
+    };
+    
     //Rating
     $scope.rate = 0;
     $scope.max = 5;
