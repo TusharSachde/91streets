@@ -1,8 +1,10 @@
 <ion-view title="91streets">
     <ion-content class="has-header">
+<!--
         <ion-nav-buttons side="right">
-            <button class="button button-icon icon ion-ios7-star" ng-click="showPopup();"></button>
+            <button class="button button-icon icon ion-ios7-star"></button>
         </ion-nav-buttons>
+-->
         <div class="storepage">
             <div class="storeimg">
                 <img src="{{storedetails.brandlogo|imagepath}}" alt="" class="full-image storepic-bg">
@@ -14,7 +16,9 @@
                     <span ng-hide="!storedetails.address">{{storedetails.address}}</span>
                     <span ng-show="!storedetails.address">{{storedetails.storeaddress}}</span>
                 </p>
-                <rating ng-model="rate" max="max" readonly="readonly"></rating>
+                <div ng-click="showPopup();">
+                    <rating ng-model="rate" max="max" readonly="readonly"></rating>
+                </div>
             </div>
             <div class="row text-center store-icon">
                 <div class="col">
@@ -37,7 +41,7 @@
                     <p>Website</p>
                 </div>
                 <div class="col">
-                    <button class="button icon ion-share button-icon" onclick="window.plugins.socialsharing.share('Checkout '+storedetails.brandname+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets')"></button>
+                    <i class="icon ion-share" ng-click="share();"></i>
                     <p>Share</p>
                 </div>
             </div>

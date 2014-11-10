@@ -728,6 +728,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log("Click");
         $scope.datasearch = '';
     };
+    
+    // close modal
+    $scope.closeModal = function () {
+        $scope.oModal2.hide();
+    };
 })
 
 
@@ -834,6 +839,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             myPopup.close(); //close the popup after 3 seconds for some reason
         }, 1500);
     };
+    
+    // Share
+    $scope.share = function () {
+        window.plugins.socialsharing.share('Checkout '+storedetails.brandname+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        console.log('Share');
+    }
     
     //Rating
     $scope.rate = 0;

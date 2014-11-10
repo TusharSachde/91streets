@@ -586,3 +586,6 @@ button:hover {
 .static p {
     padding: 5px 20px;
 }
+a.button {
+    min-height: 0;
+}
