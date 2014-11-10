@@ -1,15 +1,15 @@
 var lat = 0;
 var long = 0;
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
-    .controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate) {
+    .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover ) {
         $scope.loginData = {};
-    
-//    get all city
-    var getcity = function(data, status){
-        console.log(data);
-        $scope.cities=data;
-    };
-    MyServices.viewcity().success(getcity);
+
+        //    get all city
+        var getcity = function(data, status) {
+            console.log(data);
+            $scope.cities = data;
+        };
+        MyServices.viewcity().success(getcity);
         //Display Main categories
 
         //Google Maps API Lat Long
@@ -34,7 +34,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log("my lat long");
         console.log(lat);
         console.log(long);
-        var getcategorysuccess = function (data, status) {
+        var getcategorysuccess = function(data, status) {
             console.log(data);
             $scope.category = data;
             /*            $scope.category.leftcategory={};
@@ -51,14 +51,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     */
         };
 
-        $scope.shoppingip = function () {
+        $scope.shoppingip = function() {
             console.log(lat);
         };
 
         MyServices.getcategory().success(getcategorysuccess);
 
         // Create the login modal
-        $scope.checkButton = function (check) {
+        $scope.checkButton = function(check) {
             var page = 'login';
             if (check == 'register') {
                 page = "register";
@@ -68,30 +68,30 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             }
             $ionicModal.fromTemplateUrl('templates/' + page + '.html', {
                 scope: $scope
-            }).then(function (modal) {
+            }).then(function(modal) {
                 $scope.modal = modal;
                 $scope.modal.show();
             });
         }
 
         $scope.userdata = user = $.jStorage.get("user");
-    
+
         console.log($scope.userdata);
-    
-    var getcityname = function (data, status){
-        console.log(data);
-        $scope.city=data;
-    };
-    if ($scope.userdata) {
-    MyServices.getonecity($scope.userdata.city).success(getcityname);
-    }
+
+        var getcityname = function(data, status) {
+            console.log(data);
+            $scope.city = data;
+        };
+        if ($scope.userdata) {
+            MyServices.getonecity($scope.userdata.city).success(getcityname);
+        }
         //Page opening, login modal if empty jStorage
         if (!$scope.userdata) {
             $scope.checkButton('login');
         };
 
         //Register User
-        var onregistersuccess = function (data, status) {
+        var onregistersuccess = function(data, status) {
             $scope.loginData.email = data.email;
             $scope.loginData.password = data.passsword;
             console.log(data);
@@ -99,28 +99,28 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.modal.hide();
 
         }
-        $scope.submitRegister = function (data) {
+        $scope.submitRegister = function(data) {
             MyServices.registeruser(data.name, data.lastname, data.email, data.password, data.city).success(onregistersuccess)
         };
 
         // Triggered in the login modal to close it
-        $scope.closeLogin = function () {
+        $scope.closeLogin = function() {
             $scope.modal.hide();
         };
         // Open the login modal
-        $scope.showlogin = function () {
+        $scope.showlogin = function() {
             $scope.modal.show();
         };
 
         // Slider Home Tab
-        $scope.nextSlide = function () {
+        $scope.nextSlide = function() {
             $ionicSlideBoxDelegate.next();
         };
-        $scope.prevSlide = function () {
+        $scope.prevSlide = function() {
             $ionicSlideBoxDelegate.previous();
         };
 
-        var loginsuccess = function (data, status) {
+        var loginsuccess = function(data, status) {
             if (data != "false") {
                 $scope.userdata = data;
                 MyServices.setuser($scope.userdata);
@@ -129,44 +129,75 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         };
 
-        $scope.doLogin = function (userdata) {
+        $scope.doLogin = function(userdata) {
             var useremail = userdata.email;
             var password = userdata.password;
             MyServices.loginuser(useremail, password).success(loginsuccess)
         };
 
         //Logout function
-        $scope.logout = function () {
+        $scope.logout = function() {
             $.jStorage.flush();
             $scope.userdata = {};
             MyServices.setuser($scope.userdata);
             $.jStorage.deleteKey("user");
         };
 
+
+        // Popover Share
+        $ionicPopover.fromTemplateUrl('templates/share-popover.html', {
+            scope: $scope,
+        }).then(function(popover) {
+            $scope.popover = popover;
+        });
+        $scope.openPopover = function($event) {
+            $scope.popover.show($event);
+        };
+        $scope.closePopover = function() {
+            $scope.popover.hide();
+        };
+        //Cleanup the popover when we're done with it!
+        $scope.$on('$destroy', function() {
+            $scope.popover.remove();
+        });
+        // Execute action on hide popover
+        $scope.$on('popover.hidden', function() {
+            // Execute action
+        });
+        // Execute action on remove popover
+        $scope.$on('popover.removed', function() {
+            // Execute action
+        });
+
+        // Share
+        $scope.share = function() {
+            console.log('Share');
+            window.plugins.socialsharing.share('Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        };
+
     })
 
-.controller('FavoritesStoreCtrl', function ($scope, MyServices, $ionicModal, $timeout, $location) {
+.controller('FavoritesStoreCtrl', function($scope, MyServices, $ionicModal, $timeout, $location) {
 
     $scope.user = MyServices.getuser();
     $scope.brands = {};
     console.log($scope.user);
-    $scope.addlike=0;
-    
-    $scope.gotofavorites = function () {
+    $scope.addlike = 0;
+
+    $scope.gotofavorites = function() {
         console.log("gotofavoriteslist clicked");
         $location.url("tab/favorites");
     }
 
-    var favoritelisting = function (data, status) {
+    var favoritelisting = function(data, status) {
         console.log(data);
         $scope.brands = data;
         for (var i = 0; i < data.length; i++) {
             $scope.brands[i].mylike = data[i].like.length;
-            for (var j = 0; j < data[i].like.length; j++){
-                if(data[i].like[j].user==$scope.user.id)
-                {
+            for (var j = 0; j < data[i].like.length; j++) {
+                if (data[i].like[j].user == $scope.user.id) {
                     $scope.brands[i].userlike = 1;
-                }else{
+                } else {
                     $scope.brands[i].userlike = 0;
                 }
             }
@@ -176,51 +207,48 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     };
     MyServices.favoritebrands().success(favoritelisting);
-    
-    $scope.likeclass="liked";
-    $scope.nolikeclass="";
-    var ilike = function (data, status){
+
+    $scope.likeclass = "liked";
+    $scope.nolikeclass = "";
+    var ilike = function(data, status) {
         console.log(data);
     };
-    $scope.like =function(brand){
+    $scope.like = function(brand) {
         console.log(brand);
-        if(brand.userlike==0)
-        {
-            brand.userlike=1;
-            MyServices.like($scope.user.id,brand.brandid,brand.userlike).success(ilike);
-        }
-        else
-        {
-            brand.userlike=0;
-            MyServices.like($scope.user.id,brand.brandid,brand.userlike).success(ilike);
+        if (brand.userlike == 0) {
+            brand.userlike = 1;
+            MyServices.like($scope.user.id, brand.brandid, brand.userlike).success(ilike);
+        } else {
+            brand.userlike = 0;
+            MyServices.like($scope.user.id, brand.brandid, brand.userlike).success(ilike);
         }
         console.log(brand.userlike);
         //$scope.$apply();
     }
 
 })
-    .controller('NotificationCtrl', function ($scope, MyServices, $ionicModal, $timeout, $location) {
+    .controller('NotificationCtrl', function($scope, MyServices, $ionicModal, $timeout, $location) {
         $scope.userdata = user = $.jStorage.get("user");
         console.log($scope.userdata);
-        var getnotification = function (data, status) {
+        var getnotification = function(data, status) {
             console.log(data);
-            $scope.notification=data;
+            $scope.notification = data;
         };
         MyServices.notification($scope.userdata.id).success(getnotification);
-})
+    })
 
-.controller('SettingCtrl', function ($scope) {})
-.controller('InNotificationCtrl', function ($scope, MyServices, $stateParams, $ionicModal, $timeout, $location) {
-    
-    var notificationbrand = function (data, status){
-        console.log(data);
-        $scope.notifications=data;
-    };
-    MyServices.notificationbrandid($stateParams.id).success(notificationbrand);
-    
-})
+.controller('SettingCtrl', function($scope) {})
+    .controller('InNotificationCtrl', function($scope, MyServices, $stateParams, $ionicModal, $timeout, $location) {
 
-.controller('ShoppingCtrl', function ($scope, MyServices, $ionicModal, $timeout, $location) {
+        var notificationbrand = function(data, status) {
+            console.log(data);
+            $scope.notifications = data;
+        };
+        MyServices.notificationbrandid($stateParams.id).success(notificationbrand);
+
+    })
+
+.controller('ShoppingCtrl', function($scope, MyServices, $ionicModal, $timeout, $location) {
     $scope.clothing = [];
     $scope.bigbagplan = [];
     var check1 = 0;
@@ -244,7 +272,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             console.log("Plus hua");
         }
     };
-    var allcategory = function (data, status) {
+    var allcategory = function(data, status) {
 
         console.log("in allcategory");
         console.log(data);
@@ -264,17 +292,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     };
     MyServices.getcategory().success(allcategory);
-    var subcategory = function (data, status) {
+    var subcategory = function(data, status) {
         $scope.clothing = data;
     };
-    $scope.getsubcategory = function (id) {
+    $scope.getsubcategory = function(id) {
         console.log("my id is");
         console.log(id);
         MyServices.getsubcategory(id).success(subcategory);
     };
 
     $scope.bigbag = [];
-    $scope.addtobag = function (cloths) {
+    $scope.addtobag = function(cloths) {
 
         if ($scope.bigbag.length == 0) {
             $scope.bigbag.push(cloths);
@@ -297,7 +325,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
 
-    var getshoppingbagg = function (data, status) {
+    var getshoppingbagg = function(data, status) {
         console.log(data);
         $scope.bigbag = data;
         fillbagtocategory();
@@ -317,20 +345,20 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     ///////////////////////////////////////////////////shopping bag submit///////////////////////////////////////////////////////////////////
 
-    var shoppingplansaved = function (data, status) {
+    var shoppingplansaved = function(data, status) {
         //        console.log(data);
         console.log("Shopping Plan Submited");
         $location.url("/tab/shoppingbag");
     };
 
     // Triggered in the login modal to close it
-    $scope.closeLogin = function () {
+    $scope.closeLogin = function() {
         $scope.modal.hide();
     };
 
 
 
-    $scope.submitplan = function () {
+    $scope.submitplan = function() {
         $scope.bigbagplan.category = $scope.bigbag[0].id;
         for (var i = 1; i < $scope.bigbag.length; i++) {
             $scope.bigbagplan.category += "," + $scope.bigbag[i].id;
@@ -339,7 +367,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         MyServices.saveshoppingbag($scope.bigbagplan).success(shoppingplansaved);
     };
 
-    $scope.showshoppingbag = function () {
+    $scope.showshoppingbag = function() {
         $location.url("/tab/shoppingbag");
     };
 
@@ -359,7 +387,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }];*/
 })
 
-.controller('DiscountCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
+.controller('DiscountCtrl', function($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
 
 
     $scope.cat = [];
@@ -367,18 +395,18 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     //    clear filter and sort
 
-    $scope.clear = function () {
+    $scope.clear = function() {
         MyServices.getallstoresdiscount().success(getdiscount);
     }
 
-    var allmaincategory = function (data, status) {
+    var allmaincategory = function(data, status) {
         console.log(data);
         $scope.allcat = data;
     };
     MyServices.getcategory().success(allmaincategory);
 
     //filter
-    $scope.filter = function (cat) {
+    $scope.filter = function(cat) {
 
         if ($scope.cat.length == 0) {
             $scope.cat.push(cat);
@@ -409,7 +437,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.sort = "othersort.html";
     $scope.myorder = 'name';
     $scope.myorderorder = false;;
-    $scope.changesort = function (order, orderorder) {
+    $scope.changesort = function(order, orderorder) {
         $scope.myorder = order;
         $scope.myorderorder = orderorder;
     };
@@ -419,14 +447,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         id: '4',
         scope: $scope,
         animation: 'slide-in-up'
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.oModal4 = modal;
     });
-    $scope.showsortsort = function () {
+    $scope.showsortsort = function() {
         $scope.oModal4.show();
     };
 
-    var getdiscount = function (data, status) {
+    var getdiscount = function(data, status) {
         console.log(data);
         $scope.listing = {};
         $scope.listing = data;
@@ -467,10 +495,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         id: '3',
         scope: $scope,
         animation: 'slide-in-up'
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.oModal3 = modal;
     });
-    $scope.showSort = function () {
+    $scope.showSort = function() {
         $scope.oModal3.show();
     };
 
@@ -480,7 +508,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //        $scope.brands = data;
     //    };
 
-    $scope.hideSort = function (dep) {
+    $scope.hideSort = function(dep) {
         console.log($scope.cat);
         $scope.catarray = $scope.cat[0].id;
         for (var i = 1; i < $scope.cat.length; i++) {
@@ -491,9 +519,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 })
 
-.controller('ShoppingBagCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
+.controller('ShoppingBagCtrl', function($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
 
-    var getshoppingbagg = function (data, status) {
+    var getshoppingbagg = function(data, status) {
         console.log(data);
         for (var i = 0; i < data.length; i++) {
             $scope.listing = data;
@@ -516,9 +544,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 })
 
-.controller('StoreDetailCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
+.controller('StoreDetailCtrl', function($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
 
-    var onestore = function (data, status) {
+    var onestore = function(data, status) {
         console.log(data);
         $scope.storedetails = {};
         $scope.storedetails = data;
@@ -549,15 +577,15 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     }
 
     // Share
-    $scope.share = function () {
+    $scope.share = function() {
         console.log('Share');
-        window.plugins.socialsharing.share('Checkout '+$scope.storedetails.brandname+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        window.plugins.socialsharing.share('Checkout ' + $scope.storedetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
     }
 
 
 })
 
-.controller('StoreListCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
+.controller('StoreListCtrl', function($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
 
     $scope.brands = [];
     var categoryId = $stateParams.cid;
@@ -566,17 +594,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.sort = "othersort.html";
     $scope.myorder = 'brandname';
     $scope.myorderorder = false;;
-    $scope.changesort = function (order, orderorder) {
+    $scope.changesort = function(order, orderorder) {
         $scope.myorder = order;
         $scope.myorderorder = orderorder;
     };
     //show discount fucntion
 
-    $scope.clear = function () {
+    $scope.clear = function() {
         MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
     }
 
-    var getdiscount = function (data, status) {
+    var getdiscount = function(data, status) {
         for (var i = 0; i < data.length; i++) {
             $scope.brands = data;
             $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
@@ -585,7 +613,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log($scope.brands);
     }
 
-    $scope.showdiscount = function () {
+    $scope.showdiscount = function() {
         if ($scope.discountstatus == 0) {
             MyServices.getstorebycategoryoffers($stateParams.cid).success(getdiscount);
             $scope.discountstatus = 1;
@@ -599,7 +627,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
     //Get brands by category API
-    var onbrandbycategorysuccess = function (data, status) {
+    var onbrandbycategorysuccess = function(data, status) {
         for (var i = 0; i < data.length; i++) {
             $scope.brands = data;
             $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
@@ -608,15 +636,15 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log($scope.brands);
     }
 
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions:.........");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
-    }
+        function showPosition2(position) {
+            var latlon = position.coords.latitude + "," + position.coords.longitude;
+            console.log("Positions:.........");
+            console.log(position.coords);
+            $scope.coords = position.coords;
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+            MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
+        }
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition2, showError);
@@ -628,13 +656,13 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
     //get sub category
-    var subcategorysuccess = function (data, status) {
+    var subcategorysuccess = function(data, status) {
         console.log(data);
         $scope.subcat = data;
     };
     MyServices.getsubcategory(categoryId).success(subcategorysuccess);
     //filter
-    $scope.filter = function (cat) {
+    $scope.filter = function(cat) {
 
         if ($scope.cat.length == 0) {
             $scope.cat.push(cat);
@@ -663,20 +691,20 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         id: '1',
         scope: $scope,
         animation: 'slide-in-up'
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.oModal1 = modal;
     });
     $ionicModal.fromTemplateUrl('templates/othersort.html', {
         id: '2',
         scope: $scope,
         animation: 'slide-in-up'
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.oModal2 = modal;
     });
-    $scope.showSort = function () {
+    $scope.showSort = function() {
         $scope.oModal1.show();
     };
-    $scope.showsortsort = function () {
+    $scope.showsortsort = function() {
         $scope.oModal2.show();
     };
 
@@ -686,7 +714,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //        $scope.brands = data;
     //    };
 
-    $scope.hideSort = function (dep) {
+    $scope.hideSort = function(dep) {
         console.log($scope.cat);
         $scope.catarray = $scope.cat[0].id;
         for (var i = 1; i < $scope.cat.length; i++) {
@@ -698,7 +726,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
     //Alert
-    $scope.showAlert = function () {
+    $scope.showAlert = function() {
         var alertPopup = $ionicPopup.alert({
             title: 'Unable to find location',
             template: 'Please turn on your GPS'
@@ -708,12 +736,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //Location
     $cordovaGeolocation
         .getCurrentPosition()
-        .then(function (position) {
+        .then(function(position) {
             var lat = position.coords.latitude;
             var long = position.coords.longitude;
             $scope.location = position.coords;
 
-        }, function (err) {
+        }, function(err) {
             $scope.showAlert();
         });
 
@@ -721,27 +749,27 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
     //Search
-    var onsearchsuccess = function (data, status) {
+    var onsearchsuccess = function(data, status) {
         $scope.brands = data;
     };
-    $scope.doSearch = function (data) {
+    $scope.doSearch = function(data) {
         MyServices.search(data).success(onsearchsuccess);
     };
 
-    $scope.clearSearch = function () {
+    $scope.clearSearch = function() {
         console.log("Click");
         $scope.datasearch = '';
     };
-    
+
     // close modal
-    $scope.closeModal = function () {
+    $scope.closeModal = function() {
         $scope.oModal2.hide();
     };
 })
 
 
 
-.controller('StorePageCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $timeout) {
+.controller('StorePageCtrl', function($scope, $stateParams, MyServices, $ionicPopup, $timeout) {
 
     $scope.user = MyServices.getuser();
     $scope.test = "Hello";
@@ -753,7 +781,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.user.id = 0;
     }
     var brandId = $stateParams.bid;
-    var ongetbrandsuccess = function (data, status) {
+    var ongetbrandsuccess = function(data, status) {
         console.log(data);
         $scope.branddetails = data.store;
         $scope.newarrivals = data.newin;
@@ -769,7 +797,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var likecount = data.like;
         $scope.checklike = likecount;
         console.log('Like Counter= ' + likecount);
-        $scope.like = function () {
+        $scope.like = function() {
 
             if (likecount == 0 || !likecount) {
                 likecount = 1;
@@ -793,28 +821,28 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     MyServices.getbranddetails(brandId, $scope.user.id).success(ongetbrandsuccess);
 
-    $scope.sendtowebsite = function (website) {
+    $scope.sendtowebsite = function(website) {
         window.open(website, '_system');
     }
 
     //like API
-    var likesuccess = function (data, status) {
+    var likesuccess = function(data, status) {
         console.log(data + 'Liked');
     };
-    $scope.likeapi = function (userid, brandid, like) {
+    $scope.likeapi = function(userid, brandid, like) {
         MyServices.like(userid, brandid, like).success(likesuccess);
     }
 
     //rating API
-    var ratesuccess = function (data, status) {
+    var ratesuccess = function(data, status) {
 
     };
-    $scope.submitRate = function (userid, storeid, rating) {
+    $scope.submitRate = function(userid, storeid, rating) {
         MyServices.rating(userid, storeid, rating).success(ratesuccess);
     }
 
     // Popups for favorites
-     $scope.addfavPopup = function () {
+    $scope.addfavPopup = function() {
         $scope.data = {}
 
         // An elaborate, custom popup
@@ -824,12 +852,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             scope: $scope,
 
         });
-        $timeout(function () {
+        $timeout(function() {
             myPopup.close(); //close the popup after 3 seconds for some reason
         }, 1500);
     };
-    
-     $scope.remfavPopup = function () {
+
+    $scope.remfavPopup = function() {
         $scope.data = {}
 
         // An elaborate, custom popup
@@ -839,22 +867,22 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             scope: $scope,
 
         });
-        $timeout(function () {
+        $timeout(function() {
             myPopup.close(); //close the popup after 3 seconds for some reason
         }, 1500);
     };
-    
+
     // Share
-    $scope.share = function () {
+    $scope.share = function() {
         console.log('Share');
-        window.plugins.socialsharing.share('Checkout '+$scope.branddetails.brandname+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
     }
-    
+
     //Rating
     $scope.rate = 0;
     $scope.max = 5;
     $scope.readonly = true;
-    $scope.showPopup = function () {
+    $scope.showPopup = function() {
         $scope.data = {}
         var myPopup = $ionicPopup.show({
             template: '<rating ng-model="data.newrate" max="max" readonly="false"></rating>',
@@ -866,7 +894,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             }, {
                 text: '<b>Submit</b>',
                 type: 'button-balanced',
-                onTap: function (e) {
+                onTap: function(e) {
                     $scope.submitRate($scope.user.id, $scope.branddetails.id, $scope.data.newrate);
                     console.log($scope.user.id, $scope.branddetails.id, $scope.data.newrate);
                 }
@@ -876,29 +904,28 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 })
 
-.controller('BrandListCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+.controller('BrandListCtrl', function($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
 
-    var brnadsuccess = function (data, status) {
+    var brnadsuccess = function(data, status) {
         console.log(data);
         $scope.brands = data;
     };
     MyServices.getallbrands().success(brnadsuccess);
 })
 
-.controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate, $location) {
+.controller('FavoritesCtrl', function($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate, $location) {
 
     $scope.user = {};
     $scope.user = MyServices.getuser();
     console.log("My information");
     console.log($scope.user);
-$scope.favorites = {};
-    var userlikes = function (data, status) {
-//        console.log(data);
+    $scope.favorites = {};
+    var userlikes = function(data, status) {
+        //        console.log(data);
         $scope.favorites = data;
-        for(var i=0;i<data.length;i++)
-        {
-            $scope.favorites[i].userlike=data[i].like.length;
+        for (var i = 0; i < data.length; i++) {
+            $scope.favorites[i].userlike = data[i].like.length;
         }
         console.log($scope.favorites);
     };
@@ -909,25 +936,25 @@ $scope.favorites = {};
     }
 
 
-    $scope.gotofavoriteslist = function () {
+    $scope.gotofavoriteslist = function() {
         console.log("gotofavoriteslist clicked");
         $location.url("tab/favoritesstore");
     }
 
 })
 
-.controller('MallPageListCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $ionicModal, $ionicSlideBoxDelegate) {
+.controller('MallPageListCtrl', function($scope, $stateParams, MyServices, $ionicPopup, $ionicModal, $ionicSlideBoxDelegate) {
     console.log($stateParams.mid);
     $scope.cat = [];
 
     //get sub category
-    var subcategorysuccess = function (data, status) {
+    var subcategorysuccess = function(data, status) {
         console.log(data);
         $scope.subcat = data;
     };
     MyServices.getsubcategory($stateParams.id).success(subcategorysuccess);
     //filter
-    $scope.filter = function (cat) {
+    $scope.filter = function(cat) {
 
         if ($scope.cat.length == 0) {
             $scope.cat.push(cat);
@@ -954,26 +981,26 @@ $scope.favorites = {};
 
 
     };
-    
-    
-    
+
+
+
     $scope.myorder = 'name';
     $scope.myorderorder = false;;
-    $scope.changesort = function (order, orderorder) {
+    $scope.changesort = function(order, orderorder) {
         $scope.myorder = order;
         $scope.myorderorder = orderorder;
     };
 
-    
+
     //Sort Modal
     $ionicModal.fromTemplateUrl('templates/sort.html', {
         id: '1',
         scope: $scope,
         animation: 'slide-in-up'
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.oModal1 = modal;
     });
-    $scope.showSort = function () {
+    $scope.showSort = function() {
         $scope.oModal1.show();
     };
     //Sort Modal
@@ -981,19 +1008,19 @@ $scope.favorites = {};
         id: '2',
         scope: $scope,
         animation: 'slide-in-up'
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.oModal2 = modal;
     });
-    $scope.showsortsort = function () {
+    $scope.showsortsort = function() {
         $scope.oModal2.show();
     };
 
-    var catarraysuccess = function (data, status) {
+    var catarraysuccess = function(data, status) {
         console.log(data);
         $scope.malllist = data;
     };
 
-    $scope.hideSort = function () {
+    $scope.hideSort = function() {
         console.log($scope.cat);
         $scope.categoryarray = $scope.cat[0].id;
         for (var i = 1; i < $scope.cat.length; i++) {
@@ -1004,27 +1031,27 @@ $scope.favorites = {};
         MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid).success(catarraysuccess);
     };
 
-    var mallpagesuccess = function (data, status) {
+    var mallpagesuccess = function(data, status) {
         console.log(data);
         $scope.malllist = data;
     };
     MyServices.mallcategorystore($stateParams.id, $stateParams.mid).success(mallpagesuccess);
-    
-    $scope.clear =function(){
+
+    $scope.clear = function() {
         MyServices.mallcategorystore($stateParams.id, $stateParams.mid).success(mallpagesuccess);
     }
 })
 
-.controller('MallistCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+.controller('MallistCtrl', function($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
     $scope.malls = [];
-    var mallsuccess = function (data, status) {
+    var mallsuccess = function(data, status) {
         console.log(data);
         $scope.malls = data;
-        
-        
-        
-        
+
+
+
+
         for (var i = 0; i < data.length; i++) {
             if (data[i].latitude != null) {
                 $scope.malls[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
@@ -1037,10 +1064,10 @@ $scope.favorites = {};
             }
         }
     };
-    
-    
-    
-    
+
+
+
+
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
         console.log("Positions:.........");
@@ -1058,41 +1085,40 @@ $scope.favorites = {};
     }
 
 
-    
+
 })
 
 
-.controller('PageOffersCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
-    
-    var successoffers = function (data, status) {
+.controller('PageOffersCtrl', function($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+
+    var successoffers = function(data, status) {
         console.log(data);
-        $scope.offers={};
-        $scope.offers=data;
-        for(var i=0;i<data.length;i++)
-        {
-        if (data[i].image == null) {
-            $scope.offers[i].image = "img/logo.png";
-        }
+        $scope.offers = {};
+        $scope.offers = data;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].image == null) {
+                $scope.offers[i].image = "img/logo.png";
+            }
         }
     };
     MyServices.mallalloffers($stateParams.id).success(successoffers)
-    
+
 })
 
 
-.controller('MallPageCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+.controller('MallPageCtrl', function($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
     console.log("mall id");
     console.log($stateParams.id);
-    $scope.mallid=$stateParams.id;
+    $scope.mallid = $stateParams.id;
     $scope.mall = [];
     $scope.mallcategory = [];
-    var successoffers = function (data, status) {
+    var successoffers = function(data, status) {
         console.log(data);
-        $scope.offers=data;
+        $scope.offers = data;
     };
-    MyServices.malloffers($stateParams.id,2).success(successoffers)
-    var mallsuccess = function (data, status) {
+    MyServices.malloffers($stateParams.id, 2).success(successoffers)
+    var mallsuccess = function(data, status) {
         console.log(data.mall);
         $scope.mall = data.mall;
         if (data.mall.logo == "") {
@@ -1101,7 +1127,7 @@ $scope.favorites = {};
     };
     MyServices.beforeeditmall($stateParams.id).success(mallsuccess);
 
-    var mallcategorysuccess = function (data, status) {
+    var mallcategorysuccess = function(data, status) {
         //        console.log("mall category");
         //        console.log(data);
         for (var i = 0; i < data.length; i++) {
@@ -1111,42 +1137,41 @@ $scope.favorites = {};
         }
         console.log("formated categories");
         console.log($scope.mallcategory);
-        $scope.mallcategory=partitionarray($scope.mallcategory,2);
+        $scope.mallcategory = partitionarray($scope.mallcategory, 2);
     };
     MyServices.mallcategories($stateParams.id).success(mallcategorysuccess);
- function partitionarray(myarray,number) {
-            var arrlength=myarray.length;
-            var newarray=[];
-            var j=-1;
-            for(var i=0;i<arrlength;i++)
-            {
-                if(i%number==0)
-                {
-                    j++;
-                    newarray[j]=[];
-                }
-                newarray[j].push(myarray[i]);
+
+    function partitionarray(myarray, number) {
+        var arrlength = myarray.length;
+        var newarray = [];
+        var j = -1;
+        for (var i = 0; i < arrlength; i++) {
+            if (i % number == 0) {
+                j++;
+                newarray[j] = [];
             }
-            return newarray;
-        };
-    
+            newarray[j].push(myarray[i]);
+        }
+        return newarray;
+    };
+
     // Share
-    $scope.share = function () {
+    $scope.share = function() {
         console.log('Share');
-        window.plugins.socialsharing.share('Checkout '+$scope.mall.name+' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
-    }
-    
+        window.plugins.socialsharing.share('Checkout ' + $scope.mall.name + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+    };
+
 })
 
 
-.controller('BrandStoreCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+.controller('BrandStoreCtrl', function($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
     $scope.brands = [];
     // ip function
 
 
     //Get brands by category API
-    var brnadsuccess = function (data, status) {
+    var brnadsuccess = function(data, status) {
 
         $scope.brands = data;
         for (var i = 0; i < data.length; i++) {
@@ -1160,15 +1185,15 @@ $scope.favorites = {};
         console.log($scope.brands);
     }
 
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions:.........");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.getallstoresbybrandid($stateParams.id).success(brnadsuccess);
-    }
+        function showPosition2(position) {
+            var latlon = position.coords.latitude + "," + position.coords.longitude;
+            console.log("Positions:.........");
+            console.log(position.coords);
+            $scope.coords = position.coords;
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+            MyServices.getallstoresbybrandid($stateParams.id).success(brnadsuccess);
+        }
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition2, showError);
@@ -1180,15 +1205,15 @@ $scope.favorites = {};
 })
 
 
-.controller('PhotoSliderCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
+.controller('PhotoSliderCtrl', function($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $ionicModal.fromTemplateUrl('templates/image-slider.html', {
         scope: $scope,
         animation: 'slide-in-up'
-    }).then(function (modal) {
+    }).then(function(modal) {
         $scope.modal = modal;
     });
 
-    $scope.openModal = function (index2) {
+    $scope.openModal = function(index2) {
 
         $scope.modal.show();
         // Important: This line is needed to update the current ion-slide's width
@@ -1205,37 +1230,37 @@ $scope.favorites = {};
 
     };
 
-    $scope.closeModal = function () {
+    $scope.closeModal = function() {
         $scope.modal.hide();
     };
 
     // Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function () {
+    $scope.$on('$destroy', function() {
         $scope.modal.remove();
     });
     // Execute action on hide modal
-    $scope.$on('modal.hide', function () {
+    $scope.$on('modal.hide', function() {
         // Execute action
     });
     // Execute action on remove modal
-    $scope.$on('modal.removed', function () {
+    $scope.$on('modal.removed', function() {
         // Execute action
     });
-    $scope.$on('modal.shown', function () {
+    $scope.$on('modal.shown', function() {
         console.log('Modal is shown!');
     });
 
     // Call this functions if you need to manually control the slides
-    $scope.next = function () {
+    $scope.next = function() {
         $ionicSlideBoxDelegate.next();
     };
 
-    $scope.previous = function () {
+    $scope.previous = function() {
         $ionicSlideBoxDelegate.previous();
     };
 
     // Called each time the slide changes
-    $scope.slideChanged = function (index) {
+    $scope.slideChanged = function(index) {
         $scope.slideIndex = index;
     };
 
