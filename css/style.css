@@ -22,10 +22,10 @@ input,
 button,
 select,
 textarea {
-    font-family: 'Raleway', cursive;
+    font-family: 'Raleway', cursive !important;
 }
 .bar .title {
-    font-family: 'Rochester';
+    font-family: 'Rochester' !important;
     font-size: 27px;
 }
 .tab-item.tab-item-active,
