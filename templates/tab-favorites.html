@@ -1,24 +1,13 @@
 <ion-view title="My Favorites">
     <ion-content class="has-header">
         <ion-nav-buttons side="right">
-            <!--            <a href="#/tab/favoritesstore" class="color:#FFF;"><i class="icon-plus icon-2x"></i></a>-->
             <button class="button button-icon icon ion-ios7-plus-empty" ng-click="gotofavoriteslist()"></button>
         </ion-nav-buttons>
 
-        <!--
-        <div class="list">
-
-        <a class="item item-avatar" href="#/tab/storelist/storepage">
-            <img src="img/adidas.jpg">
-            <h2>Adidas</h2>
-            <p>High Street Pheonix Lower Parel<br>
-                32 favorites</p>
-
-        </a>
-        </div>
-        href="#/tab/storelist/storepage/{{brand.storeid}}"
--->
         <ion-list>
+            <ion-item ng-show="favorites == '';">
+                Click on '<i class="ion-ios7-plus-empty"></i>' to add brands to favorites.
+            </ion-item>
             <ion-item class="item-avatar" ng-repeat="favorite in favorites">
                 <img src="{{favorite.logo|imagepath}}">
                 <span class="item-note">{{favorite.userlike}} Likes</span>

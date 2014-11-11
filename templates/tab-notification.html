@@ -1,10 +1,10 @@
 <ion-view title="Notification">
     <ion-content class="has-header">
         <ion-nav-buttons side="right">
-            <a class="button button-icon icon ion-ios7-plus-empty" href="#/tab/favorites"></a>
+            <a href="#/tab/favorites"><button class="button button-icon icon ion-ios7-plus-empty"></button></a>
         </ion-nav-buttons>
         <ion-list>
-            <ion-item class="item-text-wrap">
+            <ion-item class="item-text-wrap" ng-show="notification == '';">
                 Like brands to follow them.
                 <br>Receive notifications for discounts and new arrivals in your favorite brands.
             </ion-item>

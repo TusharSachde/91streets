@@ -2,6 +2,7 @@
     <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false">
         <ion-slide ng-repeat="newarrival in newarrivals">
             <img ng-src="{{newarrival.image|imagepath}}" class="fullscreen-image" />
+            <i class="ion-android-share gobottom" ng-click="shareImg(newarrival.image);" ></i>
         </ion-slide>
     </ion-slide-box>
 </div>

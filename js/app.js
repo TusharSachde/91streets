@@ -249,6 +249,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
     };
 });
 
+var imagepath = "http://mafiawarloots.com/91street/uploads/";
 
 var rad = function(x) {
     return x * Math.PI / 180;
