@@ -597,3 +597,17 @@ a.button {
 .popover {
     height: 55px;
 }
+textarea.review {
+    height: 70px;
+    margin-top: 10px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #343434;
+}
+.gobottom {
+    color: white;
+    font-size: 35px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}

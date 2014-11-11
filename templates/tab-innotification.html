@@ -24,7 +24,7 @@
                 </label>
             </div>
             
-            <ion-item class="item-avatar" ng-repeat="notif in notifications">
+            <ion-item ng-repeat="notif in notifications">
                 <img src="{{brand.brandlogo|imagepath}}">
                 <span class="item-note"  ng-show="notif.from!=1">{{notif.from}}  {{notif.to}}</span>
                 <h2>{{notif.storename}}</h2>

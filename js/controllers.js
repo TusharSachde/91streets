@@ -930,6 +930,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
     }
 
+    // Share img
+    $scope.shareImg = function(image) {
+        console.log(imagepath+image);
+        console.log(image);
+        console.log(imagepath);
+        window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets', imagepath+image);
+    }
+
     //Rating
     $scope.rate = 0;
     $scope.max = 5;
@@ -937,9 +945,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.showPopup = function() {
         $scope.data = {}
         var myPopup = $ionicPopup.show({
-            template: '<rating ng-model="data.newrate" max="max" readonly="false"></rating>',
-            title: 'Your Rating',
-            subTitle: 'Please enter your rating',
+            template: '<rating ng-model="data.newrate" max="max" readonly="false"></rating> <textarea class="review" placeholder="Please enter your review"></textarea>',
+            title: 'Your Review',
+            subTitle: 'Please enter your review',
             scope: $scope,
             buttons: [{
                 text: 'Cancel'
@@ -1172,7 +1180,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             }
         }
     };
-    MyServices.mallalloffers($stateParams.id).success(successoffers)
+    MyServices.mallalloffers($stateParams.id).success(successoffers);
+    
+    // Share
+    $scope.share = function(name, header) {
+        window.plugins.socialsharing.share('Checkout ' + name + ', '+ header +' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+    };
 
 })
 
