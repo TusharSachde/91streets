@@ -935,7 +935,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(imagepath+image);
         console.log(image);
         console.log(imagepath);
-        window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets', imagepath+image);
+        window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets', null, imagepath+image);
     }
 
     //Rating
