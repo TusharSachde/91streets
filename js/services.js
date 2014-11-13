@@ -63,8 +63,8 @@ var myservices = angular.module('myservices', [])
         getallstoresdiscount: function () {
             return $http.get(adminurl + 'getallstoresdiscount', {});
         },
-        getallmalls: function () {
-            return $http.get(adminurl + 'getallmalls', {});
+        getallmalls: function (city) {
+            return $http.get(adminurl + 'getallmalls?city='+city, {});
         },
         getallbrands: function () {
             return $http.get(adminurl + 'getallbrands', {});
@@ -120,6 +120,9 @@ var myservices = angular.module('myservices', [])
         setuser: function (userdata) {
             var user = userdata;
             $.jStorage.set("user", userdata);
+        },
+        appsignup: function (name, lastname, email, password, city) {
+            return $http.get(adminurl + 'appsignup?name='+name+'&lastname='+lastname+'&email='+email+'&password='+password+'&city='+city,{});
         },
         getuser: function(){
             var userdata = user = $.jStorage.get("user")
