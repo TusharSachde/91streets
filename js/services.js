@@ -78,8 +78,17 @@ var myservices = angular.module('myservices', [])
         notificationbrandid: function (id) {
             return $http.get(adminurl + 'notificationbrandid?id='+id, {});
         },
+        findoneuser: function (id) {
+            return $http.get(adminurl + 'findoneuser?id='+id, {});
+        },
+        updateuserpro: function (user,id) {
+            return $http.get(adminurl + 'updateuserpro?id='+id+'&firstname='+user.firstname+'&lastname='+user.lastname+'&email='+user.email+'&dob='+user.dob+'&city='+user.city, {});
+        },
         getonecity: function (id) {
             return $http.get(adminurl + 'getonecity?id='+id, {});
+        },
+        isshopping: function (id) {
+            return $http.get(adminurl + 'isshopping?id='+id, {});
         },
         getstorebycategories: function (id) {
             return $http.get(adminurl + 'getstorebycategories?id='+id, {});
@@ -102,11 +111,14 @@ var myservices = angular.module('myservices', [])
         getbranddetails: function (id, userid) {
             return $http.get(adminurl + 'getstorebystoreid?id='+ id + '&userid=' + userid, {});
         },
+        reviewbystoreid: function (id) {
+            return $http.get(adminurl + 'reviewbystoreid?storeid='+ id, {});
+        },
         search: function (search) {
             return $http.get(adminurl + 'getbrandsearch?brand=' + search, {});
         },
-        rating: function (userid, storeid, rating) {
-            return $http.get(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + '&rating=' + rating , {});
+        rating: function (userid, storeid, rating, review) {
+            return $http.get(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + '&rating=' + rating + '&review=' + review, {});
         },
         like: function (userid, storeid, like) {
             return $http.get(adminurl + 'addlike?userid=' + userid + '&brandid=' + storeid + '&like=' + like , {});

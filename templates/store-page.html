@@ -46,8 +46,9 @@
             <div class="list">
                 <div class="item">
                     <h3>Offers</h3>
-                    <p>Sorry, no offers going on.</p>
-                    <a href="#">
+<!--                    <p>Sorry, no offers going on.</p>-->
+                    <p ng-repeat="offer in offers">{{offer.header}}.</p>
+<!--                    <a href="#">-->
                         <span class="item-note">View All</span>
                     </a>
                 </div>
@@ -77,6 +78,15 @@
                     <h3>Timings</h3>
                     <p>{{branddetails.workinghoursfrom}} to {{branddetails.workinghoursto}}. Closed on {{branddetails.shopclosedday}}
                     </p>
+                </div>
+                <div class="item">
+                    <h3>Reviews</h3>
+                    <p>{{storepagemsg}}</p>
+                    <p ng-repeat="review in reviews">{{review.review}}</p>
+                    <a ng-click="loadmorereview()">
+                        <span class="item-note">{{seemore}}</span>
+                    </a>
+<!--                    <h4 ng-click="loadmorereview()">{{seemore}}</h4>-->
                 </div>
             </div>
 

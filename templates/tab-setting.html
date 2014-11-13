@@ -5,26 +5,40 @@
                 <span class="assertive">Profile</span>
             </div>
             <div class="item">
-                <h6>Name</h6>
-                <h4>{{userdata.name}}</h4>
+                <h6>First Name</h6>
+                <input type="text" ng-model="userpro.firstname" placeholder="First Name">
+<!--                <h4>{{userdata.name}}</h4>-->
+            </div>
+            <div class="item">
+                <h6>Last Name</h6>
+                <input type="text" ng-model="userpro.lastname" placeholder="Last Name">
+<!--                <h4>{{userdata.name}}</h4>-->
             </div>
             <div class="item">
                 <h6>Email</h6>
-                <h4>{{userdata.email}}</h4>
+                <input type="text" ng-model="userpro.email" placeholder="Email Address">
+<!--                <h4>{{userdata.email}}</h4>-->
             </div>
             <div class="item">
                 <h6>Birthdate</h6>
-                <h4>{{userdata.dob}}</h4>
+                <input type="date" ng-model="userpro.dob">
+<!--                <h4>{{userdata.dob}}</h4>-->
             </div>
             <div class="item">
-                <h6>City</h6>
-                <h4>{{city}}</h4>
+                <h6>{{city.name}}</h6>
+                <select ng-model="userpro.city">
+                        <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
+                    </select>
             </div>
+            
+            <div class="padding"><a class="button button-assertive button-block" ng-click="updatepro(userpro)">Update Profile</a></div>
+            
             <div class="item item-divider">
                 <span class="assertive">Shopping bag</span>
             </div>
             <div class="item">
-                <h4>Shopping bag is empty</h4>
+                <h4 ng-show="shoppingtext">Shopping bag is empty</h4>
+                <h4 ng-hide="shoppingtext" ng-click="gotoshoppingbag()">My Shopping Bag</h4>
             </div>
             <div class="item item-divider">
                 <span class="assertive">About</span>
