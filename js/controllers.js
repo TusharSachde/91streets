@@ -1,11 +1,44 @@
 var lat = 0;
 var long = 0;
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
-    .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover) {
+    .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location) {
         $scope.loginData = {};
         $scope.loginlogouttext="Log Out";
-        
+        $scope.shoppingtext=false;
         $scope.userdata = user = $.jStorage.get("user");
+    console.log($scope.userdata);
+    $scope.userpro=[];
+    
+        var getshoppingbag1 = function (data, status) {
+            if(data==1)
+            {
+                $scope.shoppingtext=false;
+            }else{
+                $scope.shoppingtext=true;   
+            }
+        };
+    var before = function (data, status) {
+        console.log(data);
+        $scope.userpro=data;
+        
+    };
+    //update profile
+    var userupdated = function (data, status) {
+        console.log(data);
+    };
+    $scope.updatepro=function(userpro){
+        MyServices.updateuserpro(userpro,$scope.userdata.id).success(userupdated);
+    }
+    
+    //update profile
+        if($scope.userdata)
+        {
+        MyServices.isshopping($scope.userdata.id).success(getshoppingbag1);
+        MyServices.findoneuser($scope.userdata.id).success(before);
+        }
+        $scope.gotoshoppingbag=function(){
+            $location.url("tab/shoppingbag");
+        }
         console.log("my data");
         console.log($scope.userdata);
         if($scope.userdata)
@@ -649,12 +682,16 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     }
 
     var getdiscount = function(data, status) {
-        for (var i = 0; i < data.length; i++) {
+        
             $scope.brands = data;
+        for (var i = 0; i < data.length; i++) {
             $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
             console.log($scope.brands[i].dist);
         }
         console.log($scope.brands);
+        scroll = 1;
+        $scope.loadMore();
+        console.log(scroll);
     }
 
     $scope.showdiscount = function() {
@@ -670,11 +707,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     //Get brands by category API
     var onbrandbycategorysuccess = function(data, status) {
-
-        for (var i = 0; i < data.length; i++) {
+        
             $scope.brands = data;
+        for (var i = 0; i < data.length; i++) {
             $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
-            console.log($scope.brands[i].dist);
+//            console.log($scope.brands[i].dist);
         }
         scroll = 1;
         $scope.loadMore();
@@ -698,11 +735,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
 
-    //ionic load more
+//    //ionic load more
     $scope.productItem = [];
     var change = 10;
     var counter = 0;
-    $scope.brands = [];
+//    $scope.brands = [];
 
     $scope.loadMore = function() {
         if (scroll == 1) {
@@ -837,6 +874,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.user = MyServices.getuser();
     $scope.test = "Hello";
+    $scope.storepagemsg="";
     console.log("storage controller");
     $scope.user = {};
     console.log($scope.user);
@@ -849,6 +887,13 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
         $scope.branddetails = data.store;
         $scope.newarrivals = data.newin;
+        $scope.reviews = data.review;
+        $scope.offers=data.offers;
+        console.log("all reviews");
+        if($scope.reviews=="")
+        {
+            $scope.storepagemsg="No Reviews";
+        }
         data.averagerating = parseFloat(data.averagerating);
         var decval = data.averagerating - Math.floor(data.averagerating);
         if (decval < 0.5) {
@@ -901,8 +946,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var ratesuccess = function(data, status) {
 
     };
-    $scope.submitRate = function(userid, storeid, rating) {
-        MyServices.rating(userid, storeid, rating).success(ratesuccess);
+    $scope.submitRate = function(userid, storeid, rating, review) {
+        MyServices.rating(userid, storeid, rating, review).success(ratesuccess);
     }
 
     // Popups for favorites
@@ -949,7 +994,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(imagepath);
         window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets', null, imagepath+image);
     }
-
+    $scope.user = MyServices.getuser();
     //Rating
     $scope.rate = 0;
     $scope.max = 5;
@@ -957,7 +1002,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.showPopup = function() {
         $scope.data = {}
         var myPopup = $ionicPopup.show({
-            template: '<rating ng-model="data.newrate" max="max" readonly="false"></rating> <textarea class="review" placeholder="Please enter your review"></textarea>',
+            template: '<rating ng-model="data.newrate" max="max" readonly="false"></rating> <textarea ng-model="data.newreview" class="review" placeholder="Please enter your review"></textarea>',
             title: 'Your Review',
             subTitle: 'Please enter your review',
             scope: $scope,
@@ -967,13 +1012,24 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 text: '<b>Submit</b>',
                 type: 'button-balanced',
                 onTap: function(e) {
-                    $scope.submitRate($scope.user.id, $scope.branddetails.id, $scope.data.newrate);
-                    console.log($scope.user.id, $scope.branddetails.id, $scope.data.newrate);
+                    $scope.submitRate($scope.user.id, $scope.branddetails.id, $scope.data.newrate, $scope.data.newreview);
+                    console.log($scope.user.id, $scope.branddetails.id, $scope.data.newrate, $scope.data.newreview);
                 }
             }]
         });
 
     };
+    
+    //load more review
+    $scope.seemore="...See More";
+    var reviewlosdsuccess = function (data, status){
+        $scope.reviews=data;
+    };
+    $scope.loadmorereview = function(){
+        $scope.seemore="";
+        MyServices.reviewbystoreid($scope.branddetails.id).success(reviewlosdsuccess);
+    }
+    
 })
 
 .controller('BrandListCtrl', function($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
@@ -1133,9 +1189,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             }
         }
     };
+ 
+    $scope.user = MyServices.getuser();
+    console.log($scope.user);
+    if($scope.user==null)
+    {
+        $scope.usercity=0;
+    }else{
+        $scope.usercity=$scope.user.city;
+    }
 
-
-    MyServices.getallmalls().success(mallsuccess);
+    MyServices. getallmalls($scope.usercity).success(mallsuccess);
     //ionic load more
     $scope.mallItem = [];
     var change = 10;

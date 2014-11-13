@@ -25,7 +25,7 @@
                 </label>
             </div>
             
-            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in productItem | orderBy:myorder:myorderorder">
+            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in brands | orderBy:myorder:myorderorder">
                 <img src="{{brand.brandlogo|imagepath}}">
                 <span class="item-note">{{brand.dist}} KM</span>
                 <h2>{{brand.brandname}}</h2>
