@@ -3,7 +3,17 @@ var long = 0;
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover) {
         $scope.loginData = {};
-
+        $scope.loginlogouttext="Log Out";
+        
+        $scope.userdata = user = $.jStorage.get("user");
+        console.log("my data");
+        console.log($scope.userdata);
+        if($scope.userdata)
+        {
+           $scope.loginlogouttext="Log Out"; 
+        }else{
+            $scope.loginlogouttext="Login";
+        }
         //    get all city
         var getcity = function(data, status) {
             console.log(data);
@@ -92,15 +102,16 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         //Register User
         var onregistersuccess = function(data, status) {
+            console.log(data);
             $scope.loginData.email = data.email;
             $scope.loginData.password = data.passsword;
             console.log(data);
             $scope.checkButton('login');
-            $scope.modal.hide();
+//            $scope.modal.hide();
 
         }
         $scope.submitRegister = function(data) {
-            MyServices.registeruser(data.name, data.lastname, data.email, data.password, data.city).success(onregistersuccess)
+            MyServices.appsignup(data.name, data.lastname, data.email, data.password, data.city).success(onregistersuccess)
         };
 
         // Triggered in the login modal to close it
@@ -140,6 +151,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $.jStorage.flush();
             $scope.userdata = {};
             MyServices.setuser($scope.userdata);
+            $scope.loginlogouttext="Login";
             $.jStorage.deleteKey("user");
         };
 
@@ -1155,6 +1167,27 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
+        
+//start user is not logged in get city from lat long
+        
+        
+            $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + long + "&key=AIzaSyDqN3t8_Nb04MF7jTufq-bkEHogZxyeUHY", {}, function (data) {
+                console.log(data);
+                data = data.results[0].address_components;
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].types[0] == "locality") {
+                        $scope.city = data[i].long_name;
+                    }
+                }
+                console.log("location city");
+                console.log($scope.city);
+
+            });
+
+        
+//ende user is not logged in get city from lat long
+        
+        
     }
 
     if (navigator.geolocation) {
