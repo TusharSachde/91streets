@@ -13,17 +13,19 @@ var myservices = angular.module('myservices', [])
         setuseremail: function(user) {
             useremail = user;
         },
-        getbrandsbycategory: function (id) {
+        getbrandsbycategory: function (id,city) {
             return $http.get(adminurl + 'getstorebycategory', {
                 params: {
-                    id: id
+                    id: id,
+                    city: city
                 }
             });
         },
-        getstorebycategoryoffers: function (id) {
+        getstorebycategoryoffers: function (id,city) {
             return $http.get(adminurl + 'getstorebycategoryoffers', {
                 params: {
-                    id: id
+                    id: id,
+                    city: city
                 }
             });
         },
@@ -82,6 +84,16 @@ var myservices = angular.module('myservices', [])
             return $http.get(adminurl + 'findoneuser?id='+id, {});
         },
         updateuserpro: function (user,id) {
+            
+            $userdata ={
+                'email' : user.email,
+                'id' : id,
+                'dob' : user.dob,
+                'city' : user.city
+            };
+            
+            $.jStorage.set("user", $userdata);
+            
             return $http.get(adminurl + 'updateuserpro?id='+id+'&firstname='+user.firstname+'&lastname='+user.lastname+'&email='+user.email+'&dob='+user.dob+'&city='+user.city, {});
         },
         getonecity: function (id) {
@@ -96,8 +108,8 @@ var myservices = angular.module('myservices', [])
         getcatarraystoreoffer: function (catarray) {
             return $http.get(adminurl + 'getcatarraystoreoffer?catarray='+catarray, {});
         },
-        getcatarraystore: function (catarray) {
-            return $http.get(adminurl + 'getcatarraystore?catarray='+catarray, {});
+        getcatarraystore: function (catarray,city) {
+            return $http.get(adminurl + 'getcatarraystore?catarray='+catarray+'&city='+city, {});
         },
         favoritebrands: function () {
             return $http.get(adminurl + 'favoritebrands', {});
