@@ -664,6 +664,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('StoreListCtrl', function($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
 
     $scope.brands = [];
+    $scope.userdata = user = $.jStorage.get("user");
+    if($scope.userdata)
+    {
+        $scope.ucity=$scope.userdata.city;
+    }else{
+        $scope.ucity=0;
+    }
+    console.log($scope.userdata);
     var categoryId = $stateParams.cid;
     var scroll = 0;
     $scope.cat = [];
@@ -678,7 +686,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //show discount fucntion
 
     $scope.clear = function() {
-        MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
+        MyServices.getbrandsbycategory(categoryId,$scope.ucity).success(onbrandbycategorysuccess);
     }
 
     var getdiscount = function(data, status) {
@@ -696,10 +704,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.showdiscount = function() {
         if ($scope.discountstatus == 0) {
-            MyServices.getstorebycategoryoffers($stateParams.cid).success(getdiscount);
+            MyServices.getstorebycategoryoffers($stateParams.cid,$scope.ucity).success(getdiscount);
             $scope.discountstatus = 1;
         } else {
-            MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
+            MyServices.getbrandsbycategory(categoryId,$scope.ucity).success(onbrandbycategorysuccess);
             $scope.discountstatus = 0;
         }
 
@@ -725,7 +733,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        MyServices.getbrandsbycategory(categoryId).success(onbrandbycategorysuccess);
+        MyServices.getbrandsbycategory(categoryId,$scope.ucity).success(onbrandbycategorysuccess);
     };
 
     if (navigator.geolocation) {
@@ -824,7 +832,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         for (var i = 1; i < $scope.cat.length; i++) {
             $scope.catarray += "," + $scope.cat[i].id;
         }
-        MyServices.getcatarraystore($scope.catarray).success(onbrandbycategorysuccess);
+        MyServices.getcatarraystore($scope.catarray,$scope.ucity).success(onbrandbycategorysuccess);
         $scope.oModal1.hide();
     };
 
