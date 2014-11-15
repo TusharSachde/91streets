@@ -62,8 +62,8 @@ var myservices = angular.module('myservices', [])
         getuserlike: function (id) {
             return $http.get(adminurl + 'getuserlike?user='+id, {});
         },
-        getallstoresdiscount: function () {
-            return $http.get(adminurl + 'getallstoresdiscount', {});
+        getallstoresdiscount: function (city) {
+            return $http.get(adminurl + 'getallstoresdiscount?city='+city, {});
         },
         getallmalls: function (city) {
             return $http.get(adminurl + 'getallmalls?city='+city, {});

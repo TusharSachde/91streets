@@ -438,10 +438,18 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.cat = [];
     $scope.catarray = [];
 
+    $scope.user = MyServices.getuser();
+    if($scope.user==null)
+    {
+        $scope.city=0;
+    }else{
+        $scope.city=$scope.user.city;
+    }
+    
     //    clear filter and sort
 
     $scope.clear = function() {
-        MyServices.getallstoresdiscount().success(getdiscount);
+        MyServices.getallstoresdiscount($scope.city).success(getdiscount);
     };
 
     var allmaincategory = function(data, status) {
@@ -519,7 +527,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         };
     };
     
-    MyServices.getallstoresdiscount().success(getdiscount);
+    
+    
+    MyServices.getallstoresdiscount($scope.city).success(getdiscount);
 
     
     
@@ -931,6 +941,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             }
 
             console.log($scope.user.id, $scope.branddetails.brandid, likecount);
+            console.log('Like Counter=' + likecount + ' ' + $scope.checklike);
             console.log('Like Counter=' + likecount + ' ' + $scope.checklike);
 
         }
