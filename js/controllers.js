@@ -1236,12 +1236,16 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('MallistCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
     $scope.malls = [];
+    $scope.search=false;
     var mallsuccess = function (data, status) {
+        $scope.search=false;
         scroll = 1;
         console.log(data);
         $scope.malls = data;
         $scope.loadMore();
         for (var i = 0; i < data.length; i++) {
+            
+//            $scope.malls[i].link="#/tab/malllist/mallpage/"+data.id;
             if (data[i].latitude != null) {
                 $scope.malls[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
             } else {
@@ -1255,6 +1259,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     //Search
     var onsearchsuccess = function (data, status) {
+        $scope.search=true;
         console.log(data);
         $scope.malls = {};
         $scope.malls = data;
