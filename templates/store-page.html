@@ -24,7 +24,7 @@
                         <p>Call</p>
                     </a>
                 </div>
-                <div class="col" ng-click="like();">
+                <div class="col" ng-click="like();" ng-show="likediv">
                     <i class="icon ion-heart" ng-class="{liked: checklike == 1}"></i>
                     <p>Like<span ng-show="checklike == 1;">d</span>
                     </p>

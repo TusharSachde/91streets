@@ -9,12 +9,12 @@
             <div class="item item-input-inset" ng-show="showSearch">
                 <label class="item-input-wrapper">
                     <i class="icon ion-ios7-search placeholder-icon"></i>
-                    <input type="search" placeholder="Search" ng-model="datasearch" ng-keyup="doSearch(datasearch);">
+                    <input type="search" placeholder="Search" ng-model="datasearch" ng-change="doSearch(datasearch);">
                     <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch();"></i>
                 </label>
             </div>
-            <ion-item class="item-avatar" href="#/tab/malllist/mallpage/{{mall.id}}" ng-repeat="mall in mallItem">
-                <img src="{{mall.logo}}">
+            <ion-item class="item-avatar" href="#/tab/malllist/mallpage/{{mall.id}}" ng-repeat="mall in malls">
+                <img src="{{mall.logo|imagepath}}">
                 <span class="item-note">{{mall.dist}} KM</span>
                 <h2>{{mall.name}}</h2>
                 <p>
