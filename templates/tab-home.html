@@ -8,11 +8,8 @@
         </ion-nav-buttons>
 
         <ion-slide-box show-pager="false" auto-play="true">
-            <ion-slide>
-                <img src="img/slide.png" alt="" class="full-image">
-            </ion-slide>
-            <ion-slide>
-                <img src="img/slide.png" alt="" class="full-image">
+            <ion-slide ng-repeat="slide in slider">
+                <img src="{{slide.image|imagepath}}" alt="" class="full-image">
             </ion-slide>
         </ion-slide-box>
 

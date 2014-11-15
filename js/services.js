@@ -117,6 +117,9 @@ var myservices = angular.module('myservices', [])
         viewcity: function () {
             return $http.get(adminurl + 'viewcity', {});
         },
+        getbanner: function () {
+            return $http.get(adminurl + 'getbanner', {});
+        },
         getcategory: function () {
             return $http.get(adminurl + 'getmaincategory', {});
         },
@@ -127,7 +130,7 @@ var myservices = angular.module('myservices', [])
             return $http.get(adminurl + 'reviewbystoreid?storeid='+ id, {});
         },
         search: function (search) {
-            return $http.get(adminurl + 'getbrandsearch?brand=' + search, {});
+            return $http.get(adminurl + 'searchstorepage?name=' + search, {});
         },
         rating: function (userid, storeid, rating, review) {
             return $http.get(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + '&rating=' + rating + '&review=' + review, {});
