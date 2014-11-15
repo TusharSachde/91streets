@@ -754,8 +754,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //Get brands by category API
     var onbrandbycategorysuccess = function (data, status) {
         console.log("my data");
-        console.log(data[1].newin);
-        
         $scope.brands = data;
         for (var i = 0; i < data.length; i++) {
             $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
