@@ -17,14 +17,18 @@
                 <label class="item item-input">
                     <input type="email" ng-model="loginData.email" placeholder="Email Address" required>
                 </label>
-                <label class="item item-input">
-                    <input type="password" ng-model="loginData.password" placeholder="Password" required>
-                </label>
-                <label class="item item-input">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        City
+                    </div>
                     <select ng-model="loginData.city">
                         <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
                     </select>
                 </label>
+                <label class="item item-input">
+                    <input type="password" ng-model="loginData.password" placeholder="Password" required>
+                </label>
+                
             </div>
 
             <div class="padding">
