@@ -1,0 +1,48 @@
+<ion-view title="Search">
+    <ion-content class="has-header">
+        <ion-list>
+            <div class="item item-select">
+                <h6>Search By</h6>
+                <select ng-model="search" ng-change="brandmall(search)">
+                        <option value="1">Brands</option>
+                        <option value="2">Malls</option>
+                    </select>
+            </div>
+            <div class="item item-input-inset">
+                <label class="item-input-wrapper">
+                    <i class="icon ion-ios7-search placeholder-icon"></i>
+                    <input type="search" placeholder="Search" ng-model="searchdata" ng-change="doSearch(searchdata)">
+                    <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch();"></i>
+                </label>
+            </div>
+                <span ng-show="brands==''">
+                    Loading...
+                </span>
+                
+               <ion-item ng-show="brandmalldiv" class="item-avatar" href="#/tab/malllist/mallpage/{mall.id}" ng-repeat="mall in malls | orderBy:myorder:myorderorder">
+                <img src="{{mall.logo|imagepath}}">
+                <span class="item-note"> {{mall.dist}} KM </span>
+                
+                <h2>{{mall.name}}</h2>
+                <p>
+                    <span>{{mall.address}}</span>
+                </p>
+            </ion-item>
+              
+              
+               <ion-item ng-hide="brandmalldiv" class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in brands | orderBy:myorder:myorderorder">
+                <img src="{{brand.brandlogo|imagepath}}">
+                <span class="item-note"><span ng-show="{{brand.newin!=''}}"><i class="ion-images balanced"></i></span> <span  ng-show="{{brand.offer!=''}}"><i class="ion-ios7-pricetags calm"></i></span> {{brand.dist}} KM </span>
+                
+                <h2>{{brand.brandname}}</h2>
+                <h3 class="assertive">{{brand.header}}</h3>
+                <span class="rate"><rating ng-model="rate" max="5" readonly="true"></rating></span>
+                <p>
+                    <span ng-hide="!mall.address">{{brand.address}}</span>
+                    <span ng-show="!mall.address">{{brand.storeaddress}}</span>
+                </p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
+

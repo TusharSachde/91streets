@@ -3,11 +3,21 @@ var long = 0;
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     .controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location) {
 
+    
+        //opensearch
+    
+        $scope.opensearch = function(){
+            console.log("search");
+            $location.url("tab/search");
+        }
+    
+        //opensearch
         //start slide from api.....
 
         var bannersuccess = function (data, status) {
             console.log(data);
             $scope.slider = data;
+            $scope.$apply();
         };
         MyServices.getbanner().success(bannersuccess);
 
@@ -252,6 +262,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
         $scope.brands = data;
         for (var i = 0; i < data.length; i++) {
+            if(data[i].logo=="")
+            {
+                $scope.brands[i].logo="logo.png";
+            }
+            
             $scope.brands[i].mylike = data[i].like.length;
             for (var j = 0; j < data[i].like.length; j++) {
                 if (data[i].like[j].user == $scope.user.id) {
@@ -276,10 +291,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(brand);
         if (brand.userlike == 0) {
             brand.userlike = 1;
-            MyServices.like($scope.user.id, brand.brandid, brand.userlike).success(ilike);
+            MyServices.like($scope.user.id, brand.id, brand.userlike).success(ilike);
         } else {
             brand.userlike = 0;
-            MyServices.like($scope.user.id, brand.brandid, brand.userlike).success(ilike);
+            MyServices.like($scope.user.id, brand.id, brand.userlike).success(ilike);
         }
         console.log(brand.userlike);
         //$scope.$apply();
@@ -297,13 +312,110 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     })
 
 .controller('SettingCtrl', function ($scope) {})
+.controller('Search', function ($scope, MyServices, $stateParams, $ionicModal, $timeout, $location) {
+    
+    $scope.myorder = 'dist';
+    $scope.myorderorder = false;
+    $scope.user = MyServices.getuser();
+    if($scope.user==null)
+    {
+        $scope.ucity=0;
+    }
+    console.log($scope.user);
+    $scope.brandmalldiv = false;
+    
+    var allmalls = function (data, status) {
+        console.log(data);
+        $scope.malls=data;
+        for(var i=0;i<data.length;i++)
+        {
+            if (data[i].latitude == null & data[i].longitude == null) {
+                $scope.malls[i].dist = 0;
+            } else {
+                $scope.malls[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
+            }
+            if($scope.malls[i].logo=="" || $scope.malls[i].logo==null)
+            {
+                $scope.malls[i].logo="logo.png";
+            }
+            
+        }
+    };
+    
+    $scope.brandmall = function (search) {
+        
+        $scope.bybrandmall=search;
+        
+        
+    }
+    
+    $scope.doSearch = function (searchdata)
+    {
+        if($scope.bybrandmall==1)
+        {
+            $scope.brandmalldiv = false;
+        }else{
+            $scope.brandmalldiv = true;
+            MyServices.searchbymall($scope.ucity,searchdata).success(allmalls);
+        }
+    }
+    
+    //get lat long
+    
+     function showPosition2(position) {
+        var latlon = position.coords.latitude + "," + position.coords.longitude;
+        console.log("Positions");
+        console.log(position.coords);
+        $scope.coords = position.coords;
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+        MyServices.notificationbrandid($stateParams.id).success(notificationbrand);
+    }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition2, showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    
+})
+
     .controller('InNotificationCtrl', function ($scope, MyServices, $stateParams, $ionicModal, $timeout, $location) {
 
+    
+    
         var notificationbrand = function (data, status) {
             console.log(data);
             $scope.notifications = data;
+            
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].latitude == null & data[i].longitude == null) {
+                $scope.notifications[i].dist = 0;
+            } else {
+                $scope.notifications[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
+            }
+        }
+            
         };
+        
+    
+        function showPosition2(position) {
+        var latlon = position.coords.latitude + "," + position.coords.longitude;
+        console.log("Positions");
+        console.log(position.coords);
+        $scope.coords = position.coords;
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
         MyServices.notificationbrandid($stateParams.id).success(notificationbrand);
+    }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition2, showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+    
 
     })
 
@@ -505,7 +617,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.sort = "othersort.html";
     $scope.myorder = 'name';
-    $scope.myorderorder = false;;
+    $scope.myorderorder = false;
     $scope.changesort = function (order, orderorder) {
         $scope.myorder = order;
         $scope.myorderorder = orderorder;
@@ -1383,7 +1495,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data.mall);
         $scope.mall = data.mall;
         if (data.mall.logo == "") {
-            $scope.mall.logo = "img/logo.png";
+            $scope.mall.logo = "logo.png";
         }
     };
     MyServices.beforeeditmall($stateParams.id).success(mallsuccess);

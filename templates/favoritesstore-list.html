@@ -18,9 +18,9 @@
             </div>
 
             <ion-item class="item-avatar item-button-right" ng-repeat="brand in brands | orderBy:myorder:myorderorder">
-                <img src="{{brand.brandlogo|imagepath}}">
+                <img src="{{brand.logo|imagepath}}">
 
-                <h2>{{brand.brandname}}</h2>
+                <h2>{{brand.name}}</h2>
                 <!--<h3 style="color:#cc2311;">{{brand.header}}</h3>-->
                 <h2 class="assertive">{{brand.mylike + addlike}} Likes</h2>
                 <button class="button button-clear {{brand.userlike|isuserlike}}" ng-click="like(brand);">

@@ -4,7 +4,7 @@
         </ion-nav-buttons>
         <div class="storepage">
             <div class="text-center">
-                <img src="{{mall.logo}}" alt="" class="storepic">
+                <img src="{{mall.logo|imagepath}}" alt="" class="storepic">
                 <h2>{{mall.name}}</h2>
                 <p>
                     <span ng-hide="!mall.address">{{mall.address}}</span>

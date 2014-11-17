@@ -108,6 +108,9 @@ var myservices = angular.module('myservices', [])
         getcatarraystoreoffer: function (catarray) {
             return $http.get(adminurl + 'getcatarraystoreoffer?catarray='+catarray, {});
         },
+        searchbymall: function (city,search) {
+            return $http.get(adminurl + 'searchbymall?city='+city+'&search='+search, {});
+        },
         getcatarraystore: function (catarray,city) {
             return $http.get(adminurl + 'getcatarraystore?catarray='+catarray+'&city='+city, {});
         },
