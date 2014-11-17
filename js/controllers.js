@@ -315,6 +315,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('Search', function ($scope, MyServices, $stateParams, $ionicModal, $timeout, $location) {
     
     $scope.myorder = 'dist';
+    $scope.search=1;
+    $scope.bybrandmall=1;
     $scope.myorderorder = false;
     $scope.user = MyServices.getuser();
     if($scope.user==null)
@@ -342,6 +344,21 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
     };
     
+    var brnadsuccess = function (data, status) {
+        
+        console.log(data);
+        $scope.brands=data;
+        for(var i=0;i<data.length;i++)
+        {
+            if($scope.brands[i].logo=="" || $scope.brands[i].logo==null)
+            {
+                $scope.brands[i].logo="logo.png";
+            }
+            
+        }
+        
+    };
+    
     $scope.brandmall = function (search) {
         
         $scope.bybrandmall=search;
@@ -354,6 +371,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         if($scope.bybrandmall==1)
         {
             $scope.brandmalldiv = false;
+            MyServices.getallbrandssearch(searchdata).success(brnadsuccess);
         }else{
             $scope.brandmalldiv = true;
             MyServices.searchbymall($scope.ucity,searchdata).success(allmalls);
@@ -369,7 +387,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        MyServices.notificationbrandid($stateParams.id).success(notificationbrand);
+//        MyServices.notificationbrandid($stateParams.id).success(notificationbrand);
     }
 
     if (navigator.geolocation) {
@@ -616,7 +634,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
     $scope.sort = "othersort.html";
-    $scope.myorder = 'name';
+    $scope.myorder = 'dist';
     $scope.myorderorder = false;
     $scope.changesort = function (order, orderorder) {
         $scope.myorder = order;
@@ -1285,7 +1303,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
 
-    $scope.myorder = 'name';
+    $scope.myorder = 'dist';
     $scope.myorderorder = false;;
     $scope.changesort = function (order, orderorder) {
         $scope.myorder = order;
@@ -1379,7 +1397,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
     }
     $scope.doSearch = function (data) {
-        MyServices.search(data).success(onsearchsuccess);
+        MyServices.searchbymall($scope.usercity,data).success(mallsuccess);
     };
 
     
