@@ -5,7 +5,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     
         //opensearch
-    
+    analytics.trackView('Home');
+    analytics.trackEvent('Page', 'Load', 'Home', 101);
         $scope.opensearch = function(){
             console.log("search");
             $location.url("tab/search");
@@ -18,7 +19,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             console.log(data);
             $scope.slider = data;
             $ionicSlideBoxDelegate.update();
-//            $scope.$apply();
+//            $scope.$apply();4
+            
         };
         MyServices.getbanner().success(bannersuccess);
 
@@ -262,6 +264,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var favoritelisting = function (data, status) {
         console.log(data);
         $scope.brands = data;
+        
+        analytics.trackView('Favorite Store ');
+        analytics.trackEvent('Page', 'Load', 'Favorite Store ', 102);
         for (var i = 0; i < data.length; i++) {
             if(data[i].logo=="")
             {
@@ -308,6 +313,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var getnotification = function (data, status) {
             console.log(data);
             $scope.notification = data;
+            analytics.trackView('Notification ');
+            analytics.trackEvent('Page', 'Load', 'Notification ', 103);
         };
         MyServices.notification($scope.userdata.id).success(getnotification);
     })
@@ -319,6 +326,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.search=1;
     $scope.bybrandmall=1;
     $scope.myorderorder = false;
+
     $scope.user = MyServices.getuser();
     if($scope.user==null)
     {
@@ -349,6 +357,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         
         console.log(data);
         $scope.brands=data;
+        
+        
+//google analytics    
+            analytics.trackView('Search ');
+            analytics.trackEvent('Page', 'Load', 'Search ', 104);
+//google analytics
+    
+        
         for(var i=0;i<data.length;i++)
         {
             if($scope.brands[i].logo=="" || $scope.brands[i].logo==null)
@@ -407,6 +423,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             console.log(data);
             $scope.notifications = data;
             
+            
+        
+//google analytics    
+            analytics.trackView('In Notification ');
+            analytics.trackEvent('Page', 'Load', 'In Notification ', 105);
+//google analytics
+    
+            
         for (var i = 0; i < data.length; i++) {
             if (data[i].latitude == null & data[i].longitude == null) {
                 $scope.notifications[i].dist = 0;
@@ -449,6 +473,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log("inin big bag........");
         console.log(data);
         $scope.bigbag = data;
+        
+//google analytics    
+            analytics.trackView('Shopping ');
+            analytics.trackEvent('Page', 'Load', 'Shopping ', 106);
+//google analytics
+    
         fillbagtocategory();
     };
 
@@ -685,6 +715,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
         $scope.listing = [];
         $scope.listing = data;
+        
+//google analytics    
+            analytics.trackView('Discount ');
+            analytics.trackEvent('Page', 'Load', 'Discount ', 107);
+//google analytics
+    
         scroll = 1;
         $scope.loadMore();
         for (var i = 0; i < data.length; i++) {
@@ -781,6 +817,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     var getshoppingbagg = function (data, status) {
         console.log(data);
+        
+        
+//google analytics    
+            analytics.trackView('Shopping Bag ');
+            analytics.trackEvent('Page', 'Load', 'Shopping Bag ', 108);
+//google analytics
+    
+        
         for (var i = 0; i < data.length; i++) {
             $scope.listing = data;
             $scope.listing[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
@@ -801,6 +845,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
 })
+
 
 .controller('StoreDetailCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
 
