@@ -17,7 +17,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var bannersuccess = function (data, status) {
             console.log(data);
             $scope.slider = data;
-            $scope.$apply();
+            $ionicSlideBoxDelegate.update();
+//            $scope.$apply();
         };
         MyServices.getbanner().success(bannersuccess);
 
@@ -675,7 +676,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.loadMore();
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
-                $scope.listing[i].image = "../assets/img/logo.png";
+                $scope.listing[i].image = "logo.png";
             }
             if (data[i].latitude == null & data[i].longitude == null) {
                 $scope.listing[i].dist = 0;
@@ -796,7 +797,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.storedetails = data;
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
-                $scope.storedetails[i].image = "../assets/img/logo.png";
+                $scope.storedetails[i].image = "logo.png";
             }
             $scope.storedetails[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
 
@@ -1483,7 +1484,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.offers = data;
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
-                $scope.offers[i].image = "img/logo.png";
+                $scope.offers[i].image = "logo.png";
             }
         }
     };
@@ -1566,6 +1567,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         $scope.brands = data;
         for (var i = 0; i < data.length; i++) {
+            $scope.brands[i].logo = "logo.png";
             if (data[i].latitude != null) {
                 $scope.brands[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
                 console.log($scope.brands[i].dist);
