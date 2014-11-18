@@ -804,10 +804,22 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('StoreDetailCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices) {
 
+    
     var onestore = function (data, status) {
         console.log(data);
         $scope.storedetails = {};
         $scope.storedetails = data;
+        var addre="";
+        if(storedetails.address)
+        {
+            addre=storedetails.address;
+        }
+        else
+        {
+            addre=storedetails.storeaddress;
+        }
+        analytics.trackView('Store Detail Page - '+data.brandname+' - '+addre);
+        analytics.trackEvent('Page', 'Load', 'Store Detail Page - '+data.brandname+' - '+addre, 801);
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
                 $scope.storedetails[i].image = "logo.png";
