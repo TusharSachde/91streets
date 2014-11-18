@@ -68,6 +68,9 @@ var myservices = angular.module('myservices', [])
         getallmalls: function (city) {
             return $http.get(adminurl + 'getallmalls?city='+city, {});
         },
+        clearshoppingbag: function (user) {
+            return $http.get(adminurl + 'clearshoppingbag?user='+user, {});
+        },
         getallbrandssearch: function (search) {
             return $http.get(adminurl + 'getallbrandssearch?search='+search, {});
         },

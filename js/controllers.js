@@ -443,6 +443,28 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.bigbagplan = [];
     var check1 = 0;
 
+    
+    
+    var getshoppingbagg = function (data, status) {
+        console.log("inin big bag........");
+        console.log(data);
+        $scope.bigbag = data;
+        fillbagtocategory();
+    };
+
+
+    $scope.user = MyServices.getuser();
+    console.log("user loggedin");
+    if ($scope.user == null) {
+
+        $location.url('/home');
+
+    } else {
+        MyServices.getshoppingbag($scope.user.id).success(getshoppingbagg);
+        console.log("hey, im logged in");
+    }
+
+    
     function fillbagtocategory() {
         if (check1 == 1) {
 
@@ -451,6 +473,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                     for (var k = 0; k < $scope.categories[j].subcategory.length; k++) {
                         if ($scope.bigbag[i].id == $scope.categories[j].subcategory[k].id) {
                             $scope.categories[j].subcategory[k].type = true;
+                            $scope.categories[j].font="assertive";
                         }
                     }
                 }
@@ -462,6 +485,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             console.log("Plus hua");
         }
     };
+    var clearsuccess = function (data, status){
+        alert("cleared");
+        MyServices.getshoppingbag($scope.user.id).success(getshoppingbagg);
+    };
+    $scope.clearshoppingbag=function(){
+        console.log($scope.user.id);
+        MyServices.clearshoppingbag($scope.user.id).success(clearsuccess);
+    }
     var allcategory = function (data, status) {
 
         console.log("in allcategory");
@@ -514,24 +545,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     };
 
-
-    var getshoppingbagg = function (data, status) {
-        console.log(data);
-        $scope.bigbag = data;
-        fillbagtocategory();
-    };
-
-
-    $scope.user = MyServices.getuser();
-    console.log("user loggedin");
-    if ($scope.user == null) {
-
-        $location.url('/home');
-
-    } else {
-        MyServices.getshoppingbag($scope.user.id).success(getshoppingbagg);
-        console.log("hey, im logged in");
-    }
 
     ///////////////////////////////////////////////////shopping bag submit///////////////////////////////////////////////////////////////////
 
