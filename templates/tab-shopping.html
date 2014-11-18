@@ -13,8 +13,8 @@
         
         <accordion ng-repeat="category in categories">
             <accordion-group is-open="status.open">
-                <accordion-heading>
-                    <p >{{category.name}} <i class="pull-right ion ion-ios7-arrow-down"></i></p>
+                <accordion-heading >
+                    <p class="{{category.font}}">{{category.name}} <i class="pull-right ion ion-ios7-arrow-down"></i></p>
                 </accordion-heading>
                 <ul class="list">
                     <li class="item item-checkbox" ng-repeat="cloths in category.subcategory">
