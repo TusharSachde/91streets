@@ -5,8 +5,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     
         //opensearch
-    analytics.trackView('Home');
-    analytics.trackEvent('Page', 'Load', 'Home', 101);
+    
         $scope.opensearch = function(){
             console.log("search");
             $location.url("tab/search");
@@ -19,6 +18,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             console.log(data);
             $scope.slider = data;
             $ionicSlideBoxDelegate.update();
+//            analytics.trackView('Home');
+//            analytics.trackEvent('Page', 'Load', 'Home', 101);
 //            $scope.$apply();4
             
         };
@@ -265,8 +266,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
         $scope.brands = data;
         
-        analytics.trackView('Favorite Store ');
-        analytics.trackEvent('Page', 'Load', 'Favorite Store ', 102);
+//        analytics.trackView('Favorite Store ');
+//        analytics.trackEvent('Page', 'Load', 'Favorite Store ', 102);
         for (var i = 0; i < data.length; i++) {
             if(data[i].logo=="")
             {
@@ -313,8 +314,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var getnotification = function (data, status) {
             console.log(data);
             $scope.notification = data;
-            analytics.trackView('Notification ');
-            analytics.trackEvent('Page', 'Load', 'Notification ', 103);
+//            analytics.trackView('Notification ');
+//            analytics.trackEvent('Page', 'Load', 'Notification ', 103);
         };
         MyServices.notification($scope.userdata.id).success(getnotification);
     })
@@ -360,8 +361,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         
         
 //google analytics    
-            analytics.trackView('Search ');
-            analytics.trackEvent('Page', 'Load', 'Search ', 104);
+//            analytics.trackView('Search ');
+//            analytics.trackEvent('Page', 'Load', 'Search ', 104);
 //google analytics
     
         
@@ -426,8 +427,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             
         
 //google analytics    
-            analytics.trackView('In Notification ');
-            analytics.trackEvent('Page', 'Load', 'In Notification ', 105);
+//            analytics.trackView('In Notification ');
+//            analytics.trackEvent('Page', 'Load', 'In Notification ', 105);
 //google analytics
     
             
@@ -475,8 +476,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.bigbag = data;
         
 //google analytics    
-            analytics.trackView('Shopping ');
-            analytics.trackEvent('Page', 'Load', 'Shopping ', 106);
+//            analytics.trackView('Shopping ');
+//            analytics.trackEvent('Page', 'Load', 'Shopping ', 106);
 //google analytics
     
         fillbagtocategory();
@@ -717,8 +718,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.listing = data;
         
 //google analytics    
-            analytics.trackView('Discount ');
-            analytics.trackEvent('Page', 'Load', 'Discount ', 107);
+//            analytics.trackView('Discount ');
+//            analytics.trackEvent('Page', 'Load', 'Discount ', 107);
 //google analytics
     
         scroll = 1;
@@ -820,8 +821,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         
         
 //google analytics    
-            analytics.trackView('Shopping Bag ');
-            analytics.trackEvent('Page', 'Load', 'Shopping Bag ', 108);
+//            analytics.trackView('Shopping Bag ');
+//            analytics.trackEvent('Page', 'Load', 'Shopping Bag ', 108);
 //google analytics
     
         
@@ -854,17 +855,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
         $scope.storedetails = {};
         $scope.storedetails = data;
-        var addre="";
-        if(storedetails.address)
-        {
-            addre=storedetails.address;
-        }
-        else
-        {
-            addre=storedetails.storeaddress;
-        }
-        analytics.trackView('Store Detail Page - '+data.brandname+' - '+addre);
-        analytics.trackEvent('Page', 'Load', 'Store Detail Page - '+data.brandname+' - '+addre, 801);
+//        var addre="";
+//        if(storedetails.address)
+//        {
+//            addre=storedetails.address;
+//        }
+//        else
+//        {
+//            addre=storedetails.storeaddress;
+//        }
+//        analytics.trackView('Store Detail Page - '+data.brandname+' - '+addre);
+//        analytics.trackEvent('Page', 'Load', 'Store Detail Page - '+data.brandname+' - '+addre, 801);
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
                 $scope.storedetails[i].image = "logo.png";
@@ -904,8 +905,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.brands = [];
     
-    analytics.trackView('Store List Page');
-    analytics.trackEvent('Page', 'Load', 'Store List Page',802);
+//    analytics.trackView('Store List Page');
+//    analytics.trackEvent('Page', 'Load', 'Store List Page',802);
     
     $scope.userdata = user = $.jStorage.get("user");
     if ($scope.userdata) {
@@ -1148,17 +1149,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.branddetails = data.store;
         $scope.newarrivals = data.newin;
         
-        var addre="";
-        if(data.store.address)
-        {
-            addre=data.store.address;
-        }
-        else
-        {
-            addre=data.store.storeaddress;
-        }
-        analytics.trackView('Store Page Opens - '+data.store.brandname+' - '+addre);
-        analytics.trackEvent('Page', 'Load', 'Store Page Loaded - '+data.store.brandname+' - '+addre, 803);
+//        var addre="";
+//        if(data.store.address)
+//        {
+//            addre=data.store.address;
+//        }
+//        else
+//        {
+//            addre=data.store.storeaddress;
+//        }
+//        analytics.trackView('Store Page Opens - '+data.store.brandname+' - '+addre);
+//        analytics.trackEvent('Page', 'Load', 'Store Page Loaded - '+data.store.brandname+' - '+addre, 803);
         
         $scope.reviews = data.review;
         $scope.offers = data.offers;4
@@ -1316,8 +1317,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('BrandListCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
     
-    analytics.trackView('Brand List Page');
-    analytics.trackEvent('Page', 'Load', 'Brand List Page Loaded', 804);
+//    analytics.trackView('Brand List Page');
+//    analytics.trackEvent('Page', 'Load', 'Brand List Page Loaded', 804);
         
     
     var brnadsuccess = function (data, status) {
@@ -1330,8 +1331,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate, $location) {
 
-    analytics.trackView('Favorites Page');
-    analytics.trackEvent('Page', 'Load', 'Favorites Page Loaded', 805);
+//    analytics.trackView('Favorites Page');
+//    analytics.trackEvent('Page', 'Load', 'Favorites Page Loaded', 805);
     
     $scope.user = {};
     $scope.user = MyServices.getuser();
@@ -1364,8 +1365,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     console.log($stateParams.mid);
     $scope.cat = [];
     
-    analytics.trackView('Mall Page List');
-    analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 806);
+//    analytics.trackView('Mall Page List');
+//    analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 806);
     
 
     //get sub category
@@ -1489,8 +1490,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             }
         }
         
-        analytics.trackView('Mall Page List');
-        analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 808);
+//        analytics.trackView('Mall Page List');
+//        analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 808);
         
     };
 
@@ -1587,8 +1588,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('PageOffersCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
 
     
-    analytics.trackView('Page Offers ');
-    analytics.trackEvent('Page', 'Load', 'Page Offers Loaded', 810);
+//    analytics.trackView('Page Offers ');
+//    analytics.trackEvent('Page', 'Load', 'Page Offers Loaded', 810);
     
     var successoffers = function (data, status) {
         console.log(data);
@@ -1626,8 +1627,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data.mall);
         $scope.mall = data.mall;
         
-        analytics.trackView('Mall Page - '+data.mall.name);
-        analytics.trackEvent('Page', 'Load', 'Mall Page Loaded - '+data.mall.name, 811);
+//        analytics.trackView('Mall Page - '+data.mall.name);
+//        analytics.trackEvent('Page', 'Load', 'Mall Page Loaded - '+data.mall.name, 811);
     
         
         if (data.mall.logo == "") {
@@ -1679,8 +1680,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.demo = "demo";
     $scope.brands = [];
     // ip function
-        analytics.trackView('Brand Store');
-        analytics.trackEvent('Page', 'Load', "Brand Store Loaded", 812);
+//        analytics.trackView('Brand Store');
+//        analytics.trackEvent('Page', 'Load', "Brand Store Loaded", 812);
     
     
 
@@ -1730,8 +1731,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.modal = modal;
     });
     
-    analytics.trackView('Photo Slider');
-        analytics.trackEvent('Page', 'Load', "Photo Slider Loaded", 813);
+//    analytics.trackView('Photo Slider');
+//        analytics.trackEvent('Page', 'Load', "Photo Slider Loaded", 813);
 
     $scope.openModal = function (index2) {
 
