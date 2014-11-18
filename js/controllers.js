@@ -858,6 +858,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('StoreListCtrl', function ($scope, $cordovaGeolocation, $stateParams, $ionicPopup, MyServices, $ionicModal) {
 
     $scope.brands = [];
+    
+    analytics.trackView('Store List Page');
+    analytics.trackEvent('Page', 'Load', 'Store List Page',802);
+    
     $scope.userdata = user = $.jStorage.get("user");
     if ($scope.userdata) {
         $scope.ucity = $scope.userdata.city;
@@ -1075,6 +1079,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('StorePageCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $timeout) {
 
+    
+    
     $scope.likediv=true;
     $scope.user={};
     $scope.user = MyServices.getuser();
@@ -1096,6 +1102,19 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
         $scope.branddetails = data.store;
         $scope.newarrivals = data.newin;
+        
+        var addre="";
+        if(data.store.address)
+        {
+            addre=data.store.address;
+        }
+        else
+        {
+            addre=data.store.storeaddress;
+        }
+        analytics.trackView('Store Page Opens - '+data.store.brandname+' - '+addre);
+        analytics.trackEvent('Page', 'Load', 'Store Page Loaded - '+data.store.brandname+' - '+addre, 803);
+        
         $scope.reviews = data.review;
         $scope.offers = data.offers;4
         if(data.like==2)
@@ -1251,16 +1270,24 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('BrandListCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
-
+    
+    analytics.trackView('Brand List Page');
+    analytics.trackEvent('Page', 'Load', 'Brand List Page Loaded', 804);
+        
+    
     var brnadsuccess = function (data, status) {
         console.log(data);
         $scope.brands = data;
+        
     };
     MyServices.getallbrands().success(brnadsuccess);
 })
 
 .controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate, $location) {
 
+    analytics.trackView('Favorites Page');
+    analytics.trackEvent('Page', 'Load', 'Favorites Page Loaded', 805);
+    
     $scope.user = {};
     $scope.user = MyServices.getuser();
     console.log("My information");
@@ -1291,6 +1318,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('MallPageListCtrl', function ($scope, $stateParams, MyServices, $ionicPopup, $ionicModal, $ionicSlideBoxDelegate) {
     console.log($stateParams.mid);
     $scope.cat = [];
+    
+    analytics.trackView('Mall Page List');
+    analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 806);
+    
 
     //get sub category
     var subcategorysuccess = function (data, status) {
@@ -1378,6 +1409,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     var mallpagesuccess = function (data, status) {
         console.log(data);
+        
+        
+    
         $scope.malllist = data;
     };
     MyServices.mallcategorystore($stateParams.id, $stateParams.mid).success(mallpagesuccess);
@@ -1409,6 +1443,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 $scope.malls[i].logo = "logo.png";
             }
         }
+        
+        analytics.trackView('Mall Page List');
+        analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 808);
+        
     };
 
     //Search
@@ -1503,6 +1541,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('PageOffersCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
 
+    
+    analytics.trackView('Page Offers ');
+    analytics.trackEvent('Page', 'Load', 'Page Offers Loaded', 810);
+    
     var successoffers = function (data, status) {
         console.log(data);
         $scope.offers = {};
@@ -1538,12 +1580,19 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var mallsuccess = function (data, status) {
         console.log(data.mall);
         $scope.mall = data.mall;
+        
+        analytics.trackView('Mall Page - '+data.mall.name);
+        analytics.trackEvent('Page', 'Load', 'Mall Page Loaded - '+data.mall.name, 811);
+    
+        
         if (data.mall.logo == "") {
             $scope.mall.logo = "logo.png";
         }
     };
     MyServices.beforeeditmall($stateParams.id).success(mallsuccess);
 
+    
+    
     var mallcategorysuccess = function (data, status) {
         //        console.log("mall category");
         //        console.log(data);
@@ -1585,7 +1634,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.demo = "demo";
     $scope.brands = [];
     // ip function
-
+        analytics.trackView('Brand Store');
+        analytics.trackEvent('Page', 'Load', "Brand Store Loaded", 812);
+    
+    
 
     //Get brands by category API
     var brnadsuccess = function (data, status) {
@@ -1599,6 +1651,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             } else {
                 $scope.brands[i].dist = 0;
             }
+            
+            
         }
         console.log($scope.brands);
     }
@@ -1630,6 +1684,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     }).then(function (modal) {
         $scope.modal = modal;
     });
+    
+    analytics.trackView('Photo Slider');
+        analytics.trackEvent('Page', 'Load', "Photo Slider Loaded", 813);
 
     $scope.openModal = function (index2) {
 
