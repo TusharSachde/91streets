@@ -45,7 +45,7 @@ function registerPushwooshIOS() {
 	//!!! Please note this is an API for PGB plugin. This code is different in CLI plugin!!!
 	//At the moment I cannot update the plugin to the latest version. TY PGB Team!
 	//see http://community.phonegap.com/nitobi/topics/malformed_xml_in_plugin_xml_file?utm_source=notification&utm_medium=email&utm_campaign=new_reply&utm_content=reply_button&reply%5Bid%5D=14224918#reply_14224918
-	pushNotification.registerDevice({alert:true, badge:true, sound:true, pw_appid:"F39B5-A73B5", appname:"91streetss"},
+	pushNotification.registerDevice({alert:true, badge:true, sound:true, pw_appid:"F39B5-A73B5", appname:"91streets"},
 		function(status)
 		{
 			var deviceToken = status['deviceToken'];
