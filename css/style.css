@@ -38,6 +38,7 @@ textarea {
 }
 .bar.bar-assertive {
     border-color: #DF4E11;
+    background: -webkit-linear-gradient(0deg, #dc353f, #df4a39 80%, #e06334) !important;
     background: linear-gradient(90deg, #dc353f, #df4a39 80%, #e06334) !important;
     border-bottom-width: 2px;
 }
@@ -101,7 +102,6 @@ h3,
     background-color: #fff;
     border: 1px solid transparent;
     border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05)
 }
 .panel {
@@ -109,7 +109,6 @@ h3,
     background-color: #ffffff;
     border: 1px solid transparent;
     border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-body {} .panel-heading {
@@ -431,7 +430,6 @@ h3,
     height: 0;
     overflow: hidden;
     -webkit-transition: height .35s ease;
-    -o-transition: height .35s ease;
     transition: height .35s ease
 }
 .panel-body li.item.item-checkbox {
@@ -570,15 +568,20 @@ ul.rating li i {
 }
 .incategory h1:before {
     font-size: 50px;
-    background-color: #ef4e3a;
-    color: white;
-    background-image: linear-gradient(90deg, #dc353f, #df4a39 80%, #e06334) !important;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 0px;
+    /* background-color: #ef4e3a; */
+    color: #565656;
+    /* background-image: linear-gradient(90deg, #dc353f, #df4a39 80%, #e06334) !important; */
+    border-radius: 100%;
+    width: 85px;
+    padding: 11.5px 0;
+    margin: 0 auto;
+    display: block;
 }
 .incategory h1 {
     margin: 15px 0;
+}
+.incategory a:hover h1 {
+    opacity: 0.5;
 }
 button:hover {
     opacity: 0.8;
