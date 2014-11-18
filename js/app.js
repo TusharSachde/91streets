@@ -1,4 +1,4 @@
-angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCordova' ])
+angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCordova'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -47,7 +47,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             }
         }
     })
-    
+
     .state('tab.favoritesstore', {
         url: '/favoritesstore',
         views: {
@@ -68,16 +68,16 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     })
 
-    .state('tab.search',{
+    .state('tab.search', {
         url: '/search',
         views: {
-            'tab-home':{
+            'tab-home': {
                 templateUrl: 'templates/tab-search.html',
                 controller: 'Search'
             }
         }
     })
-    
+
     .state('tab.innotification', {
         url: '/innotification/:id',
         views: {
@@ -137,7 +137,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             }
         }
     })
-    
+
     .state('tab.malllist', {
         url: '/malllist',
         views: {
@@ -147,7 +147,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             }
         }
     })
-    
+
     .state('tab.discount', {
         url: '/discount',
         views: {
@@ -157,7 +157,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             }
         }
     })
-    
+
     .state('tab.brandstorelist', {
         url: '/brandstorelist/:id',
         views: {
@@ -177,15 +177,15 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
             }
         }
     })
-    .state('tab.storedetail', {
-        url: '/storedetail/:id',
-        views: {
-            'tab-home': {
-                templateUrl: 'templates/store-detail.html',
-                controller: 'StoreDetailCtrl'
+        .state('tab.storedetail', {
+            url: '/storedetail/:id',
+            views: {
+                'tab-home': {
+                    templateUrl: 'templates/store-detail.html',
+                    controller: 'StoreDetailCtrl'
+                }
             }
-        }
-    })
+        })
 
     .state('tab.mallpage', {
         url: '/malllist/mallpage/:id',
@@ -217,7 +217,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     })
 
-    
+
     .state('tab.disclaimer', {
         url: '/setting/disclaimer',
         views: {
@@ -228,7 +228,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     })
 
-    
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/home');
 
@@ -244,32 +244,38 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers','ngCor
         }
     };
 })
-.filter('isuserlike', function () {
-    return function (input) {
-        if(input==1)
-            return "liked";
-        else
-            return "";
-    };
-})
-.filter('fourletter', function () {
-    return function (input) {
-        return input.substring(0,4);
-            
-    };
-});
+    .filter('isuserlike', function () {
+        return function (input) {
+            if (input == 1)
+                return "liked";
+            else
+                return "";
+        };
+    })
+    .filter('fourletter', function () {
+        return function (input) {
+            return input.substring(0, 4);
+
+        };
+    });
 
 var imagepath = "http://mafiawarloots.com/91street/uploads/";
 
-var rad = function(x) {
+var rad = function (x) {
     return x * Math.PI / 180;
 };
 
-var getDistance = function(lat1,long1,lat2,long2) {
+var getDistance = function (lat1, long1, lat2, long2) {
     var R = 6378.137; // Earth’s mean radius in km
-    var p1={lat:lat1,lng:long1};
-    var p2={lat:lat2,lng:long2};
-    
+    var p1 = {
+        lat: lat1,
+        lng: long1
+    };
+    var p2 = {
+        lat: lat2,
+        lng: long2
+    };
+
     var dLat = rad(p2.lat - p1.lat);
     var dLong = rad(p2.lng - p1.lng);
     var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -279,3 +285,21 @@ var getDistance = function(lat1,long1,lat2,long2) {
     var d = R * c;
     return d; // returns the distance in km
 };
+var googleanalyticsApp = angular.module('googleanalytics', ['ionic'])
+    .run(function ($ionicPlatform, $ionicPopup) {
+        $ionicPlatform.ready(function () {
+            if (typeof analytics !== "undefined") {
+                analytics.startTrackerWithId("UA-56855808-1");
+            } else {
+                console.log("Google Analytics Unavailable");
+            }
+        });
+    });
+
+googleanalyticsApp.controller('AwesomeController', function($scope) {
+    if(typeof analytics !== "undefined") { analytics.trackView("Application Started"); }
+ 
+    $scope.initEvent = function() {
+        if(typeof analytics !== "undefined") { analytics.trackEvent("Load event", "Loaded", "Aplication Loaded",1); }
+    }
+});

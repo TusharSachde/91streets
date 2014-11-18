@@ -44,6 +44,8 @@
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
 
+	<gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
+	
     <feature name="http://api.phonegap.com/1.0/file" />
     <feature name="http://api.phonegap.com/1.0/geolocation" />
     <feature name="http://api.phonegap.com/1.0/notification" />
