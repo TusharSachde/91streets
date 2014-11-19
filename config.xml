@@ -16,7 +16,7 @@
     <gap:platform name="android" />
     <gap:platform name="winphone" />
 
-    <icon src="img/logo.png" />
+    <icon src="img/logo2.png" />
     <gap:splash src="img/splash.png" />
 
     <preference name="phonegap-version" />
@@ -43,7 +43,6 @@
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
-    <gap:plugin name="org.apache.cordova.statusbar" />
 
 	<gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
 	
