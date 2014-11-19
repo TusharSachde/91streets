@@ -285,6 +285,7 @@ var getDistance = function (lat1, long1, lat2, long2) {
     var d = R * c;
     return d; // returns the distance in km
 };
+
 var googleanalyticsApp = angular.module('googleanalytics', ['ionic'])
     .run(function ($ionicPlatform, $ionicPopup) {
         $ionicPlatform.ready(function () {
