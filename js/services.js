@@ -1,4 +1,4 @@
-var adminurl = "http://mafiawarloots.com/91street/index.php/json/";
+var adminurl = "http://91streets.com/admin/index.php/json/";
 
 var myservices = angular.module('myservices', [])
 
