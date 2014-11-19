@@ -1,11 +1,9 @@
 var lat = 0;
 var long = 0;
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
-<<<<<<< HEAD
-    .controller('HomeCtrl', function ($scope, $stateParams, $cordovaStatusbar, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location) {
-=======
+
     .controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location) {
->>>>>>> origin/master
+
 
         //opensearch
 
