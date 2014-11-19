@@ -19,7 +19,7 @@
     <icon src="img/logo2.png" />
     <gap:splash src="img/splash.png" />
 
-    <preference name="phonegap-version" />
+    <preference name="phonegap-version" version="3.5.0"/>
     <preference name="permissions" value="none" />
     <preference name="fullscreen" value="false" />
     <preference name="orientation" value="portrait" />
