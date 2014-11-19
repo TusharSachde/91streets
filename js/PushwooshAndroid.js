@@ -34,7 +34,7 @@ function registerPushwooshAndroid() {
 			}
 
 			//and show alert
-			//alert(title);
+			alert(title);
 
 			//stopping geopushes
 			pushNotification.stopGeoPushes();
@@ -51,13 +51,13 @@ function registerPushwooshAndroid() {
 	pushNotification.registerDevice({ projectid: "697329602980", appid : "F39B5-A73B5" },
 		function(token)
 		{
-			//alert(token);
+			alert(token);
 			//callback when pushwoosh is ready
 			onPushwooshAndroidInitialized(token);
 		},
 		function(status)
 		{
-			//alert("Failed to register: " +  status);
+			alert("Failed to register: " +  status);
 		    console.warn(JSON.stringify(['failed to register ', status]));
 		}
 	);
