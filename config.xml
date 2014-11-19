@@ -43,6 +43,7 @@
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="org.apache.cordova.statusbar" />
 
 	<gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
 	
