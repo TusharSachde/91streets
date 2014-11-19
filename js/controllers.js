@@ -478,6 +478,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
 
+    var getshoppingbaggg = function (data, status) {
+        $location.url('/tab/shopping');
+        
+    };
     var getshoppingbagg = function (data, status) {
         console.log("inin big bag........");
         console.log(data);
@@ -527,8 +531,13 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
     };
     var clearsuccess = function (data, status) {
-        alert("cleared");
-        MyServices.getshoppingbag($scope.user.id).success(getshoppingbagg);
+        for (var j = 0; j < $scope.categories.length; j++) {
+                    for (var k = 0; k < $scope.categories[j].subcategory.length; k++) {
+                            $scope.categories[j].subcategory[k].type = false;
+                        $scope.categories[j].font = "";
+                    }
+                }
+       // MyServices.getshoppingbag($scope.user.id).success(getshoppingbaggg);
     };
     $scope.clearshoppingbag = function () {
         console.log($scope.user.id);
