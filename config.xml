@@ -19,7 +19,7 @@
     <icon src="img/logo2.png" />
     <gap:splash src="img/splash.png" />
 
-    <preference name="phonegap-version" version="3.5.0"/>
+    <preference name="phonegap-version" value="3.5.0"/>
     <preference name="permissions" value="none" />
     <preference name="fullscreen" value="false" />
     <preference name="orientation" value="portrait" />
@@ -39,7 +39,7 @@
     <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.file-transfer" />
     <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" />
+    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" verion="3.0.2" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
