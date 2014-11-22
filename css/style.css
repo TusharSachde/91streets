@@ -37,8 +37,7 @@ textarea {
     color: #df4a39;
 }
 .bar.bar-assertive {
-    border-color: #DF4E11;
-    background: -webkit-linear-gradient(0deg, #dc353f, #df4a39 80%, #e06334) !important;
+    border-color: #dc353f;
     background: linear-gradient(90deg, #dc353f, #df4a39 80%, #e06334) !important;
     border-bottom-width: 2px;
 }
@@ -429,7 +428,6 @@ h3,
     position: relative;
     height: 0;
     overflow: hidden;
-    -webkit-transition: height .35s ease;
     transition: height .35s ease
 }
 .panel-body li.item.item-checkbox {
@@ -566,7 +564,7 @@ ul.rating li i {
     color: #797979;
     text-align: center;
 }
-.incategory h1:before { 
+.incategory h1:before {
     font-size: 50px;
     /* background-color: #ef4e3a; */
     color: #565656;
@@ -613,4 +611,8 @@ textarea.review {
     position: absolute;
     bottom: 20px;
     left: 20px;
+}
+.intro {
+    width: 65%;
+    margin: 15px auto;
 }
