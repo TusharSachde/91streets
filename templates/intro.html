@@ -1,0 +1,74 @@
+<style>
+    .slider-slide {
+        padding-top: 80px;
+        text-align: center;
+    }
+</style>
+
+<ion-view title="Intro">
+    <ion-nav-buttons side="left">
+        <button class="button button-clear no-animation" ng-click="startApp()" ng-if="!slideIndex">
+            Skip Intro
+        </button>
+        <button class="button button-clear no-animation" ng-click="previous()" ng-if="slideIndex > 0">
+            Previous Slide
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-clear no-animation" ng-click="next()" ng-if="slideIndex != 2">
+            Next
+        </button>
+        <button class="button button-clear no-animation" ng-click="startApp()" ng-if="slideIndex == 2">
+            Start using 91streets
+        </button>
+    </ion-nav-buttons>
+    <ion-slide-box on-slide-changed="slideChanged($slideIndex)">
+
+        <ion-slide>
+            <h3>Thank you for choosing us!</h3>
+            <div class="intro">
+                <img src="img/logo2.png" class="full-image">
+            </div>
+            <p>
+                We've worked hard to make you happy.
+            </p>
+        </ion-slide>
+
+        <ion-slide>
+            <h3>Like <i class="ion-heart assertive"></i> Your Favourite Brands</h3>
+            <div class="intro">
+                <img src="img/intro/plan.jpg" class="full-image">
+            </div>
+            <h5>Stay updated with Offers and New Arrivals! <br> Get some Rewards too!</h5>
+        </ion-slide>
+
+        <ion-slide>
+            <h3>Find Malls, Stores &amp; Offers</h3>
+            <div class="intro">
+                <img src="img/intro/plan.jpg" class="full-image">
+
+            </div>
+            <h5>Filter out what is relevant to you! (Eg: Check out stores selling Party wear clothing, sports shoes, etc)</h5>
+        </ion-slide>
+
+        <ion-slide>
+            <h3>Share your shopping plan</h3>
+            <div class="intro">
+                <img src="img/intro/plan.jpg" class="full-image">
+
+            </div>
+            <h5>Receive recommendations for the same.</h5>
+        </ion-slide>
+
+        <ion-slide>
+            <h3>Follow brands, rate them, write reviews, share offers with your friends.</h3>
+            <div class="intro">
+                <img src="img/intro/plan.jpg" class="full-image">
+
+            </div>
+            <h5>Enjoy the rewards &amp; Keep shopping!</h5>
+        </ion-slide>
+
+
+    </ion-slide-box>
+</ion-view>
