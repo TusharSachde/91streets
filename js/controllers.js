@@ -760,8 +760,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         scroll = 1;
         $scope.loadMore();
         for (var i = 0; i < data.length; i++) {
-            if (data[i].image == null) {
-                $scope.listing[i].image = "logo.png";
+            if (data[i].logo == null) {
+                $scope.listing[i].logo = "logo.png";
             }
             if (data[i].latitude == null & data[i].longitude == null) {
                 $scope.listing[i].dist = 0;
