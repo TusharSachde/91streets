@@ -250,7 +250,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
         if (input == null) {
             //return "http://www.wohlig.co.in/zibabackend/uploads/2239a46835dc42bc7a6acade8f8517e9.jpg";
         } else {
-            return "http://mafiawarloots.com/91street/uploads/" + input;
+            return "http://91streets.com/admin/uploads/" + input;
         }
     };
 })
@@ -269,7 +269,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
         };
     });
 
-var imagepath = "http://mafiawarloots.com/91street/uploads/";
+var imagepath = "http://91streets.com/admin/uploads/";
 
 var rad = function (x) {
     return x * Math.PI / 180;
