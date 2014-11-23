@@ -616,3 +616,6 @@ textarea.review {
     width: 65%;
     margin: 15px auto;
 }
+.item-note i {
+    font-size: 18px;
+}

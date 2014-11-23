@@ -8,11 +8,6 @@
              <div class="item-divider">
                 <button class="button button-clear button-small button-dark" ng-click="showSort();">Filter</button>
                 <button class="button button-clear button-small button-dark" ng-click="showsortsort();">Sort</button>
-<!--
-                <button class="button button-clear button-small button-dark" ng-click="changesort('brandname',false);">A-Z</button>
-               <button class="button button-clear button-small button-dark" ng-click="changesort('dist',false);">Distance</button>
-               <button class="button button-clear button-small button-dark" ng-click="changesort('rating',true);">Rating</button>
--->
                 <button class="button button-clear button-small button-dark" ng-click="showdiscount();">Discount</button>
                 <button class="button button-clear button-small button-dark" style="float:right;" ng-click="clear();">Clear Filter &amp; Sort</button>
             
@@ -30,7 +25,7 @@
                 </span>
                <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in brands | orderBy:myorder:myorderorder">
                 <img src="{{brand.brandlogo|imagepath}}">
-                <span class="item-note"><span ng-show="{{brand.newin!=''}}"><i class="ion-images balanced"></i></span> <span  ng-show="{{brand.offer!=''}}"><i class="ion-ios7-pricetags calm"></i></span> {{brand.dist}} KM </span>
+                <span class="item-note">{{brand.dist}} KM <br><span ng-show="{{brand.newin!=''}}"><i class="ion-images balanced"></i></span> <span  ng-show="{{brand.offer!=''}}"><i class="ion-ios7-pricetags calm"></i></span> </span>
                 
                 <h2>{{brand.brandname}}</h2>
                 <h3 class="assertive">{{brand.header}}</h3>
