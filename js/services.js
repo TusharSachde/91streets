@@ -83,6 +83,9 @@ var myservices = angular.module('myservices', [])
         notification: function (user) {
             return $http.get(adminurl + 'notification?user='+user, {});
         },
+        favoritesearch: function (searchdata) {
+            return $http.get(adminurl + 'favoritesearch?searchdata='+searchdata, {});
+        },
         notificationbrandid: function (id) {
             return $http.get(adminurl + 'notificationbrandid?id='+id, {});
         },

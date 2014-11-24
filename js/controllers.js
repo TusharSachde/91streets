@@ -340,6 +340,15 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(brand.userlike);
         //$scope.$apply();
     }
+    
+    var successfavorite = function (data, status) {
+        console.log(data);
+    };
+    
+    $scope.doSearch = function(searchdata){
+        MyServices.favoritesearch(searchdata).success(favoritelisting);
+    }
+    
 
 })
     .controller('NotificationCtrl', function($scope, MyServices, $ionicModal, $timeout, $location) {
@@ -961,7 +970,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.cat = [];
     $scope.discountstatus = 0;
     $scope.sort = "othersort.html";
-    $scope.myorder = 'brandname';
+    $scope.myorder = 'dist';
     $scope.myorderorder = false;
 
     $scope.changesort = function(order, orderorder) {
