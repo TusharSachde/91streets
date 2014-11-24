@@ -13,7 +13,7 @@ var myservices = angular.module('myservices', [])
         setuseremail: function(user) {
             useremail = user;
         },
-        getbrandsbycategory: function (id,city) {
+        getbrandsbycategory: function (id,city,start) {
             return $http.get(adminurl + 'getstorebycategory', {
                 params: {
                     id: id,
@@ -22,11 +22,12 @@ var myservices = angular.module('myservices', [])
                 }
             });
         },
-        getstorebycategoryoffers: function (id,city) {
+        getstorebycategoryoffers: function (id,city,start) {
             return $http.get(adminurl + 'getstorebycategoryoffers', {
                 params: {
                     id: id,
-                    city: city
+                    city: city,
+                    start: start
                 }
             });
         },
@@ -48,11 +49,11 @@ var myservices = angular.module('myservices', [])
         malloffers: function (id,limit) {
             return $http.get(adminurl + 'malloffers?id='+id+"&limit="+limit, {});
         },
-        mallcategorystore: function (id,mid) {
-            return $http.get(adminurl + 'mallcategorystore?id='+id+"&mid="+mid, {});
+        mallcategorystore: function (id,mid,start) {
+            return $http.get(adminurl + 'mallcategorystore?id='+id+"&mid="+mid+'&start='+start, {});
         },
-        mallcategorystorecat: function (id,mid) {
-            return $http.get(adminurl + 'mallcategorystorecat?id='+id+"&mid="+mid, {});
+        mallcategorystorecat: function (id,mid,city) {
+            return $http.get(adminurl + 'mallcategorystorecat?id='+id+"&mid="+mid+"&city="+city, {});
         },
         addstorelike: function (user,store) {
             return $http.get(adminurl + 'addstorelike?user='+user+"&store="+store, {});
@@ -142,8 +143,8 @@ var myservices = angular.module('myservices', [])
         reviewbystoreid: function (id) {
             return $http.get(adminurl + 'reviewbystoreid?storeid='+ id, {});
         },
-        search: function (search) {
-            return $http.get(adminurl + 'searchstorepage?name=' + search, {});
+        search: function (search,id,city,start) {
+            return $http.get(adminurl + 'searchstorepage?name=' + search + '&id=' + id + '&city=' + city + '&start=' + start, {});
         },
         rating: function (userid, storeid, rating, review) {
             return $http.get(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + '&rating=' + rating + '&review=' + review, {});

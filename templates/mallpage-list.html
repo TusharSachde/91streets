@@ -20,8 +20,9 @@
             </div>
             <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{malll.storeid}}" ng-repeat="malll in malllist | orderBy:myorder:myorderorder">
                 <img src="{{malll.brandlogo|imagepath}}">
+                <span class="item-note">{{malll.dist}} KM</span>
                 <h2>{{malll.brandname}}</h2>
-                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
+                <h5>Rating: <span class="rate"><rating ng-model="malll.rating" max="5" readonly="true"></rating></span></h5>
                 <p>
                     <span ng-hide="!malll.address">{{malll.address}}</span>
                     <span ng-show="!malll.address">{{malll.storeaddress}}</span>
