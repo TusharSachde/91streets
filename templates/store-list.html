@@ -5,13 +5,13 @@
             <button class="button button-icon icon ion-ios7-search" ng-click="showSearch = !showSearch;"></button>
         </ion-nav-buttons>
         <ion-list>
-             <div class="item-divider">
+            <div class="item-divider">
                 <button class="button button-clear button-small button-dark" ng-click="showSort();">Filter</button>
                 <button class="button button-clear button-small button-dark" ng-click="showsortsort();">Sort</button>
                 <button class="button button-clear button-small button-dark" ng-click="showdiscount();">Discount</button>
                 <button class="button button-clear button-small button-dark" style="float:right;" ng-click="clear();">Clear Filter &amp; Sort</button>
-            
-            </div> 
+
+            </div>
             <div class="item item-input-inset" ng-show="showSearch">
                 <label class="item-input-wrapper">
                     <i class="icon ion-ios7-search placeholder-icon"></i>
@@ -19,14 +19,14 @@
                     <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch();"></i>
                 </label>
             </div>
-            
-                <span ng-show="brands==''">
+
+            <span ng-show="brands==''">
                     Loading...
                 </span>
-               <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in brands | orderBy:myorder:myorderorder">
+            <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.storeid}}" ng-repeat="brand in brands | orderBy:myorder:myorderorder">
                 <img src="{{brand.brandlogo|imagepath}}">
-                <span class="item-note">{{brand.dist}} KM <br><span ng-show="{{brand.newin!=''}}"><i class="ion-images balanced"></i></span> <span  ng-show="{{brand.offer!=''}}"><i class="ion-ios7-pricetags calm"></i></span> </span>
-                
+                <span class="item-note">{{brand.dist}} KM <br><span ng-show="{{brand.newin!=''}}"><i class="ion-images balanced"></i></span>  <span ng-show="{{brand.offer!=''}}"><i class="ion-ios7-pricetags calm"></i></span> </span>
+
                 <h2>{{brand.brandname}}</h2>
                 <h3 class="assertive">{{brand.header}}</h3>
                 <span class="rate"><rating ng-model="brand.rating" max="5" readonly="true"></rating></span>
@@ -36,6 +36,9 @@
                 </p>
             </ion-item>
         </ion-list>
+
+        <ion-infinite-scroll icon="ion-loading-c" on-infinite="loadMore()">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>
 
