@@ -17,7 +17,8 @@ var myservices = angular.module('myservices', [])
             return $http.get(adminurl + 'getstorebycategory', {
                 params: {
                     id: id,
-                    city: city
+                    city: city,
+                    start:start
                 }
             });
         },

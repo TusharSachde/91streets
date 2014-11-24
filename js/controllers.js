@@ -6,10 +6,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     //Home Intro
 
-    // Called to navigate to the main app
-    $scope.startApp = function() {
-        $state.go('home');
-    };
     $scope.next = function() {
         $ionicSlideBoxDelegate.next();
     };
@@ -991,9 +987,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             console.log($scope.brands[i].dist);
         }
         console.log($scope.brands);
-        scroll = 1;
-        $scope.loadMore();
-        console.log(scroll);
     }
 
     $scope.showdiscount = function() {
@@ -1015,9 +1008,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
             //            console.log($scope.brands[i].dist);
         }
-        scroll = 1;
-        $scope.loadMore();
-        console.log(scroll);
+    };
+    var pushcategorysuccess = function(data, status) {
+        console.log("my data");
+        for(var i=0;i<data.length;i++)
+        {
+            $scope.brands.push(data[i]);
+        }
+        
     };
 
     function showPosition2(position) {
@@ -1027,7 +1025,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        MyServices.getbrandsbycategory(categoryId, $scope.ucity).success(onbrandbycategorysuccess);
+        MyServices.getbrandsbycategory(categoryId, $scope.ucity,0).success(onbrandbycategorysuccess);
     };
 
     if (navigator.geolocation) {
@@ -1044,20 +1042,24 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //    $scope.brands = [];
 
     $scope.loadMore = function() {
-        if (scroll == 1) {
-            var sum = counter + change;
-            if (sum > $scope.brands.length) {
-                sum = $scope.brands.length;
-            }
-            for (var i = counter; i <= sum; i++) {
-                if ($scope.brands[i]) {
-                    $scope.productItem.push($scope.brands[i]);
-                    console.log($scope.productItem);
-                };
-            };
-            counter += change + 1;
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-        };
+        var totallength=$scope.brands.length;
+        MyServices.getbrandsbycategory(categoryId, $scope.ucity,totallength).success(pushcategorysuccess);
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+//        
+//        if (scroll == 1) {
+//            var sum = counter + change;
+//            if (sum > $scope.brands.length) {
+//                sum = $scope.brands.length;
+//            }
+//            for (var i = counter; i <= sum; i++) {
+//                if ($scope.brands[i]) {
+//                    $scope.productItem.push($scope.brands[i]);
+//                    console.log($scope.productItem);
+//                };
+//            };
+//            counter += change + 1;
+//           
+//        };
     };
 
     //get sub category
