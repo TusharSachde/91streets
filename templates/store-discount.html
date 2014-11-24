@@ -22,7 +22,8 @@
                 <img src="{{store.logo|imagepath}}">
                 <span class="item-note">{{store.dist}} KM</span>
                 <h2>{{store.name}}</h2> <strong style="color:#cc2311;">{{store.header}}</strong>
-                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
+                <h5>Rating: 
+                <span class="rate"><rating ng-model="store.rating" max="5" readonly="true"></rating></span></h5>
                 <p>
                     <span ng-hide="!store.address">{{store.address}}</span>
                     <span ng-show="!store.address">{{store.storeaddress}}</span>
