@@ -46,10 +46,11 @@
             <div class="list">
                 <div class="item">
                     <h3>Offers</h3>
+                    <p ng-show="offers==''">No data found</p>
 <!--                    <p>Sorry, no offers going on.</p>-->
                     <p ng-repeat="offer in offers">{{offer.header}}.</p>
 <!--                    <a href="#">-->
-                        <span class="item-note">View All</span>
+                        <span class="item-note" ng-show="offers.length > 2">View All</span>
                     </a>
                 </div>
                 <div class="item item-text-wrap">
@@ -83,7 +84,7 @@
                     <h3>Reviews</h3>
                     <p>{{storepagemsg}}</p>
                     <p ng-repeat="review in reviews">{{review.review}}</p>
-                    <a ng-click="loadmorereview()">
+                    <a ng-click="loadmorereview()" ng-show="reviews.length > 2">
                         <span class="item-note">{{seemore}}</span>
                     </a>
 <!--                    <h4 ng-click="loadmorereview()">{{seemore}}</h4>-->
