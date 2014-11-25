@@ -1,0 +1,24 @@
+<ion-view title="Contact Us">
+    <ion-content class="has-header">
+       <form ng-submit="doLogin(contact)">
+            <div class="list">
+                <label class="item item-input">
+                <input type="text" placeholder="Name" ng-model="contact.name" required>
+            </label>
+            <label class="item item-input">
+                <input type="email" placeholder="Email" ng-model="contact.email" required>
+            </label>
+            <label class="item item-input">
+                <input type="tel" placeholder="Phone" ng-model="contact.phone">
+            </label>
+            <label class="item item-input">
+                <textarea placeholder="Comments" ng-model="contact.comment" required></textarea>
+            </label>
+            </div>
+
+            <div class="padding">
+                <button class="button button-block button-balanced" type="submit">Submit</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
