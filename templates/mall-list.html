@@ -22,19 +22,9 @@
                     <span ng-show="!mall.address">{{mall.storeaddress}}</span>
                 </p>
             </ion-item>
-<!--
-            <ion-item ng-show="search" class="item-avatar" href="#/tab/storelist/storepage/{{mall.storeid}}" ng-repeat="mall in malls">
-                <img src="{{mall.logo|imagepath}}">
-                <span class="item-note">{{mall.dist}} KM</span>
-                <h2>{{mall.name}}</h2>
-                <p>
-                    <span ng-hide="!mall.address">{{mall.address}}</span>
-                    <span ng-show="!mall.address">{{mall.storeaddress}}</span>
-                </p>
-            </ion-item>
--->
         </ion-list>
-        <ion-infinite-scroll on-infinite="loadMore();" distance="1%" icon="ion-loading-c">
+        
+        <ion-infinite-scroll icon="ion-loading-c" on-infinite="loadMore()">
         </ion-infinite-scroll>
     </ion-content>
 </ion-view>
