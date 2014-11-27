@@ -13,21 +13,26 @@ var myservices = angular.module('myservices', [])
         setuseremail: function(user) {
             useremail = user;
         },
-        getbrandsbycategory: function (id,city,start) {
+        getbrandsbycategory: function (id,city,start,lat,long,sort) {
             return $http.get(adminurl + 'getstorebycategory', {
                 params: {
                     id: id,
                     city: city,
-                    start:start
+                    start:start,
+                    lat:lat,
+                    long:long,
+                    sort:sort
                 }
             });
         },
-        getstorebycategoryoffers: function (id,city,start) {
+        getstorebycategoryoffers: function (id,city,start,lat,long) {
             return $http.get(adminurl + 'getstorebycategoryoffers', {
                 params: {
                     id: id,
                     city: city,
-                    start: start
+                    start: start,
+                    lat: lat,
+                    long: long
                 }
             });
         },
@@ -119,14 +124,14 @@ var myservices = angular.module('myservices', [])
         getstorebycategoriessearch: function (id,city,searchdata) {
             return $http.get(adminurl + 'getstorebycategoriessearch?id='+id+'&city='+city+'&searchdata='+searchdata, {});
         },
-        getcatarraystoreoffer: function (catarray) {
-            return $http.get(adminurl + 'getcatarraystoreoffer?catarray='+catarray, {});
+        getcatarraystoreoffer: function (catarray,start) {
+            return $http.get(adminurl + 'getcatarraystoreoffer?catarray='+catarray+'&start='+start, {});
         },
         searchbymall: function (city,search) {
             return $http.get(adminurl + 'searchbymall?city='+city+'&search='+search, {});
         },
-        getcatarraystore: function (catarray,city,start) {
-            return $http.get(adminurl + 'getcatarraystore?catarray='+catarray+'&city='+city+'&start='+start, {});
+        getcatarraystore: function (catarray,city,start,lat,long) {
+            return $http.get(adminurl + 'getcatarraystore?catarray='+catarray+'&city='+city+'&start='+start+'&lat='+lat+'&long='+long, {});
         },
         favoritebrands: function (start) {
             return $http.get(adminurl + 'favoritebrands?start='+start, {});
