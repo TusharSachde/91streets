@@ -73,8 +73,11 @@ var myservices = angular.module('myservices', [])
         getuserlike: function (id) {
             return $http.get(adminurl + 'getuserlike?user='+id, {});
         },
-        getallstoresdiscount: function (city,start) {
-            return $http.get(adminurl + 'getallstoresdiscount?city='+city+'&start='+start, {});
+        discountsearch: function (searchdata,city,start,lat,long,sort) {
+            return $http.get(adminurl + 'discountsearch?searchdata='+searchdata+'&city='+city+'&start='+start+'&lat='+lat+'&long='+long+'&sort='+sort, {});
+        },
+        getallstoresdiscount: function (city,start,lat,long,sort) {
+            return $http.get(adminurl + 'getallstoresdiscount?city='+city+'&start='+start+'&lat='+lat+'&long='+long+'&sort='+sort, {});
         },
         getallmalls: function (city,start,lat,long) {
             return $http.get(adminurl + 'getallmalls?city='+city+'&start='+start+'&lat='+lat+'&long='+long, {});
@@ -128,8 +131,8 @@ var myservices = angular.module('myservices', [])
         getstorebycategoriessearch: function (id,city,searchdata) {
             return $http.get(adminurl + 'getstorebycategoriessearch?id='+id+'&city='+city+'&searchdata='+searchdata, {});
         },
-        getcatarraystoreoffer: function (catarray,start) {
-            return $http.get(adminurl + 'getcatarraystoreoffer?catarray='+catarray+'&start='+start, {});
+        getcatarraystoreoffer: function (catarray,city,start,lat,long,sort) {
+            return $http.get(adminurl + 'getcatarraystoreoffer?catarray='+catarray+'&city='+city+'&start='+start+'&lat='+lat+'&long='+long+'&sort='+sort, {});
         },
         searchbymall: function (city,search,start,lat,long) {
             return $http.get(adminurl + 'searchbymall?city='+city+'&search='+search+'&start='+start+'&lat='+lat+'&long='+long, {});
