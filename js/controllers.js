@@ -1572,6 +1572,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.cat = [];
     $scope.malllist = [];
     $scope.checkval = 1;
+    $scope.searchdata = "";
     $scope.initEvent = function () {
         if (typeof analytics !== "undefined") {
             analytics.trackView('Mall Page List');
@@ -1580,20 +1581,34 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     }
 
 
-    $scope.myorder = 'name';
-    $scope.myorderorder = false;;
-    $scope.changesort = function (order, orderorder) {
+    $scope.myorder = 0;
+//    $scope.myorderorder = false;;
+    $scope.changesort = function (order) {
         console.log(order);
-        if (order == 'name') {
-            $scope.myorder = 'brandname';
-        } else {
-            $scope.myorder = order;
-        }
-
-        $scope.myorderorder = orderorder;
+        $scope.myorder=order;
+        
+                if ($scope.checkval == 1) {
+                    MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long,$scope.myorder).success(mallpagesuccess);
+                }
+                if ($scope.checkval == 2) {
+                    MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
+                }
+                if ($scope.checkval == 3) {
+                    MyServices.mallpagesearch($scope.searchdata,$stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
+                }
     };
 
-
+//    get all search
+    
+    $scope.doSearch = function (searchdata) {
+        
+        $scope.checkval=3;
+        $scope.searchdata = searchdata;
+        MyServices.mallpagesearch($scope.searchdata,$stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
+        
+    }
+    
+//    get all search
 
     //    get user
     $scope.user = MyServices.getuser();
@@ -1667,17 +1682,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.closeModal = function () {
         $scope.oModal4.hide();
     };
-    var catarraysuccess = function (data, status) {
-        console.log(data);
-        $scope.malllist = data;
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].latitude != null) {
-                $scope.malllist[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
-            } else {
-                $scope.malllist[i].dist = 0;
-            }
-        }
-    };
+//    var catarraysuccess = function (data, status) {
+//        console.log(data);
+//        $scope.malllist = data;
+//        for (var i = 0; i < data.length; i++) {
+//            if (data[i].latitude != null) {
+//                $scope.malllist[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
+//            } else {
+//                $scope.malllist[i].dist = 0;
+//            }
+//        }
+//    };
 
     $scope.hideSort = function () {
         console.log($scope.cat);
@@ -1689,23 +1704,21 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.oModal1.hide();
         console.log($scope.usercity);
         $scope.checkval = 2;
-        MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, $scope.usercity, 0).success(catarraysuccess);
+        MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, 0, lat, long,$scope.myorder).success(mallpagesuccess);
     };
 
     var mallpagesuccess = function (data, status) {
-        $scope.checkval = 1;
+//        $scope.checkval = 1;
         console.log(data);
         $scope.malllist = data;
         for (var i = 0; i < data.length; i++) {
-            if (data[i].latitude != null) {
-                $scope.malllist[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
-            } else {
+            if (data[i].latitude == null) {
                 $scope.malllist[i].dist = 0;
             }
         }
         $scope.$broadcast('scroll.infiniteScrollComplete');
     };
-    MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0).success(mallpagesuccess);
+    
 
     //    get lat log
 
@@ -1717,7 +1730,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0).success(mallpagesuccess);
+        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long,$scope.myorder).success(mallpagesuccess);
     }
 
     if (navigator.geolocation) {
@@ -1732,26 +1745,27 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.malllist.push(data[i]);
         }
         for (var i = 0; i < $scope.malllist.length; i++) {
-            if ($scope.malllist[i].latitude != null) {
-                $scope.malllist[i].dist = (getDistance(lat, long, $scope.malllist[i].latitude, $scope.malllist[i].longitude)).toFixed(1);
-            } else {
+            if ($scope.malllist[i].latitude == null) {
                 $scope.malllist[i].dist = 0;
             }
         }
         $scope.$broadcast('scroll.infiniteScrollComplete');
     };
-
+    var lastlength = 0;
     $scope.loadMore = function () {
         var totallength = $scope.malllist.length;
-        console.log("my length");
-        console.log(totallength);
-        console.log($scope.checkval);
-        if ($scope.checkval == 1) {
-            MyServices.mallcategorystore($stateParams.id, $stateParams.mid, totallength).success(pushmallpagesuccess);
-        }
-        if ($scope.checkval == 2) {
-            MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, $scope.usercity, totallength).success(pushmallpagesuccess);
-        }
+            if (lastlength != totallength) {
+                lastlength = totallength;
+                if ($scope.checkval == 1) {
+                    MyServices.mallcategorystore($stateParams.id, $stateParams.mid, totallength, lat, long, $scope.myorder).success(pushmallpagesuccess);
+                }
+                if ($scope.checkval == 2) {
+                    MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, totallength, lat,long, $scope.myorder).success(pushmallpagesuccess);
+                }
+                if ($scope.checkval == 3) {
+                    MyServices.mallpagesearch($scope.searchdata,$stateParams.id, $stateParams.mid, totallength, lat, long, $scope.myorder).success(pushmallpagesuccess);
+                }
+            }
         //        $scope.$broadcast('scroll.infiniteScrollComplete');
     };
 
@@ -1759,7 +1773,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     $scope.clear = function () {
         $scope.checkval = 1;
-        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0).success(mallpagesuccess);
+        $scope.myorder = 0;
+        $scope.searchdata = "";
+        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long,$scope.myorder).success(mallpagesuccess);
     }
 })
 
@@ -1767,6 +1783,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.demo = "demo";
     $scope.malls = [];
     $scope.search = false;
+    $scope.checkval = 1;
     var mallsuccess = function (data, status) {
         $scope.search = false;
         scroll = 1;
@@ -1809,17 +1826,31 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
     //Search
-    var onsearchsuccess = function (data, status) {
-        console.log(data);
-        //        $scope.malls = {};
-        $scope.malls = data;
-        //        for (var i = 0; i < data.length; i++) {
-        //            $scope.malls[i].logo = data[i].brandlogo;
-        //            $scope.malls[i].id = data[i].mall;
-        //        }
+    var mallsuccess1 = function (data, status) {
+        $scope.malls=data;
+        for (var i = 0; i < data.length; i++) {
+
+            //            $scope.malls[i].link="#/tab/malllist/mallpage/"+data.id;
+            if (data[i].latitude == null) {
+                $scope.malls[i].dist = 0;
+            } 
+            if (data[i].logo == "") {
+                $scope.malls[i].logo = "logo_(2).png";
+            }
+        }
+        $scope.initEvent = function () {
+            if (typeof analytics !== "undefined") {
+                analytics.trackView('Mall Page List');
+                analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 808);
+            }
+        }
+        $scope.$broadcast('scroll.infiniteScrollComplete');
     }
     $scope.doSearch = function (data) {
-        MyServices.searchbymall($scope.usercity, data).success(onsearchsuccess);
+        $scope.checkval=2;
+        $scope.searchdata=data;
+        $scope.malls = "";
+        MyServices.searchbymall($scope.usercity, $scope.searchdata, 0, lat, long).success(mallsuccess1);
     };
 
 
@@ -1844,13 +1875,26 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var totallength = $scope.malls.length;
         if (lastlength != totallength) {
             lastlength = totallength;
-
-            MyServices.getallmalls($scope.usercity, totallength).success(mallsuccess);
+            if($scope.checkval==1)
+            {
+                MyServices.getallmalls($scope.usercity, totallength, lat, long).success(mallsuccess);
+            }
+            if($scope.checkval==2)
+            {
+                MyServices.searchbymall($scope.usercity, $scope.searchdata, totallength, lat, long).success(mallsuccess);
+            }
 
         }
 
     };
-
+//    clear sech
+    
+    $scope.clearSearch = function (){
+        console.log("clicked");
+        $scope.showSearch=!$scope.showSearch;
+    }
+    
+//    clear sech
     // malls api
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
@@ -1859,7 +1903,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-         MyServices.getallmalls($scope.usercity, 0, lat, long).success(mallsuccess);
+         MyServices.getallmalls($scope.usercity, 0, lat, long).success(mallsuccess1);
         //start user is not logged in get city from lat long
 
 

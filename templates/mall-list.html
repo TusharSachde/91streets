@@ -10,7 +10,7 @@
                 <label class="item-input-wrapper">
                     <i class="icon ion-ios7-search placeholder-icon"></i>
                     <input type="search" placeholder="Search" ng-model="datasearch" ng-change="doSearch(datasearch);">
-                    <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch();"></i>
+                    <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch()"></i>
                 </label>
             </div>
             <ion-item ng-hide="search" class="item-avatar" href="#/tab/malllist/mallpage/{{mall.id}}" ng-repeat="mall in malls">
