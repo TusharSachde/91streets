@@ -1082,13 +1082,25 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.cat = [];
         $scope.discountstatus = 0;
         $scope.sort = "othersort.html";
-        $scope.myorder = 'dist';
-        $scope.myorderorder = false;
+        $scope.searchdata = "";
+//        $scope.myorder = 'dist';
+//        $scope.myorderorder = false;
 
         $scope.myorder=0;
     
         $scope.changesort = function (order) {
             $scope.myorder = order;
+            console.log(order);
+            console.log($scope.checkval);
+            if($scope.checkval==1)
+            {
+                MyServices.getbrandsbycategory(categoryId, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
+            }else if($scope.checkval==2)
+            {
+                MyServices.getstorebycategoryoffers($stateParams.cid, $scope.ucity, 0, lat, long, $scope.myorder).success(getdiscount);
+            }else{
+                MyServices.getcatarraystore($scope.catarray, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
+            }
         };
         //show discount fucntion
 
@@ -1112,10 +1124,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.showdiscount = function () {
             if ($scope.discountstatus == 0) {
                 $scope.checkval = 2;
-                MyServices.getstorebycategoryoffers($stateParams.cid, $scope.ucity, 0, lat, long).success(getdiscount);
+                MyServices.getstorebycategoryoffers($stateParams.cid, $scope.ucity, 0, lat, long, $scope.myorder).success(getdiscount);
                 $scope.discountstatus = 1;
             } else {
                 $scope.checkval = 1;
+                $scope.myorder = 0;
                 MyServices.getbrandsbycategory(categoryId, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
                 $scope.discountstatus = 0;
             }
@@ -1179,10 +1192,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                     MyServices.getbrandsbycategory(categoryId, $scope.ucity, totallength, lat, long, $scope.myorder).success(pushcategorysuccess);
                 }
                 if ($scope.checkval == 2) {
-                    MyServices.getstorebycategoryoffers($stateParams.cid, $scope.ucity, totallength, lat, long).success(pushcategorysuccess);
+                    MyServices.getstorebycategoryoffers($stateParams.cid, $scope.ucity, totallength, lat, long, $scope.myorder).success(pushcategorysuccess);
                 }
                 if ($scope.checkval == 3) {
-                    MyServices.getcatarraystore($scope.catarray, $scope.ucity, totallength, lat, long).success(pushcategorysuccess);
+                    MyServices.getcatarraystore($scope.catarray, $scope.ucity, totallength, lat, long, $scope.myorder).success(pushcategorysuccess);
+                }
+                if($scope.checkval == 4)
+                {
+                    MyServices.search($scope.searchdata, categoryId, $scope.ucity, totallength, lat, long, $scope.myorder).success(pushcategorysuccess);
                 }
 
             }
@@ -1259,7 +1276,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 }
 
                 $scope.checkval = 3;
-                MyServices.getcatarraystore($scope.catarray, $scope.ucity, 0, lat, long).success(onbrandbycategorysuccess);
+                MyServices.getcatarraystore($scope.catarray, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
             }
             $scope.oModal1.hide();
         };
@@ -1291,7 +1308,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.brands = data;
         };
         $scope.doSearch = function (data) {
-            MyServices.search(data, categoryId, $scope.ucity, 0).success(onbrandbycategorysuccess);
+            $scope.checkval=4;
+            $scope.searchdata = data;
+            MyServices.search($scope.searchdata, categoryId, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
         };
 
         $scope.clearSearch = function () {
@@ -1772,11 +1791,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         for (var i = 0; i < data.length; i++) {
 
             //            $scope.malls[i].link="#/tab/malllist/mallpage/"+data.id;
-            if (data[i].latitude != null) {
-                $scope.malls[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
-            } else {
+            if (data[i].latitude == null) {
                 $scope.malls[i].dist = 0;
-            }
+            } 
             if (data[i].logo == "") {
                 $scope.malls[i].logo = "logo_(2).png";
             }
@@ -1814,7 +1831,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.usercity = $scope.user.city;
     }
 
-    MyServices.getallmalls($scope.usercity, 0).success(mallsuccess);
+   
     //ionic load more
     $scope.mallItem = [];
     var change = 10;
@@ -1842,7 +1859,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-
+         MyServices.getallmalls($scope.usercity, 0, lat, long).success(mallsuccess);
         //start user is not logged in get city from lat long
 
 
