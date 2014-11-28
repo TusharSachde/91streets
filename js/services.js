@@ -25,14 +25,15 @@ var myservices = angular.module('myservices', [])
                 }
             });
         },
-        getstorebycategoryoffers: function (id,city,start,lat,long) {
+        getstorebycategoryoffers: function (id,city,start,lat,long,sort) {
             return $http.get(adminurl + 'getstorebycategoryoffers', {
                 params: {
                     id: id,
                     city: city,
                     start: start,
                     lat: lat,
-                    long: long
+                    long: long,
+                    sort: sort
                 }
             });
         },
@@ -72,8 +73,8 @@ var myservices = angular.module('myservices', [])
         getallstoresdiscount: function (city,start) {
             return $http.get(adminurl + 'getallstoresdiscount?city='+city+'&start='+start, {});
         },
-        getallmalls: function (city,start) {
-            return $http.get(adminurl + 'getallmalls?city='+city+'&start='+start, {});
+        getallmalls: function (city,start,lat,long) {
+            return $http.get(adminurl + 'getallmalls?city='+city+'&start='+start+'&lat='+lat+'&long='+long, {});
         },
         clearshoppingbag: function (user) {
             return $http.get(adminurl + 'clearshoppingbag?user='+user, {});
@@ -130,8 +131,8 @@ var myservices = angular.module('myservices', [])
         searchbymall: function (city,search) {
             return $http.get(adminurl + 'searchbymall?city='+city+'&search='+search, {});
         },
-        getcatarraystore: function (catarray,city,start,lat,long) {
-            return $http.get(adminurl + 'getcatarraystore?catarray='+catarray+'&city='+city+'&start='+start+'&lat='+lat+'&long='+long, {});
+        getcatarraystore: function (catarray,city,start,lat,long,sort) {
+            return $http.get(adminurl + 'getcatarraystore?catarray='+catarray+'&city='+city+'&start='+start+'&lat='+lat+'&long='+long+'&sort='+sort, {});
         },
         favoritebrands: function (start) {
             return $http.get(adminurl + 'favoritebrands?start='+start, {});
@@ -151,8 +152,8 @@ var myservices = angular.module('myservices', [])
         reviewbystoreid: function (id) {
             return $http.get(adminurl + 'reviewbystoreid?storeid='+ id, {});
         },
-        search: function (search,id,city,start) {
-            return $http.get(adminurl + 'searchstorepage?name=' + search + '&id=' + id + '&city=' + city + '&start=' + start, {});
+        search: function (search,id,city,start,lat,long,sort) {
+            return $http.get(adminurl + 'searchstorepage?name=' + search + '&id=' + id + '&city=' + city + '&start=' + start + '&lat=' + lat + '&long=' + long + '&sort=' + sort, {});
         },
         rating: function (userid, storeid, rating, review) {
             return $http.get(adminurl + 'addrating?userid=' + userid + '&storeid=' + storeid + '&rating=' + rating + '&review=' + review, {});
