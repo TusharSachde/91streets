@@ -55,11 +55,14 @@ var myservices = angular.module('myservices', [])
         malloffers: function (id,limit) {
             return $http.get(adminurl + 'malloffers?id='+id+"&limit="+limit, {});
         },
-        mallcategorystore: function (id,mid,start) {
-            return $http.get(adminurl + 'mallcategorystore?id='+id+"&mid="+mid+'&start='+start, {});
+        mallcategorystore: function (id,mid,start,lat,long,sort) {
+            return $http.get(adminurl + 'mallcategorystore?id='+id+"&mid="+mid+'&start='+start+'&lat='+lat+'&long='+long+'&sort='+sort, {});
         },
-        mallcategorystorecat: function (id,mid,city,start) {
-            return $http.get(adminurl + 'mallcategorystorecat?id='+id+"&mid="+mid+"&city="+city+"&start="+start, {});
+        mallpagesearch: function (searchdata,id,mid,start,lat,long,sort) {
+            return $http.get(adminurl + 'mallpagesearch?searchdata='+searchdata+'&id='+id+"&mid="+mid+'&start='+start+'&lat='+lat+'&long='+long+'&sort='+sort, {});
+        },
+        mallcategorystorecat: function (id,mid,start,lat,long,sort) {
+            return $http.get(adminurl + 'mallcategorystorecat?id='+id+"&mid="+mid+"&start="+start+"&lat="+lat+"&long="+long+"&sort="+sort, {});
         },
         addstorelike: function (user,store) {
             return $http.get(adminurl + 'addstorelike?user='+user+"&store="+store, {});
@@ -128,8 +131,8 @@ var myservices = angular.module('myservices', [])
         getcatarraystoreoffer: function (catarray,start) {
             return $http.get(adminurl + 'getcatarraystoreoffer?catarray='+catarray+'&start='+start, {});
         },
-        searchbymall: function (city,search) {
-            return $http.get(adminurl + 'searchbymall?city='+city+'&search='+search, {});
+        searchbymall: function (city,search,start,lat,long) {
+            return $http.get(adminurl + 'searchbymall?city='+city+'&search='+search+'&start='+start+'&lat='+lat+'&long='+long, {});
         },
         getcatarraystore: function (catarray,city,start,lat,long,sort) {
             return $http.get(adminurl + 'getcatarraystore?catarray='+catarray+'&city='+city+'&start='+start+'&lat='+lat+'&long='+long+'&sort='+sort, {});
