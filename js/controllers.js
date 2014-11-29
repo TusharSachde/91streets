@@ -1103,6 +1103,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.discountstatus = 0;
         $scope.sort = "othersort.html";
         $scope.searchdata = "";
+    $scope.atoz=true;
 //        $scope.myorder = 'dist';
 //        $scope.myorderorder = false;
 
