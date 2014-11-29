@@ -21,7 +21,7 @@
             </div>
             <p class="assertive">{{msg}}</p>
             <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{store.id}}" ng-repeat="store in listing | orderBy:myorder:myorderorder">
-                <img src="{{store.logo|imagepath}}">
+                <img src="{{store.brandlogo|imagepath}}">
                 <span class="item-note">{{store.dist}} KM</span>
                 <h2>{{store.name}}</h2> <strong style="color:#cc2311;">{{store.header}}</strong>
                 <h5>Rating: 

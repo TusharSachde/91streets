@@ -1,18 +1,19 @@
 <ion-modal-view>
     <ion-header-bar class="bar-assertive">
         <h1 class="title">Sort</h1>
+<!--        <p class="title" style="float:right;">Sort</p>-->
     </ion-header-bar>
     <ion-content>
                         <ul class="list">
                             <li class="item item-checkbox">
                                 <label class="checkbox">
-                                    <input type="radio" name="sort" ng-model="atoz"  ng-click="changesort('1');">
+                                    <input type="radio" name="sort" ng-model="atoz"  ng-click="changesort('1');" class="activated">
                                 </label>
                                 A To Z
                             </li>
                             <li class="item item-checkbox">
                                 <label class="checkbox">
-                                    <input type="radio"  name="sort" ng-model="distact" ng-click="changesort('2');" checked>
+                                    <input type="radio"  name="sort" ng-model="distact" ng-click="changesort('2');">
                                 </label>
                                 Distance
                             </li>
