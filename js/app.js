@@ -237,6 +237,16 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
             }
         }
     })
+    
+    .state('tab.contact', {
+        url: '/setting/contact',
+        views: {
+            'tab-setting': {
+                templateUrl: 'templates/contact.html',
+                controller: 'HomeCtrl'
+            }
+        }
+    })
 
 
     // if none of the above states are matched, use this as the fallback
