@@ -1082,6 +1082,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         //    1 : for getbrandsbycategory start with all by main category
         //    2 : for getstorebycategoryoffers all offers
 
+//        $scope.atoz=
         $scope.brands = [];
         $scope.initEvent = function () {
             if (typeof analytics !== "undefined") {
