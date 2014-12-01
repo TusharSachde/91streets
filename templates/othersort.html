@@ -3,23 +3,24 @@
         <h1 class="title">Sort</h1>
 <!--        <p class="title" style="float:right;">Sort</p>-->
     </ion-header-bar>
+    
     <ion-content>
-                        <ul class="list">
+               <ul class="list">
                             <li class="item item-checkbox">
                                 <label class="checkbox">
-                                    <input type="radio" name="sort" ng-model="atoz"  ng-click="changesort('1');" checked>
+                                    <input type="radio" name="sort" ng-click="changesort('1');">
                                 </label>
                                 A To Z
                             </li>
                             <li class="item item-checkbox">
                                 <label class="checkbox">
-                                    <input type="radio"  name="sort" ng-model="distact" ng-click="changesort('2');">
+                                    <input type="radio"  name="sort" ng-click="changesort('2');" checked>
                                 </label>
                                 Distance
                             </li>
                             <li class="item item-checkbox">
                                 <label class="checkbox">
-                                    <input type="radio" name="sort" ng-model="rating" ng-click="changesort('3');">
+                                    <input type="radio" name="sort" ng-click="changesort('3');">
                                 </label>
                                 Rating
                             </li>
