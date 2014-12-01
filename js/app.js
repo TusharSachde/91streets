@@ -264,6 +264,14 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
         }
     };
 })
+    .filter('addlike', function () {
+        return function (input, userlike, check) {
+//            if(check==1)
+            return input+userlike;
+//            else
+//            return input;
+        };
+    })
     .filter('isuserlike', function () {
         return function (input) {
             if (input == 1)
