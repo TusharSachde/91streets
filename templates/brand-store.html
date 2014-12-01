@@ -1,11 +1,14 @@
-<ion-view title="Brand Store">
+<ion-view title="Brands">
     <ion-content class="has-header">
+<!--
         <ion-nav-buttons side="right">
             
             <button class="button button-icon icon ion-ios7-search" ng-click="showSearch = !showSearch;"></button>
         </ion-nav-buttons>
+-->
         <!--        {{location.latitude|number:0}} {{location.longitude|number:0}}-->
         <ion-list>
+<!--
             <div class="item item-input-inset" ng-show="showSearch">
                 <label class="item-input-wrapper">
                     <i class="icon ion-ios7-search placeholder-icon"></i>
@@ -13,6 +16,7 @@
                     <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch();"></i>
                 </label>
             </div>
+-->
             <ion-item class="item-avatar" href="#/tab/storelist/storepage/{{brand.id}}" ng-repeat="brand in brands">
                 <img src="{{brand.logo|imagepath}}">
                 <span class="item-note">{{brand.dist}} KM</span>
