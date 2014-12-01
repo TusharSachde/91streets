@@ -1,9 +1,11 @@
 <ion-view title="Add to favorites">
     <ion-content class="has-header">
+<!--
         <ion-nav-buttons side="right">
             
             <button class="button button-icon icon ion-ios7-search" ng-click="showSearch = !showSearch;"></button>
         </ion-nav-buttons>
+-->
         <ion-list>
             <!--
            <div class="item-divider">
@@ -13,6 +15,7 @@
                
            </div>
 -->
+<!--
             <div class="item item-input-inset" ng-show="showSearch">
                 <label class="item-input-wrapper">
                     <i class="icon ion-ios7-search placeholder-icon"></i>
@@ -20,6 +23,7 @@
                     <i class="clear-search icon ion-ios7-close-empty" ng-click="clearSearch();"></i>
                 </label>
             </div>
+-->
 
             <ion-item class="item-avatar item-button-right" ng-repeat="brand in brands | orderBy:myorder:myorderorder">
                 <img src="{{brand.logo|imagepath}}">

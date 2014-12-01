@@ -7,7 +7,7 @@
             <button class="button button-icon icon ion-ios7-more" ng-click="openPopover($event);"></button>
         </ion-nav-buttons>
 
-        <ion-slide-box show-pager="true" does-continue="true" auto-play="3000">
+        <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true" does-continue="true" auto-play="3000">
             <ion-slide ng-repeat="slide in slider">
                 <img ng-src="{{slide.image|imagepath}}" alt="" class="full-image">
             </ion-slide>
