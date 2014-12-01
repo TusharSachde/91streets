@@ -292,6 +292,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     var favoritelisting = function (data, status) {
         console.log(data);
+        var inibrandlength=$scope.brands.length;
+        console.log(inibrandlength);
         //        $scope.brands =;
         for (var i = 0; i < data.length; i++) {
             $scope.brands.push(data[i]);
@@ -304,15 +306,15 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
         for (var i = 0; i < data.length; i++) {
             if (data[i].logo == "") {
-                $scope.brands[i].logo = "logo_(2).png";
+                $scope.brands[i+inibrandlength].logo = "logo_(2).png";
             }
 
-            $scope.brands[i].mylike = data[i].like.length;
+            $scope.brands[i+inibrandlength].mylike = data[i].like.length;
             for (var j = 0; j < data[i].like.length; j++) {
                 if (data[i].like[j].user == $scope.user.id) {
-                    $scope.brands[i].userlike = 1;
+                    $scope.brands[i+inibrandlength].userlike = 1;
                 } else {
-                    $scope.brands[i].userlike = 0;
+                    $scope.brands[i+inibrandlength].userlike = 0;
                 }
             }
         }
