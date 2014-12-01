@@ -330,12 +330,15 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
     };
     $scope.like = function (brand) {
-        console.log(brand);
+//        console.log(brand);
+        
         if (brand.userlike == 0) {
             brand.userlike = 1;
+            brand.mylike++;
             MyServices.like($scope.user.id, brand.id, brand.userlike).success(ilike);
         } else {
             brand.userlike = 0;
+            brand.mylike--;
             MyServices.like($scope.user.id, brand.id, brand.userlike).success(ilike);
         }
         console.log(brand.userlike);
@@ -2088,7 +2091,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         $scope.brands = data;
         for (var i = 0; i < data.length; i++) {
-            $scope.brands[i].logo = "logo_(2).png";
+//            $scope.brands[i].logo = "logo_(2).png";
             if (data[i].latitude != null) {
                 $scope.brands[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
                 console.log($scope.brands[i].dist);

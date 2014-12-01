@@ -16,7 +16,7 @@
             <ion-item class="item-avatar" href="#/tab/brandstorelist/{{brand.id}}" ng-repeat="brand in brands">
                 <img src="{{brand.logo|imagepath}}">
                 <h2>{{brand.name}}</h2>
-                <h5>Rating: <span class="rating"><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star icon"></i><i class="ion-ios7-star-half icon"></i></span></h5>
+                <span class="rate"><rating ng-model="brand.rating" max="5" readonly="true"></rating></span>
                 <p>
                     <span ng-hide="!brand.address">{{brand.address}}</span>
                     <span ng-show="!brand.address">{{brand.storeaddress}}</span>
