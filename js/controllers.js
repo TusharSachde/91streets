@@ -1446,7 +1446,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         MyServices.getbranddetails(brandId, $scope.userid).success(ongetbrandsuccess);
 
         $scope.sendtowebsite = function (website) {
+            console.log(website);
             window.open(website, '_system');
+        }
+        
+        $scope.sendtomap = function (lati, longi) {
+            console.log(lati);
+            console.log(longi);
+            window.open('https://www.google.co.in/maps/@'+lati+','+longi+',17z', '_system');
         }
 
         //like API
