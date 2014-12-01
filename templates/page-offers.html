@@ -1,7 +1,18 @@
 <ion-view title="Offers">
     <ion-content class="has-header">
         <ion-list>
+<!--
             <ion-item ng-repeat="offer in offers" class="item-icon-right">
+               <img src="{{offer.logo|imagepath}}">
+                <h2>{{offer.name}}</h2>
+                <p>
+                    <span>{{offer.header}}</span>
+                </p>
+                <i class="icon ion-android-share balanced" ng-click="share(offer.name,offer.header);"></i>
+            </ion-item>
+-->
+            <ion-item ng-hide="search" class="item-avatar" ng-repeat="offer in offers">
+                <img src="{{offer.logo|imagepath}}">
                 <h2>{{offer.name}}</h2>
                 <p>
                     <span>{{offer.header}}</span>
