@@ -316,7 +316,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 }
             }
         }
-        console.log("liklikliklik");
+        console.log("Like");
         console.log($scope.brands);
 
         $scope.$broadcast('scroll.infiniteScrollComplete');
