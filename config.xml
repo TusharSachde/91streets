@@ -31,7 +31,7 @@
     
 
     <icon src="img/logo.png" />
-    <splash src="img/screen.png"/>
+    <gap:splash src="img/screen.png"/>
 
 
     <platform name="android">
