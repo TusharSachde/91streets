@@ -6,20 +6,17 @@
     <name>91streets</name>
 
     <description>
-        Shopping discount
+        Shopping companion
     </description>
 
-    <author href="http://wohlig.com" email="info@wohlig.com">
+    <author href="http://www.wohlig.com" email="info@wohlig.com">
         Wohlig Technologies
     </author>
+
     <gap:platform name="ios" />
     <gap:platform name="android" />
-    <gap:platform name="winphone" />
 
-    <icon src="img/logo.png" />
-    <gap:splash src="img/splash.png" />
-
-    <preference name="phonegap-version" value="3.5.0"/>
+    <preference name="phonegap-version" value="3.5.0" />
     <preference name="permissions" value="none" />
     <preference name="fullscreen" value="false" />
     <preference name="orientation" value="portrait" />
@@ -27,9 +24,39 @@
     <preference name="ErrorUrl" value="" />
     <preference name="BackgroundColor" value="0x000000" />
     <preference name="KeepRunning" value="true" />
-    <preference name="splash-screen-duration" value="5000" />
+    <preference name="splash-screen-duration" value="3000" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="android-minSdkVersion" value="7" />
+    <preference name="target-device" value="universal" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
+
+
+    <icon src="img/logo.png" />
+    <gap:splash src="img/screen.png" />
+
+
+    <platform name="android">
+        <!-- you can use any density that exists in the Android project -->
+        <gap:splash src="res/screens/android/screen-port-hdpi.png" density="port-hdpi" />
+        <gap:splash src="res/screens/android/screen-port-ldpi.png" density="port-ldpi" />
+        <gap:splash src="res/screens/android/screen-port-mdpi.png" density="port-mdpi" />
+        <gap:splash src="res/screens/android/screen-port-xhdpi.png" density="port-xhdpi" />
+    </platform>
+
+    <platform name="ios">
+        <!-- images are determined by width and height. The following are supported -->
+        <gap:splash src="res/screens/ios/screen~iphone.png" width="320" height="480" />
+        <gap:splash src="res/screens/ios/screen@2x~iphone.png" width="640" height="960" />
+        <gap:splash src="res/screens/ios/screen-Portrait~ipad.png" width="768" height="1024" />
+        <gap:splash src="res/screens/ios/screen-Portrait@2x~ipad.png" width="1536" height="2048" />
+        <gap:splash src="res/screens/ios/screen-568h@2x~iphone.png" width="640" height="1136" />
+        <gap:splash src="res/screens/ios/screen-667h.png" width="750" height="1334" />
+        <gap:splash src="res/screens/ios/screen-736h.png" width="1242" height="2208" />
+    </platform>
+
+
 
     <access origin="*" />
     <!-- allow all pages, use for development -->
@@ -44,8 +71,8 @@
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
 
-	<gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
-	
+    <gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
+
     <feature name="http://api.phonegap.com/1.0/file" />
     <feature name="http://api.phonegap.com/1.0/geolocation" />
     <feature name="http://api.phonegap.com/1.0/notification" />
