@@ -306,7 +306,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
         for (var i = 0; i < data.length; i++) {
             if (data[i].logo == "") {
-                $scope.brands[i+inibrandlength].logo = "logo_(2).png";
+                $scope.brands[i+inibrandlength].logo = "logo.png";
             }
 
             $scope.brands[i+inibrandlength].mylike = data[i].like.length;
@@ -414,7 +414,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                     $scope.malls[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
                 }
                 if ($scope.malls[i].logo == "" || $scope.malls[i].logo == null) {
-                    $scope.malls[i].logo = "logo_(2).png";
+                    $scope.malls[i].logo = "logo.png";
                 }
 
             }
@@ -436,7 +436,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
             for (var i = 0; i < data.length; i++) {
                 if ($scope.brands[i].logo == "" || $scope.brands[i].logo == null) {
-                    $scope.brands[i].logo = "logo_(2).png";
+                    $scope.brands[i].logo = "logo.png";
                 }
 
             }
@@ -836,7 +836,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].logo == null) {
-                $scope.listing[i].logo = "logo_(2).png";
+                $scope.listing[i].logo = "logo.png";
             }
             if (data[i].latitude == null & data[i].longitude == null) {
                 $scope.listing[i].dist = 0;
@@ -854,7 +854,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var mylength = data.lenght;
         for (var i = 0; i < mylength; i++) {
             if ($scope.listing[i].logo == null) {
-                $scope.listing[i].logo = "logo_(2).png";
+                $scope.listing[i].logo = "logo.png";
             }
             if ($scope.listing[i].latitude == null & $scope.listing[i].longitude == null) {
                 $scope.listing[i].dist = 0;
@@ -1076,7 +1076,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
-                $scope.storedetails[i].image = "logo_(2).png";
+                $scope.storedetails[i].image = "logo.png";
             }
             $scope.storedetails[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
 
@@ -1406,7 +1406,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.branddetails = data.store;
             if($scope.branddetails.brandlogo=="" || !$scope.branddetails.brandlogo)
             {
-                $scope.branddetails.brandlogo="logo_(2).png";
+                $scope.branddetails.brandlogo="logo.png";
             }
             $scope.newarrivals = data.newin;
             
@@ -1892,7 +1892,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 $scope.malls[i].dist = 0;
             } 
             if (data[i].logo == "") {
-                $scope.malls[i].logo = "logo_(2).png";
+                $scope.malls[i].logo = "logo.png";
             }
         }
         $scope.initEvent = function () {
@@ -1915,7 +1915,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 $scope.malls[i].dist = 0;
             } 
             if (data[i].logo == "") {
-                $scope.malls[i].logo = "logo_(2).png";
+                $scope.malls[i].logo = "logo.png";
             }
         }
         $scope.initEvent = function () {
@@ -2032,7 +2032,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.offers = data;
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
-                $scope.offers[i].image = "logo_(2).png";
+                $scope.offers[i].image = "logo.png";
             }
         }
     };
@@ -2069,7 +2069,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
 
         if (data.mall.logo == "") {
-            $scope.mall.logo = "logo_(2).png";
+            $scope.mall.logo = "logo.png";
         }
     };
     MyServices.beforeeditmall($stateParams.id).success(mallsuccess);
@@ -2131,10 +2131,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         $scope.brands = data;
         for (var i = 0; i < data.length; i++) {
-//            $scope.brands[i].logo = "logo_(2).png";
+//            $scope.brands[i].logo = "logo.png";
             if($scope.brands[i].logo=="" || !$scope.brands)
             {
-                $scope.brands[i].logo = "logo_(2).png";
+                $scope.brands[i].logo = "logo.png";
             }
             if (data[i].latitude != null) {
                 $scope.brands[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
