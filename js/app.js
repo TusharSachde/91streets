@@ -313,22 +313,3 @@ var getDistance = function (lat1, long1, lat2, long2) {
     var d = R * c;
     return d; // returns the distance in km
 };
-
-var googleanalyticsApp = angular.module('googleanalytics', ['ionic'])
-    .run(function ($ionicPlatform, $ionicPopup) {
-        $ionicPlatform.ready(function () {
-            if (typeof analytics !== "undefined") {
-                analytics.startTrackerWithId("UA-56855808-1");
-            } else {
-                console.log("Google Analytics Unavailable");
-            }
-        });
-    });
-
-googleanalyticsApp.controller('AwesomeController', function($scope) {
-    if(typeof analytics !== "undefined") { analytics.trackView("Application Started"); }
- 
-    $scope.initEvent = function() {
-        if(typeof analytics !== "undefined") { analytics.trackEvent("Load event", "Loaded", "Aplication Loaded",1); }
-    }
-});
