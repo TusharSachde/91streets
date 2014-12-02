@@ -15,7 +15,7 @@
 
     <gap:platform name="ios" />
     <gap:platform name="android" />
-    
+
     <preference name="phonegap-version" value="3.5.0" />
     <preference name="permissions" value="none" />
     <preference name="fullscreen" value="false" />
@@ -25,13 +25,16 @@
     <preference name="BackgroundColor" value="0x000000" />
     <preference name="KeepRunning" value="true" />
     <preference name="splash-screen-duration" value="3000" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
     <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="target-device" value="universal" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
-    
+
 
     <icon src="img/logo.png" />
+    <gap:splash src="img/screen.png" />
 
 
     <platform name="android">
