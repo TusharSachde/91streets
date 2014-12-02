@@ -1404,7 +1404,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var ongetbrandsuccess = function (data, status) {
             console.log(data);
             $scope.branddetails = data.store;
+            if($scope.branddetails.brandlogo=="" || !$scope.branddetails.brandlogo)
+            {
+                $scope.branddetails.brandlogo="logo_(2).png";
+            }
             $scope.newarrivals = data.newin;
+            
             $scope.initEvent = function () {
                 if (typeof analytics !== "undefined") {
                     var addre = "";
@@ -2127,6 +2132,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.brands = data;
         for (var i = 0; i < data.length; i++) {
 //            $scope.brands[i].logo = "logo_(2).png";
+            if($scope.brands[i].logo=="" || !$scope.brands)
+            {
+                $scope.brands[i].logo = "logo_(2).png";
+            }
             if (data[i].latitude != null) {
                 $scope.brands[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
                 console.log($scope.brands[i].dist);
