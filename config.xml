@@ -24,9 +24,7 @@
     <preference name="ErrorUrl" value="" />
     <preference name="BackgroundColor" value="0x000000" />
     <preference name="KeepRunning" value="true" />
-    <preference name="SplashScreen" value="screen" />
     <preference name="splash-screen-duration" value="3000" />
-    <preference name="SplashScreenDelay" value="3000" />
     <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
