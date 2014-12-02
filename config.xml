@@ -6,20 +6,39 @@
     <name>91streets</name>
 
     <description>
-        Shopping discount
+        Shopping companion
     </description>
 
-    <author href="http://wohlig.com" email="info@wohlig.com">
+    <author href="http://www.wohlig.com" email="info@wohlig.com">
         Wohlig Technologies
     </author>
+
     <gap:platform name="ios" />
     <gap:platform name="android" />
-    <gap:platform name="winphone" />
 
     <icon src="img/logo.png" />
-    <gap:splash src="img/splash.png" />
 
-    <preference name="phonegap-version" value="3.5.0"/>
+    <platform name="android">
+        <!-- you can use any density that exists in the Android project -->
+        <splash src="img/android/splash-port-hdpi.png" density="port-hdpi" />
+        <splash src="img/android/splash-port-ldpi.png" density="port-ldpi" />
+        <splash src="img/android/splash-port-mdpi.png" density="port-mdpi" />
+        <splash src="img/android/splash-port-xhdpi.png" density="port-xhdpi" />
+    </platform>
+
+    <platform name="ios">
+        <!-- images are determined by width and height. The following are supported -->
+        <splash src="img/ios/Default~iphone.png" width="320" height="480" />
+        <splash src="img/ios/Default@2x~iphone.png" width="640" height="960" />
+        <splash src="img/ios/Default-Portrait~ipad.png" width="768" height="1024" />
+        <splash src="img/ios/Default-Portrait@2x~ipad.png" width="1536" height="2048" />
+        <splash src="img/ios/Default-568h@2x~iphone.png" width="640" height="1136" />
+        <splash src="img/ios/Default-667h.png" width="750" height="1334" />
+        <splash src="img/ios/Default-736h.png" width="1242" height="2208" />
+    </platform>
+
+
+    <preference name="phonegap-version" value="3.5.0" />
     <preference name="permissions" value="none" />
     <preference name="fullscreen" value="false" />
     <preference name="orientation" value="portrait" />
@@ -27,7 +46,7 @@
     <preference name="ErrorUrl" value="" />
     <preference name="BackgroundColor" value="0x000000" />
     <preference name="KeepRunning" value="true" />
-    <preference name="splash-screen-duration" value="5000" />
+    <preference name="SplashScreenDelay" value="5000" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
 
@@ -43,10 +62,10 @@
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
-    <gap:plugin name="org.apache.cordova.statusbar" />
+    <gap:plugin name="org.apache.cordova.splashscreen" />
 
-	<gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
-	
+    <gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
+
     <feature name="http://api.phonegap.com/1.0/file" />
     <feature name="http://api.phonegap.com/1.0/geolocation" />
     <feature name="http://api.phonegap.com/1.0/notification" />

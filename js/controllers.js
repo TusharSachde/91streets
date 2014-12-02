@@ -24,23 +24,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 })
 
-.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location, $cordovaSplashscreen, $cordovaStatusbar) {
-    
-    
-  $cordovaStatusbar.show();
-    
-    //Statusbar
-    $cordovaStatusbar.overlaysWebView(true);
-
-  // styles: Default : 0, LightContent: 1, BlackTranslucent: 2, BlackOpaque: 3
-  $cordovaStatusbar.style(1);
-
-  // supported names: black, darkGray, lightGray, white, gray, red, green,
-  // blue, cyan, yellow, magenta, orange, purple, brown
-  $cordovaStatusbar.styleColor('black');
-    
-    //splashscreen
-    $cordovaSplashscreen.show();
+.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location) {
 
 
     //opensearch
