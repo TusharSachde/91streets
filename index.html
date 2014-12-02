@@ -38,6 +38,18 @@
     <script src="js/services.js"></script>
     <script src="lib/jstorage.js"></script>
 
+    <script>
+        var gaPlugin;
+        var functionconsole = function (data) {
+            console.log(data);
+        }
+
+        $(document).ready(function () {
+                gaPlugin = window.plugins.gaPlugin;
+                gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
+            }
+    </script>
+
 </head>
 
 
@@ -93,17 +105,7 @@
 
         };
     </script>
-    <script>
-        var gaPlugin;
-        var functionconsole = function (data) {
-            console.log(data);
-        }
 
-        $(document).ready(function () {
-                gaPlugin = window.plugins.gaPlugin;
-                gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
-            }
-    </script>
 </body>
 
 </html>
