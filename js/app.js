@@ -2,6 +2,8 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
+        gaPlugin = window.plugins.gaPlugin;
+        gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -37,7 +39,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
             }
         }
     })
-    
+
     .state('tab.home', {
         url: '/home',
         views: {
@@ -237,7 +239,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
             }
         }
     })
-    
+
     .state('tab.contact', {
         url: '/setting/contact',
         views: {
@@ -266,10 +268,10 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
 })
     .filter('addlike', function () {
         return function (input, userlike, check) {
-//            if(check==1)
-            return input+userlike;
-//            else
-//            return input;
+            //            if(check==1)
+            return input + userlike;
+            //            else
+            //            return input;
         };
     })
     .filter('isuserlike', function () {
