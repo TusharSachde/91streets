@@ -39,11 +39,11 @@
                     <p ng-repeat="offer in offers">{{offer.header}}</p>
                     <p ng-show="offers=='';">Sorry, no offers going on.</p>
                     <a href="#/tab/pageoffers/{{mallid}}">
-                        <span class="item-note">Show Detail</span>
+                        <span class="item-note" ng-show="offers!='';">Show Detail</span>
                     </a>
                 </div>
 
-                <div class="item">
+                <div class="item" ng-show="mall.events!=''">
                     <h3>Events</h3>
                     <p>{{mall.events}}</p>
                 </div>
