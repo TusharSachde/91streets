@@ -36,21 +36,21 @@
 
     <platform name="android">
         <!-- you can use any density that exists in the Android project -->
-        <splash src="img/android/screen-port-hdpi.png" density="port-hdpi" />
-        <splash src="img/android/screen-port-ldpi.png" density="port-ldpi" />
-        <splash src="img/android/screen-port-mdpi.png" density="port-mdpi" />
-        <splash src="img/android/screen-port-xhdpi.png" density="port-xhdpi" />
+        <splash src="res/screens/android/screen-port-hdpi.png" density="port-hdpi" />
+        <splash src="res/screens/android/screen-port-ldpi.png" density="port-ldpi" />
+        <splash src="res/screens/android/screen-port-mdpi.png" density="port-mdpi" />
+        <splash src="res/screens/android/screen-port-xhdpi.png" density="port-xhdpi" />
     </platform>
 
     <platform name="ios">
         <!-- images are determined by width and height. The following are supported -->
-        <splash src="img/ios/screen~iphone.png" width="320" height="480" />
-        <splash src="img/ios/screen@2x~iphone.png" width="640" height="960" />
-        <splash src="img/ios/screen-Portrait~ipad.png" width="768" height="1024" />
-        <splash src="img/ios/screen-Portrait@2x~ipad.png" width="1536" height="2048" />
-        <splash src="img/ios/screen-568h@2x~iphone.png" width="640" height="1136" />
-        <splash src="img/ios/screen-667h.png" width="750" height="1334" />
-        <splash src="img/ios/screen-736h.png" width="1242" height="2208" />
+        <splash src="res/screens/ios/screen~iphone.png" width="320" height="480" />
+        <splash src="res/screens/ios/screen@2x~iphone.png" width="640" height="960" />
+        <splash src="res/screens/ios/screen-Portrait~ipad.png" width="768" height="1024" />
+        <splash src="res/screens/ios/screen-Portrait@2x~ipad.png" width="1536" height="2048" />
+        <splash src="res/screens/ios/screen-568h@2x~iphone.png" width="640" height="1136" />
+        <splash src="res/screens/ios/screen-667h.png" width="750" height="1334" />
+        <splash src="res/screens/ios/screen-736h.png" width="1242" height="2208" />
     </platform>
 
 

@@ -94,7 +94,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     if ($scope.userdata) {
         $scope.loginlogouttext = "Log Out";
     } else {
-        $scope.loginlogouttext = "Login";
+        $scope.loginlogouttext = "Please Login";
     }
 
 
