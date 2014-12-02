@@ -32,13 +32,18 @@
                 <h2>{{notif.storename}}</h2>
                 <h3 ng-show="notif.from!=1">{{notif.name}}</h3>
                 <p ng-show="notif.from==1"><img src="{{notif.name|imagepath}}" style="width: 7%;"></p>
-                <span class="item-note"><span ng-show="{{notif.from=='1'}}"><i class="ion-images balanced"></i></span> <span  ng-show="{{notif.from!='1'}}"><i class="ion-ios7-pricetags calm"></i>
+                <span class="item-note">
+                <span ng-show="{{notif.from=='1'}}"><i class="ion-images balanced"></i></span> 
+                    <span  ng-show="{{notif.from!='1'}}"><i class="ion-ios7-pricetags calm"></i></span>
+                </span>
                 <p>
-                    <span ng-hide="!brand.address">{{notif.stores.address}}</span>
-                    <span ng-show="!brand.address">{{notif.stores.storeaddress}}</span>
+                    <span ng-hide="!notif.malladdress">{{notif.malladdress}}</span>
+                    <span ng-show="!notif.malladdress">{{notif.storeaddress}}</span>
                 </p>
             </ion-item>
         </ion-list>
+        <ion-infinite-scroll icon="ion-loading-c" on-infinite="loadMore()">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>
 
