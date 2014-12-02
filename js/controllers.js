@@ -34,17 +34,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     //opensearch
     //start slide from api.....
-
+    $scope.initEvent = function () {
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Page", "Open", "Home Page", 101);
+    }
     var bannersuccess = function (data, status) {
         console.log(data);
         $scope.slider = data;
         $ionicSlideBoxDelegate.update();
-        $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('Home');
-                analytics.trackEvent('Page', 'Load', 'Home', 101);
-            }
-        }
+
 
 
     };
@@ -292,29 +289,26 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     var favoritelisting = function (data, status) {
         console.log(data);
-        var inibrandlength=$scope.brands.length;
+        var inibrandlength = $scope.brands.length;
         console.log(inibrandlength);
         //        $scope.brands =;
         for (var i = 0; i < data.length; i++) {
             $scope.brands.push(data[i]);
         }
         $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('Favorite Store ');
-                analytics.trackEvent('Page', 'Load', 'Favorite Store ', 102);
-            }
+            gaPlugin.trackEvent(functionconsole, functionconsole, "Favorite Store", "Open", "Favorite Store Page", 102);
         }
         for (var i = 0; i < data.length; i++) {
             if (data[i].logo == "") {
-                $scope.brands[i+inibrandlength].logo = "logo.png";
+                $scope.brands[i + inibrandlength].logo = "logo.png";
             }
 
-            $scope.brands[i+inibrandlength].mylike = data[i].like.length;
+            $scope.brands[i + inibrandlength].mylike = data[i].like.length;
             for (var j = 0; j < data[i].like.length; j++) {
                 if (data[i].like[j].user == $scope.user.id) {
-                    $scope.brands[i+inibrandlength].userlike = 1;
+                    $scope.brands[i + inibrandlength].userlike = 1;
                 } else {
-                    $scope.brands[i+inibrandlength].userlike = 0;
+                    $scope.brands[i + inibrandlength].userlike = 0;
                 }
             }
         }
@@ -332,8 +326,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
     };
     $scope.like = function (brand) {
-//        console.log(brand);
-        
+        //        console.log(brand);
+
         if (brand.userlike == 0) {
             brand.userlike = 1;
             brand.mylike++;
@@ -380,10 +374,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             console.log(data);
             $scope.notification = data;
             $scope.initEvent = function () {
-                if (typeof analytics !== "undefined") {
-                    analytics.trackView('Notification ');
-                    analytics.trackEvent('Page', 'Load', 'Notification ', 103);
-                }
+                gaPlugin.trackEvent(functionconsole, functionconsole, "Notification", "Open", "Notification Page", 103);
             }
         };
         MyServices.notification($scope.userdata.id).success(getnotification);
@@ -420,18 +411,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             }
         };
 
+        $scope.initEvent = function () {
+            gaPlugin.trackEvent(functionconsole, functionconsole, "Search", "Open", "Search Page", 104);
+        }
+
         var brnadsuccess = function (data, status) {
 
             console.log(data);
             $scope.brands = data;
 
 
-            $scope.initEvent = function () {
-                if (typeof analytics !== "undefined") {
-                    analytics.trackView('Search ');
-                    analytics.trackEvent('Page', 'Load', 'Search ', 104);
-                }
-            }
+
 
 
             for (var i = 0; i < data.length; i++) {
@@ -483,28 +473,26 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('InNotificationCtrl', function ($scope, MyServices, $stateParams, $ionicModal, $timeout, $location) {
 
 
-    $scope.notifications=[];
-//    start get user data
-        
-        $scope.userdata = user = $.jStorage.get("user");
-        if ($scope.userdata) {
-            $scope.ucity = $scope.userdata.city;
-        } else {
-            $scope.ucity = 0;
-        }
-    
-//    end get user data
+    $scope.notifications = [];
+    //    start get user data
+
+    $scope.userdata = user = $.jStorage.get("user");
+    if ($scope.userdata) {
+        $scope.ucity = $scope.userdata.city;
+    } else {
+        $scope.ucity = 0;
+    }
+    $scope.initEvent = function () {
+        gaPlugin.trackEvent(functionconsole, functionconsole, "In Notification ", "Open", "In Notification Page", 105);
+    }
+
+    //    end get user data
     var notificationbrand = function (data, status) {
         console.log(data);
         $scope.notifications = data;
 
-        $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('In Notification ');
-                analytics.trackEvent('Page', 'Load', 'In Notification ', 105);
-            }
-        }
-        
+
+
         $scope.$broadcast('scroll.infiniteScrollComplete');
 
     };
@@ -516,7 +504,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.$broadcast('scroll.infiniteScrollComplete');
     };
 
-//start get location lat long
+    //start get location lat long
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
         console.log("Positions");
@@ -524,7 +512,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        MyServices.notificationbrandid($stateParams.id,$scope.ucity,lat,long,0).success(notificationbrand);
+        MyServices.notificationbrandid($stateParams.id, $scope.ucity, lat, long, 0).success(notificationbrand);
     }
 
     if (navigator.geolocation) {
@@ -533,25 +521,25 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 
-//end get location lat long
-    
-//    start reload function
-    
-    
+    //end get location lat long
+
+    //    start reload function
+
+
     var lastlength = 0;
     $scope.loadMore = function () {
         var totallength = $scope.notifications.length;
         if (lastlength != totallength) {
             lastlength = totallength;
-            
-                MyServices.notificationbrandid($stateParams.id,$scope.ucity,lat,long,totallength).success(pushnotificationbrand);
+
+            MyServices.notificationbrandid($stateParams.id, $scope.ucity, lat, long, totallength).success(pushnotificationbrand);
 
         }
 
 
     };
-    
-//    end  reload function
+
+    //    end  reload function
 
 })
 
@@ -566,17 +554,15 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $location.url('/tab/shopping');
 
     };
+    $scope.initEvent = function () {
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Shopping ", "Open", "Shopping Page", 106);
+    }
     var getshoppingbagg = function (data, status) {
         console.log("inin big bag........");
         console.log(data);
         $scope.bigbag = data;
 
-        $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('Shopping ');
-                analytics.trackEvent('Page', 'Load', 'Shopping ', 106);
-            }
-        }
+
 
         fillbagtocategory();
     };
@@ -727,10 +713,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     } else {
         $scope.city = $scope.user.city;
     }
-// close modal
-        $scope.closeModal = function () {
-            $scope.oModal4.hide();
-        };
+    // close modal
+    $scope.closeModal = function () {
+        $scope.oModal4.hide();
+    };
     //    clear filter and sort
 
     $scope.clear = function () {
@@ -781,14 +767,12 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.sort = "othersort.html";
     $scope.changesort = function (order) {
         $scope.myorder = order;
-        if($scope.checkval == 1)
-        {
+        if ($scope.checkval == 1) {
             MyServices.getallstoresdiscount($scope.city, 0, lat, long, $scope.myorder).success(getdiscount);
-        }else if($scope.checkval == 2)
-        {
+        } else if ($scope.checkval == 2) {
             MyServices.getcatarraystoreoffer($scope.catarray, $scope.city, 0, lat, long, $scope.myorder).success(getdiscount);
-        }else{
-            MyServices.discountsearch($scope.searchdata,$scope.city, 0, lat, long, $scope.myorder).success(getdiscount);
+        } else {
+            MyServices.discountsearch($scope.searchdata, $scope.city, 0, lat, long, $scope.myorder).success(getdiscount);
         }
     };
     //Search
@@ -804,7 +788,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.doSearch = function (data) {
         $scope.searchdata = data;
         $scope.checkval = 3;
-        MyServices.discountsearch($scope.searchdata,$scope.city, 0, lat, long, $scope.myorder).success(getdiscount);
+        MyServices.discountsearch($scope.searchdata, $scope.city, 0, lat, long, $scope.myorder).success(getdiscount);
     };
 
     $ionicModal.fromTemplateUrl('templates/discountsort.html', {
@@ -818,21 +802,18 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.oModal4.show();
     };
 
+    $scope.initEvent = function () {
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Discount", "Open", "Discount Page", 107);
+    }
     var getdiscount = function (data, status) {
         $scope.listing = "";
         $scope.listing = data;
-        if($scope.listing == "")
-        {
+        if ($scope.listing == "") {
             $scope.msg = "NO DATA FOUND";
-        }else{
+        } else {
             $scope.msg = "";
         }
-        $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('Discount ');
-                analytics.trackEvent('Page', 'Load', 'Discount ', 107);
-            }
-        }
+
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].logo == null) {
@@ -858,7 +839,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             }
             if ($scope.listing[i].latitude == null & $scope.listing[i].longitude == null) {
                 $scope.listing[i].dist = 0;
-            } 
+            }
         };
         $scope.$broadcast('scroll.infiniteScrollComplete');
     };
@@ -939,7 +920,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 MyServices.getcatarraystoreoffer($scope.catarray, $scope.city, totallength, lat, long, $scope.myorder).success(pushgetdiscount);
             }
             if ($scope.checkval == 3) {
-                MyServices.discountsearch($scope.searchdata,$scope.city, totallength, lat, long, $scope.myorder).success(pushgetdiscount);
+                MyServices.discountsearch($scope.searchdata, $scope.city, totallength, lat, long, $scope.myorder).success(pushgetdiscount);
             }
 
         }
@@ -956,13 +937,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var getshoppingbagg = function (data, status) {
         console.log(data);
 
-
         $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('Shopping Bag ');
-                analytics.trackEvent('Page', 'Load', 'Shopping Bag ', 108);
-            }
+            gaPlugin.trackEvent(functionconsole, functionconsole, "Shopping Bag", "Open", "Shopping Bag Page", 108);
         }
+
 
 
         for (var i = 0; i < data.length; i++) {
@@ -1062,17 +1040,18 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
         $scope.storedetails = {};
         $scope.storedetails = data;
+
         $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                var addre = "";
-                if (storedetails.address) {
-                    addre = storedetails.address;
-                } else {
-                    addre = storedetails.storeaddress;
-                }
-                analytics.trackView('Store Detail Page - ' + data.brandname + ' - ' + addre);
-                analytics.trackEvent('Page', 'Load', 'Store Detail Page - ' + data.brandname + ' - ' + addre, 801);
+
+            var addre = "";
+            if (storedetails.address) {
+                addre = storedetails.address;
+            } else {
+                addre = storedetails.storeaddress;
             }
+            gaPlugin.trackEvent(functionconsole, functionconsole, 'Store Detail Page - ' + data.brandname + ' - ' + addre, "Open", 'Store Detail Page - ' + data.brandname + ' - ' + addre, 801);
+
+
         }
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
@@ -1113,13 +1092,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         //    1 : for getbrandsbycategory start with all by main category
         //    2 : for getstorebycategoryoffers all offers
 
-//        $scope.atoz=
+        //        $scope.atoz=
         $scope.brands = [];
         $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('Store List Page');
-                analytics.trackEvent('Page', 'Load', 'Store List Page', 802);
-            }
+            gaPlugin.trackEvent(functionconsole, functionconsole, "Store List", "Open", "Store List Page", 108);
         }
 
         $scope.userdata = user = $.jStorage.get("user");
@@ -1135,26 +1111,23 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.discountstatus = 0;
         $scope.sort = "othersort.html";
         $scope.searchdata = "";
-    $scope.atoz=true;
-//        $scope.myorder = 'dist';
-//        $scope.myorderorder = false;
+        $scope.atoz = true;
+        //        $scope.myorder = 'dist';
+        //        $scope.myorderorder = false;
 
-        $scope.myorder=0;
-    
+        $scope.myorder = 0;
+
         $scope.changesort = function (order) {
             $scope.myorder = order;
             console.log(order);
             console.log($scope.checkval);
-            if($scope.checkval==1)
-            {
+            if ($scope.checkval == 1) {
                 MyServices.getbrandsbycategory(categoryId, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
-            }else if($scope.checkval==2)
-            {
+            } else if ($scope.checkval == 2) {
                 MyServices.getstorebycategoryoffers($stateParams.cid, $scope.ucity, 0, lat, long, $scope.myorder).success(getdiscount);
-            }else if($scope.checkval==3)
-            {
+            } else if ($scope.checkval == 3) {
                 MyServices.getcatarraystore($scope.catarray, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
-            }else{
+            } else {
                 MyServices.search($scope.searchdata, categoryId, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
             }
         };
@@ -1170,10 +1143,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var getdiscount = function (data, status) {
 
             $scope.brands = data;
-//            for (var i = 0; i < data.length; i++) {
-//                $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
-//                console.log($scope.brands[i].dist);
-//            }
+            //            for (var i = 0; i < data.length; i++) {
+            //                $scope.brands[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
+            //                console.log($scope.brands[i].dist);
+            //            }
             $scope.$broadcast('scroll.infiniteScrollComplete');
             console.log($scope.brands);
         }
@@ -1197,10 +1170,10 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             console.log("my data");
             console.log(data);
             $scope.brands = data;
-//            for (var i = 0; i < data.length; i++) {
-////                $scope.brands[i].dist = ($scope.brands[i].dist).toFixed(1);
-//                            console.log($scope.brands[i].dist.toFixed(1));
-//            }
+            //            for (var i = 0; i < data.length; i++) {
+            ////                $scope.brands[i].dist = ($scope.brands[i].dist).toFixed(1);
+            //                            console.log($scope.brands[i].dist.toFixed(1));
+            //            }
             $scope.$broadcast('scroll.infiniteScrollComplete');
             //$scope.loadMore();
         };
@@ -1210,9 +1183,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             for (var i = 0; i < data.length; i++) {
                 $scope.brands.push(data[i]);
             }
-//            for (var i = 0; i < $scope.brands.length; i++) {
-//                $scope.brands[i].dist = (getDistance($scope.brands[i].latitude, $scope.brands[i].longitude, lat, long)).toFixed(1);
-//            }
+            //            for (var i = 0; i < $scope.brands.length; i++) {
+            //                $scope.brands[i].dist = (getDistance($scope.brands[i].latitude, $scope.brands[i].longitude, lat, long)).toFixed(1);
+            //            }
             $scope.$broadcast('scroll.infiniteScrollComplete');
         };
 
@@ -1254,8 +1227,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 if ($scope.checkval == 3) {
                     MyServices.getcatarraystore($scope.catarray, $scope.ucity, totallength, lat, long, $scope.myorder).success(pushcategorysuccess);
                 }
-                if($scope.checkval == 4)
-                {
+                if ($scope.checkval == 4) {
                     MyServices.search($scope.searchdata, categoryId, $scope.ucity, totallength, lat, long, $scope.myorder).success(pushcategorysuccess);
                 }
 
@@ -1365,7 +1337,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.brands = data;
         };
         $scope.doSearch = function (data) {
-            $scope.checkval=4;
+            $scope.checkval = 4;
             $scope.searchdata = data;
             MyServices.search($scope.searchdata, categoryId, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
         };
@@ -1404,23 +1376,26 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var ongetbrandsuccess = function (data, status) {
             console.log(data);
             $scope.branddetails = data.store;
-            if($scope.branddetails.brandlogo=="" || !$scope.branddetails.brandlogo)
-            {
-                $scope.branddetails.brandlogo="logo.png";
+            if ($scope.branddetails.brandlogo == "" || !$scope.branddetails.brandlogo) {
+                $scope.branddetails.brandlogo = "logo.png";
             }
             $scope.newarrivals = data.newin;
-            
+
+
+
+
             $scope.initEvent = function () {
-                if (typeof analytics !== "undefined") {
-                    var addre = "";
-                    if (data.store.address) {
-                        addre = data.store.address;
-                    } else {
-                        addre = data.store.storeaddress;
-                    }
-                    analytics.trackView('Store Page Opens - ' + data.store.brandname + ' - ' + addre);
-                    analytics.trackEvent('Page', 'Load', 'Store Page Loaded - ' + data.store.brandname + ' - ' + addre, 803);
+
+                var addre = "";
+                if (data.store.address) {
+                    addre = data.store.address;
+                } else {
+                    addre = data.store.storeaddress;
                 }
+
+                gaPlugin.trackEvent(functionconsole, functionconsole, "Store Page", "Open", 'Store Page Loaded - ' + data.store.brandname + ' - ' + addre, 803);
+
+
             }
 
             $scope.reviews = data.review;
@@ -1450,26 +1425,25 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             }
 
             $scope.like = function () {
-                if($scope.userid!=0)
-                {
-                if (likecount == 0 || !likecount) {
-                    likecount = 1;
-                    $scope.addfavPopup();
-                } else {
-                    likecount = 0;
-                    $scope.remfavPopup();
-                };
-                $scope.checklike = likecount;
-                if (!$scope.user.id || $scope.user.id == 0) {
-                    console.log("What did you do ?");
-                } else {
-                    $scope.likeapi($scope.userid, $scope.branddetails.brandid, likecount);
-                }
+                if ($scope.userid != 0) {
+                    if (likecount == 0 || !likecount) {
+                        likecount = 1;
+                        $scope.addfavPopup();
+                    } else {
+                        likecount = 0;
+                        $scope.remfavPopup();
+                    };
+                    $scope.checklike = likecount;
+                    if (!$scope.user.id || $scope.user.id == 0) {
+                        console.log("What did you do ?");
+                    } else {
+                        $scope.likeapi($scope.userid, $scope.branddetails.brandid, likecount);
+                    }
 
-                console.log($scope.userid, $scope.branddetails.brandid, likecount);
-                console.log('Like Counter=' + likecount + ' ' + $scope.checklike);
-                console.log('Like Counter=' + likecount + ' ' + $scope.checklike);
-                }else{
+                    console.log($scope.userid, $scope.branddetails.brandid, likecount);
+                    console.log('Like Counter=' + likecount + ' ' + $scope.checklike);
+                    console.log('Like Counter=' + likecount + ' ' + $scope.checklike);
+                } else {
                     $location.url('/home');
                 }
 
@@ -1482,11 +1456,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             console.log(website);
             window.open(website, '_system');
         }
-        
+
         $scope.sendtomap = function (lati, longi) {
             console.log(lati);
             console.log(longi);
-            window.open('https://www.google.co.in/maps/@'+lati+','+longi+',17z', '_system');
+            window.open('https://www.google.co.in/maps/@' + lati + ',' + longi + ',17z', '_system');
         }
 
         //like API
@@ -1555,28 +1529,27 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.max = 5;
         $scope.readonly = true;
         $scope.showPopup = function () {
-            
-            if($scope.userid!=0)
-            {
-            
-            $scope.data = {}
-            var myPopup = $ionicPopup.show({
-                template: '<rating ng-model="data.newrate" max="max" readonly="false"></rating> <textarea ng-model="data.newreview" class="review" placeholder="Please enter your review"></textarea>',
-                title: 'Your Review',
-                subTitle: 'Please enter your review',
-                scope: $scope,
-                buttons: [{
-                    text: 'Cancel'
+
+            if ($scope.userid != 0) {
+
+                $scope.data = {}
+                var myPopup = $ionicPopup.show({
+                    template: '<rating ng-model="data.newrate" max="max" readonly="false"></rating> <textarea ng-model="data.newreview" class="review" placeholder="Please enter your review"></textarea>',
+                    title: 'Your Review',
+                    subTitle: 'Please enter your review',
+                    scope: $scope,
+                    buttons: [{
+                        text: 'Cancel'
             }, {
-                    text: '<b>Submit</b>',
-                    type: 'button-balanced',
-                    onTap: function (e) {
-                        $scope.submitRate($scope.userid, $scope.branddetails.id, $scope.data.newrate, $scope.data.newreview);
-                        console.log($scope.userid, $scope.branddetails.id, $scope.data.newrate, $scope.data.newreview);
-                    }
+                        text: '<b>Submit</b>',
+                        type: 'button-balanced',
+                        onTap: function (e) {
+                            $scope.submitRate($scope.userid, $scope.branddetails.id, $scope.data.newrate, $scope.data.newreview);
+                            console.log($scope.userid, $scope.branddetails.id, $scope.data.newrate, $scope.data.newreview);
+                        }
             }]
-            });
-            }else{
+                });
+            } else {
                 $location.url('/home');
             }
 
@@ -1597,11 +1570,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('BrandListCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
     $scope.initEvent = function () {
-        if (typeof analytics !== "undefined") {
-            analytics.trackView('Brand List Page');
-            analytics.trackEvent('Page', 'Load', 'Brand List Page Loaded', 804);
-        }
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Brand List Page", "Open", "Brand List Page Loaded", 804);
     }
+
 
 
     var brnadsuccess = function (data, status) {
@@ -1613,11 +1584,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 })
 
 .controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate, $location) {
+
     $scope.initEvent = function () {
-        if (typeof analytics !== "undefined") {
-            analytics.trackView('Favorites Page');
-            analytics.trackEvent('Page', 'Load', 'Favorites Page Loaded', 805);
-        }
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Favorites Page", "Open", "Favories Page", 804);
     }
 
     $scope.user = {};
@@ -1653,42 +1622,40 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.malllist = [];
     $scope.checkval = 1;
     $scope.searchdata = "";
+
     $scope.initEvent = function () {
-        if (typeof analytics !== "undefined") {
-            analytics.trackView('Mall Page List');
-            analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 806);
-        }
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Mall Page List Page", "Open", "Mall Page List", 806);
     }
 
 
     $scope.myorder = 0;
-//    $scope.myorderorder = false;;
+    //    $scope.myorderorder = false;;
     $scope.changesort = function (order) {
         console.log(order);
-        $scope.myorder=order;
-        
-                if ($scope.checkval == 1) {
-                    MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long,$scope.myorder).success(mallpagesuccess);
-                }
-                if ($scope.checkval == 2) {
-                    MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
-                }
-                if ($scope.checkval == 3) {
-                    MyServices.mallpagesearch($scope.searchdata,$stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
-                }
+        $scope.myorder = order;
+
+        if ($scope.checkval == 1) {
+            MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
+        }
+        if ($scope.checkval == 2) {
+            MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
+        }
+        if ($scope.checkval == 3) {
+            MyServices.mallpagesearch($scope.searchdata, $stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
+        }
     };
 
-//    get all search
-    
+    //    get all search
+
     $scope.doSearch = function (searchdata) {
-        
-        $scope.checkval=3;
+
+        $scope.checkval = 3;
         $scope.searchdata = searchdata;
-        MyServices.mallpagesearch($scope.searchdata,$stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
-        
+        MyServices.mallpagesearch($scope.searchdata, $stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
+
     }
-    
-//    get all search
+
+    //    get all search
 
     //    get user
     $scope.user = MyServices.getuser();
@@ -1762,17 +1729,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.closeModal = function () {
         $scope.oModal4.hide();
     };
-//    var catarraysuccess = function (data, status) {
-//        console.log(data);
-//        $scope.malllist = data;
-//        for (var i = 0; i < data.length; i++) {
-//            if (data[i].latitude != null) {
-//                $scope.malllist[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
-//            } else {
-//                $scope.malllist[i].dist = 0;
-//            }
-//        }
-//    };
+    //    var catarraysuccess = function (data, status) {
+    //        console.log(data);
+    //        $scope.malllist = data;
+    //        for (var i = 0; i < data.length; i++) {
+    //            if (data[i].latitude != null) {
+    //                $scope.malllist[i].dist = (getDistance(lat, long, data[i].latitude, data[i].longitude)).toFixed(1);
+    //            } else {
+    //                $scope.malllist[i].dist = 0;
+    //            }
+    //        }
+    //    };
 
     $scope.hideSort = function () {
         console.log($scope.cat);
@@ -1784,11 +1751,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.oModal1.hide();
         console.log($scope.usercity);
         $scope.checkval = 2;
-        MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, 0, lat, long,$scope.myorder).success(mallpagesuccess);
+        MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
     };
 
     var mallpagesuccess = function (data, status) {
-//        $scope.checkval = 1;
+        //        $scope.checkval = 1;
         console.log(data);
         $scope.malllist = data;
         for (var i = 0; i < data.length; i++) {
@@ -1798,7 +1765,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
         $scope.$broadcast('scroll.infiniteScrollComplete');
     };
-    
+
 
     //    get lat log
 
@@ -1810,7 +1777,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long,$scope.myorder).success(mallpagesuccess);
+        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
     }
 
     if (navigator.geolocation) {
@@ -1834,18 +1801,18 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var lastlength = 0;
     $scope.loadMore = function () {
         var totallength = $scope.malllist.length;
-            if (lastlength != totallength) {
-                lastlength = totallength;
-                if ($scope.checkval == 1) {
-                    MyServices.mallcategorystore($stateParams.id, $stateParams.mid, totallength, lat, long, $scope.myorder).success(pushmallpagesuccess);
-                }
-                if ($scope.checkval == 2) {
-                    MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, totallength, lat,long, $scope.myorder).success(pushmallpagesuccess);
-                }
-                if ($scope.checkval == 3) {
-                    MyServices.mallpagesearch($scope.searchdata,$stateParams.id, $stateParams.mid, totallength, lat, long, $scope.myorder).success(pushmallpagesuccess);
-                }
+        if (lastlength != totallength) {
+            lastlength = totallength;
+            if ($scope.checkval == 1) {
+                MyServices.mallcategorystore($stateParams.id, $stateParams.mid, totallength, lat, long, $scope.myorder).success(pushmallpagesuccess);
             }
+            if ($scope.checkval == 2) {
+                MyServices.mallcategorystorecat($scope.categoryarray, $stateParams.mid, totallength, lat, long, $scope.myorder).success(pushmallpagesuccess);
+            }
+            if ($scope.checkval == 3) {
+                MyServices.mallpagesearch($scope.searchdata, $stateParams.id, $stateParams.mid, totallength, lat, long, $scope.myorder).success(pushmallpagesuccess);
+            }
+        }
         //        $scope.$broadcast('scroll.infiniteScrollComplete');
     };
 
@@ -1855,7 +1822,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.checkval = 1;
         $scope.myorder = 0;
         $scope.searchdata = "";
-        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long,$scope.myorder).success(mallpagesuccess);
+        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
     }
 })
 
@@ -1890,45 +1857,38 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             //            $scope.malls[i].link="#/tab/malllist/mallpage/"+data.id;
             if (data[i].latitude == null) {
                 $scope.malls[i].dist = 0;
-            } 
+            }
             if (data[i].logo == "") {
                 $scope.malls[i].logo = "logo.png";
             }
         }
-        $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('Mall Page List');
-                analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 808);
-            }
-        }
+
         $scope.$broadcast('scroll.infiniteScrollComplete');
 
     };
+    $scope.initEvent = function () {
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Mall List", "Open", "Mall List", 808);
+    }
 
     //Search
     var mallsuccess1 = function (data, status) {
-        $scope.malls=data;
+        $scope.malls = data;
         for (var i = 0; i < data.length; i++) {
 
             //            $scope.malls[i].link="#/tab/malllist/mallpage/"+data.id;
             if (data[i].latitude == null) {
                 $scope.malls[i].dist = 0;
-            } 
+            }
             if (data[i].logo == "") {
                 $scope.malls[i].logo = "logo.png";
             }
         }
-        $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('Mall Page List');
-                analytics.trackEvent('Page', 'Load', 'Mall Page List Loaded', 808);
-            }
-        }
+
         $scope.$broadcast('scroll.infiniteScrollComplete');
     }
     $scope.doSearch = function (data) {
-        $scope.checkval=2;
-        $scope.searchdata=data;
+        $scope.checkval = 2;
+        $scope.searchdata = data;
         $scope.malls = "";
         MyServices.searchbymall($scope.usercity, $scope.searchdata, 0, lat, long).success(mallsuccess1);
     };
@@ -1942,7 +1902,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.usercity = $scope.user.city;
     }
 
-   
+
     //ionic load more
     $scope.mallItem = [];
     var change = 10;
@@ -1955,26 +1915,24 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var totallength = $scope.malls.length;
         if (lastlength != totallength) {
             lastlength = totallength;
-            if($scope.checkval==1)
-            {
+            if ($scope.checkval == 1) {
                 MyServices.getallmalls($scope.usercity, totallength, lat, long).success(mallsuccess);
             }
-            if($scope.checkval==2)
-            {
+            if ($scope.checkval == 2) {
                 MyServices.searchbymall($scope.usercity, $scope.searchdata, totallength, lat, long).success(mallsuccess);
             }
 
         }
 
     };
-//    clear sech
-    
-    $scope.clearSearch = function (){
+    //    clear sech
+
+    $scope.clearSearch = function () {
         console.log("clicked");
-        $scope.showSearch=!$scope.showSearch;
+        $scope.showSearch = !$scope.showSearch;
     }
-    
-//    clear sech
+
+    //    clear sech
     // malls api
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
@@ -1983,7 +1941,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-         MyServices.getallmalls($scope.usercity, 0, lat, long).success(mallsuccess1);
+        MyServices.getallmalls($scope.usercity, 0, lat, long).success(mallsuccess1);
         //start user is not logged in get city from lat long
 
 
@@ -2019,11 +1977,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('PageOffersCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
 
+
     $scope.initEvent = function () {
-        if (typeof analytics !== "undefined") {
-            analytics.trackView('Page Offers ');
-            analytics.trackEvent('Page', 'Load', 'Page Offers Loaded', 810);
-        }
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Page Offers", "Open", "Page Offers", 810);
     }
 
     var successoffers = function (data, status) {
@@ -2061,16 +2017,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var mallsuccess = function (data, status) {
         console.log(data.mall);
         $scope.mall = data.mall;
-        $scope.initEvent = function () {
-            if (typeof analytics !== "undefined") {
-                analytics.trackView('Mall Page - ' + data.mall.name);
-                analytics.trackEvent('Page', 'Load', 'Mall Page Loaded - ' + data.mall.name, 811);
-            }
-        }
+        
 
         if (data.mall.logo == "") {
             $scope.mall.logo = "logo.png";
         }
+
+        $scope.initEvent = function () {
+            gaPlugin.trackEvent(functionconsole, functionconsole, 'Mall Page - ' + data.mall.name, "Open", 'Mall Page Loaded - ' + data.mall.name, 811);
+        }
+
+
     };
     MyServices.beforeeditmall($stateParams.id).success(mallsuccess);
 
@@ -2116,12 +2073,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('BrandStoreCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
     $scope.brands = [];
-    $scope.initEvent = function () {
-        if (typeof analytics !== "undefined") {
 
-            analytics.trackView('Brand Store');
-            analytics.trackEvent('Page', 'Load', "Brand Store Loaded", 812);
-        }
+    $scope.initEvent = function () {
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Brand Store", "Open", "Brand Store Page", 804);
     }
 
 
@@ -2131,9 +2085,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         $scope.brands = data;
         for (var i = 0; i < data.length; i++) {
-//            $scope.brands[i].logo = "logo.png";
-            if($scope.brands[i].logo=="" || !$scope.brands)
-            {
+            //            $scope.brands[i].logo = "logo.png";
+            if ($scope.brands[i].logo == "" || !$scope.brands) {
                 $scope.brands[i].logo = "logo.png";
             }
             if (data[i].latitude != null) {
@@ -2164,17 +2117,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 
-    
-     $scope.sendtowebsite = function (website) {
-            console.log(website);
-            window.open(website, '_system');
-        }
-        
-        $scope.sendtomap = function (lati, longi) {
-            console.log(lati);
-            console.log(longi);
-            window.open('https://www.google.co.in/maps/@'+lati+','+longi+',17z', '_system');
-        }
+
+    $scope.sendtowebsite = function (website) {
+        console.log(website);
+        window.open(website, '_system');
+    }
+
+    $scope.sendtomap = function (lati, longi) {
+        console.log(lati);
+        console.log(longi);
+        window.open('https://www.google.co.in/maps/@' + lati + ',' + longi + ',17z', '_system');
+    }
 
 })
 
@@ -2187,11 +2140,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.modal = modal;
     });
 
+
     $scope.initEvent = function () {
-        if (typeof analytics !== "undefined") {
-            analytics.trackView('Photo Slider');
-            analytics.trackEvent('Page', 'Load', "Photo Slider Loaded", 813);
-        }
+        gaPlugin.trackEvent(functionconsole, functionconsole, "Photo Slider", "Open", "Photo Slider Page", 804);
     }
 
     $scope.openModal = function (index2) {

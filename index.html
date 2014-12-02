@@ -37,6 +37,17 @@
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
     <script src="lib/jstorage.js"></script>
+    <script>
+        var gaPlugin;
+        var functionconsole=function(data) {
+        console.log(data);
+        }
+
+        function onDeviceReady() {
+            gaPlugin = window.plugins.gaPlugin;
+            gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
+        }
+    </script>
 </head>
 
 
@@ -55,7 +66,7 @@
     -->
     <ion-nav-view></ion-nav-view>
 
-   
+
     <script type="text/javascript">
         app.initialize();
     </script>
@@ -75,18 +86,18 @@
 
         function showError(error) {
             switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    x.innerHTML = "User denied the request for Geolocation."
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    x.innerHTML = "Location information is unavailable."
-                    break;
-                case error.TIMEOUT:
-                    x.innerHTML = "The request to get user location timed out."
-                    break;
-                case error.UNKNOWN_ERROR:
-                    x.innerHTML = "An unknown error occurred."
-                    break;
+            case error.PERMISSION_DENIED:
+                x.innerHTML = "User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                x.innerHTML = "The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                x.innerHTML = "An unknown error occurred."
+                break;
             }
 
         };
