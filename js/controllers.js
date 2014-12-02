@@ -1478,15 +1478,35 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         MyServices.getbranddetails(brandId, $scope.userid).success(ongetbrandsuccess);
 
+    
+    //    get lat log
+    function showPosition2(position) {
+        var latlon = position.coords.latitude + "," + position.coords.longitude;
+        console.log("Positions:.........");
+        console.log(position.coords);
+        $scope.coords = position.coords;
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long,$scope.myorder).success(mallpagesuccess);
+    }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition2, showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    
+    
+    //Send to Browers
         $scope.sendtowebsite = function (website) {
             console.log(website);
-            window.open(website, '_system');
+            window.open('http://'+website, '_blank');
         }
         
         $scope.sendtomap = function (lati, longi) {
-            console.log(lati);
-            console.log(longi);
-            window.open('https://www.google.co.in/maps/@'+lati+','+longi+',17z', '_system');
+            console.log('https://www.google.co.in/maps/dir/'+lat+','+long+'/'+lati+','+longi+'/@'+lat+','+long+',17z', '_system');
+            window.open('https://www.google.co.in/maps/dir/'+lat+','+long+'/'+lati+','+longi+'/@'+lat+','+long+',17z', '_system');
+            
         }
 
         //like API
@@ -1583,7 +1603,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         };
 
         //load more review
-        $scope.seemore = "...See More";
+        $scope.seemore = "View All";
         var reviewlosdsuccess = function (data, status) {
             $scope.reviews = data;
         };
@@ -1801,8 +1821,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     
 
     //    get lat log
-
-
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
         console.log("Positions:.........");
@@ -1819,7 +1837,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 
-
+    
+//Mall
     var pushmallpagesuccess = function (data, status) {
         for (var i = 0; i < data.length; i++) {
             $scope.malllist.push(data[i]);
@@ -2167,13 +2186,13 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     
      $scope.sendtowebsite = function (website) {
             console.log(website);
-            window.open(website, '_system');
+            window.open('http://'+website, '_blank');
         }
         
         $scope.sendtomap = function (lati, longi) {
             console.log(lati);
             console.log(longi);
-            window.open('https://www.google.co.in/maps/@'+lati+','+longi+',17z', '_system');
+            window.open('https://www.google.co.in/maps/dir/'+lat+','+long+'/'+lati+','+longi+'/@'+lat+','+long+',17z', '_system');
         }
 
 })
