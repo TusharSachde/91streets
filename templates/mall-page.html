@@ -18,7 +18,7 @@
                         <p>Call</p>
                     </a>
                 </div>
-                <div class="col">
+                <div class="col" ng-click="sendtomap(mall.latitude, mall.longitude);">
                     <i class="icon ion-android-location"></i>
                     <p>Locate</p>
                 </div>
@@ -26,7 +26,7 @@
                     <i class="icon ion-ios7-world-outline"></i>
                     <p>Website</p>
                 </div>
-                <div class="col" ng-share="share();">
+                <div class="col" ng-click="share();">
                     <i class="icon ion-share" ></i>
                     <p>Share</p>
                 </div>

@@ -2129,6 +2129,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 
+    
+     $scope.sendtowebsite = function (website) {
+            console.log(website);
+            window.open(website, '_system');
+        }
+        
+        $scope.sendtomap = function (lati, longi) {
+            console.log(lati);
+            console.log(longi);
+            window.open('https://www.google.co.in/maps/@'+lati+','+longi+',17z', '_system');
+        }
 
 })
 
