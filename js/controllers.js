@@ -1375,9 +1375,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.oModal2.hide();
         };
     })
+
     .controller('StorePageCtrl', function($scope, $stateParams, MyServices, $ionicPopup, $timeout, $location) {
-
-
 
         $scope.likediv = true;
         $scope.user = {};
@@ -2119,6 +2118,37 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         window.plugins.socialsharing.share('Checkout ' + $scope.mall.name + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
     };
 
+    
+    //map api
+        function showPosition2(position) {
+            var latlon = position.coords.latitude + "," + position.coords.longitude;
+            console.log("Positions:.........");
+            console.log(position.coords);
+            $scope.coords = position.coords;
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
+            MyServices.getallstoresbybrandid($stateParams.id).success(brnadsuccess);
+        }
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition2, showError);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+
+    $scope.sendtowebsite = function(website) {
+        console.log(website);
+        window.open('http://' + website, '_blank');
+    }
+
+    $scope.sendtomap = function(lati, longi) {
+        console.log(lati);
+        console.log(longi);
+        window.open('https://www.google.co.in/maps/dir/' + lat + ',' + long + '/' + lati + ',' + longi + '/@' + lat + ',' + long + ',17z', '_system');
+    }
+    
+    
 })
 
 
@@ -2154,34 +2184,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         }
         console.log($scope.brands);
-    }
-
-        function showPosition2(position) {
-            var latlon = position.coords.latitude + "," + position.coords.longitude;
-            console.log("Positions:.........");
-            console.log(position.coords);
-            $scope.coords = position.coords;
-            lat = position.coords.latitude;
-            long = position.coords.longitude;
-            MyServices.getallstoresbybrandid($stateParams.id).success(brnadsuccess);
-        }
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-
-
-    $scope.sendtowebsite = function(website) {
-        console.log(website);
-        window.open('http://' + website, '_blank');
-    }
-
-    $scope.sendtomap = function(lati, longi) {
-        console.log(lati);
-        console.log(longi);
-        window.open('https://www.google.co.in/maps/dir/' + lat + ',' + long + '/' + lati + ',' + longi + '/@' + lat + ',' + long + ',17z', '_system');
     }
 
 })
