@@ -38,7 +38,7 @@
     </platform>
 
 
-    <preference name="phonegap-version" value="4.0.0" />
+    <preference name="phonegap-version" value="3.5.0" />
     <preference name="permissions" value="none" />
     <preference name="fullscreen" value="false" />
     <preference name="orientation" value="portrait" />
