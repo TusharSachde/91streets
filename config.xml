@@ -20,10 +20,10 @@
 
     <platform name="android">
         <!-- you can use any density that exists in the Android project -->
-        <splash src="img/android/splash-port-hdpi.png" density="port-hdpi" />
-        <splash src="img/android/splash-port-ldpi.png" density="port-ldpi" />
-        <splash src="img/android/splash-port-mdpi.png" density="port-mdpi" />
-        <splash src="img/android/splash-port-xhdpi.png" density="port-xhdpi" />
+        <splash src="img/android/Default-port-hdpi.png" density="port-hdpi" />
+        <splash src="img/android/Default-port-ldpi.png" density="port-ldpi" />
+        <splash src="img/android/Default-port-mdpi.png" density="port-mdpi" />
+        <splash src="img/android/Default-port-xhdpi.png" density="port-xhdpi" />
     </platform>
 
     <platform name="ios">
@@ -46,7 +46,9 @@
     <preference name="ErrorUrl" value="" />
     <preference name="BackgroundColor" value="0x000000" />
     <preference name="KeepRunning" value="true" />
-    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="SplashScreen" value="Default" />
+    <preference name="splash-screen-duration" value="3000" />
+    <preference name="SplashScreenDelay" value="3000" />
     <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
