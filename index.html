@@ -99,9 +99,10 @@
             console.log(data);
         }
 
-
-        gaPlugin = window.plugins.gaPlugin;
-        gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
+        $(document).ready(function () {
+                gaPlugin = window.plugins.gaPlugin;
+                gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
+            }
     </script>
 </body>
 
