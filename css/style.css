@@ -632,3 +632,9 @@ textarea.review {
 .slider-pager {
     bottom: 0px;
 }
+.popup .icon {
+    font-size: 20px;
+}
+.popup li {
+    text-align: center;
+}
