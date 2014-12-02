@@ -40,13 +40,17 @@
 
     <script>
         var gaPlugin;
-        var functionconsole = function (data) {
+
+        function functionconsole(data) {
             console.log(data);
         }
 
         $(document).ready(function () {
-                gaPlugin = window.plugins.gaPlugin;
-                gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
+                console.log("Document Ready is called");
+                if (window.plugins.gaPlugin) {
+                    gaPlugin = window.plugins.gaPlugin;
+                    gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
+                }
             }
     </script>
 
