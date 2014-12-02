@@ -15,29 +15,7 @@
 
     <gap:platform name="ios" />
     <gap:platform name="android" />
-
-    <icon src="img/logo.png" />
-
-    <platform name="android">
-        <!-- you can use any density that exists in the Android project -->
-        <splash src="img/android/Default-port-hdpi.png" density="port-hdpi" />
-        <splash src="img/android/Default-port-ldpi.png" density="port-ldpi" />
-        <splash src="img/android/Default-port-mdpi.png" density="port-mdpi" />
-        <splash src="img/android/Default-port-xhdpi.png" density="port-xhdpi" />
-    </platform>
-
-    <platform name="ios">
-        <!-- images are determined by width and height. The following are supported -->
-        <splash src="img/ios/Default~iphone.png" width="320" height="480" />
-        <splash src="img/ios/Default@2x~iphone.png" width="640" height="960" />
-        <splash src="img/ios/Default-Portrait~ipad.png" width="768" height="1024" />
-        <splash src="img/ios/Default-Portrait@2x~ipad.png" width="1536" height="2048" />
-        <splash src="img/ios/Default-568h@2x~iphone.png" width="640" height="1136" />
-        <splash src="img/ios/Default-667h.png" width="750" height="1334" />
-        <splash src="img/ios/Default-736h.png" width="1242" height="2208" />
-    </platform>
-
-
+    
     <preference name="phonegap-version" value="3.5.0" />
     <preference name="permissions" value="none" />
     <preference name="fullscreen" value="false" />
@@ -46,12 +24,36 @@
     <preference name="ErrorUrl" value="" />
     <preference name="BackgroundColor" value="0x000000" />
     <preference name="KeepRunning" value="true" />
-    <preference name="SplashScreen" value="Default" />
+    <preference name="SplashScreen" value="screen" />
     <preference name="splash-screen-duration" value="3000" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
+    
+
+    <icon src="img/logo.png" />
+
+    <platform name="android">
+        <!-- you can use any density that exists in the Android project -->
+        <splash src="img/android/screen-port-hdpi.png" density="port-hdpi" />
+        <splash src="img/android/screen-port-ldpi.png" density="port-ldpi" />
+        <splash src="img/android/screen-port-mdpi.png" density="port-mdpi" />
+        <splash src="img/android/screen-port-xhdpi.png" density="port-xhdpi" />
+    </platform>
+
+    <platform name="ios">
+        <!-- images are determined by width and height. The following are supported -->
+        <splash src="img/ios/screen~iphone.png" width="320" height="480" />
+        <splash src="img/ios/screen@2x~iphone.png" width="640" height="960" />
+        <splash src="img/ios/screen-Portrait~ipad.png" width="768" height="1024" />
+        <splash src="img/ios/screen-Portrait@2x~ipad.png" width="1536" height="2048" />
+        <splash src="img/ios/screen-568h@2x~iphone.png" width="640" height="1136" />
+        <splash src="img/ios/screen-667h.png" width="750" height="1334" />
+        <splash src="img/ios/screen-736h.png" width="1242" height="2208" />
+    </platform>
+
+
 
     <access origin="*" />
     <!-- allow all pages, use for development -->
