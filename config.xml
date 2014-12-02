@@ -33,6 +33,8 @@
     
 
     <icon src="img/logo.png" />
+    <splash src="img/screen.png"/>
+
 
     <platform name="android">
         <!-- you can use any density that exists in the Android project -->
