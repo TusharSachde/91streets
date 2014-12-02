@@ -100,8 +100,8 @@ var myservices = angular.module('myservices', [])
         favoritesearch: function (searchdata) {
             return $http.get(adminurl + 'favoritesearch?searchdata='+searchdata, {});
         },
-        notificationbrandid: function (id) {
-            return $http.get(adminurl + 'notificationbrandid?id='+id, {});
+        notificationbrandid: function (id,city,lat,long,start) {
+            return $http.get(adminurl + 'notificationbrandid?id='+id+'&city='+city+'&lat='+lat+'&long='+long+'&start='+start, {});
         },
         findoneuser: function (id) {
             return $http.get(adminurl + 'findoneuser?id='+id, {});

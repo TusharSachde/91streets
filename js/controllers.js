@@ -483,12 +483,20 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('InNotificationCtrl', function ($scope, MyServices, $stateParams, $ionicModal, $timeout, $location) {
 
 
-
+    $scope.notifications=[];
+//    start get user data
+        
+        $scope.userdata = user = $.jStorage.get("user");
+        if ($scope.userdata) {
+            $scope.ucity = $scope.userdata.city;
+        } else {
+            $scope.ucity = 0;
+        }
+    
+//    end get user data
     var notificationbrand = function (data, status) {
         console.log(data);
         $scope.notifications = data;
-
-
 
         $scope.initEvent = function () {
             if (typeof analytics !== "undefined") {
@@ -496,19 +504,19 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 analytics.trackEvent('Page', 'Load', 'In Notification ', 105);
             }
         }
-
-
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].latitude == null & data[i].longitude == null) {
-                $scope.notifications[i].dist = 0;
-            } else {
-                $scope.notifications[i].dist = (getDistance(data[i].latitude, data[i].longitude, lat, long)).toFixed(1);
-            }
-        }
+        
+        $scope.$broadcast('scroll.infiniteScrollComplete');
 
     };
+    var pushnotificationbrand = function (data, status) {
+        console.log(data);
+        for (var i = 0; i < data.length; i++) {
+            $scope.notifications.push(data[i]);
+        }
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+    };
 
-
+//start get location lat long
     function showPosition2(position) {
         var latlon = position.coords.latitude + "," + position.coords.longitude;
         console.log("Positions");
@@ -516,7 +524,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.coords = position.coords;
         lat = position.coords.latitude;
         long = position.coords.longitude;
-        MyServices.notificationbrandid($stateParams.id).success(notificationbrand);
+        MyServices.notificationbrandid($stateParams.id,$scope.ucity,lat,long,0).success(notificationbrand);
     }
 
     if (navigator.geolocation) {
@@ -525,7 +533,25 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 
+//end get location lat long
+    
+//    start reload function
+    
+    
+    var lastlength = 0;
+    $scope.loadMore = function () {
+        var totallength = $scope.notifications.length;
+        if (lastlength != totallength) {
+            lastlength = totallength;
+            
+                MyServices.notificationbrandid($stateParams.id,$scope.ucity,lat,long,totallength).success(pushnotificationbrand);
 
+        }
+
+
+    };
+    
+//    end  reload function
 
 })
 
