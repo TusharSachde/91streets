@@ -47,6 +47,7 @@
     <preference name="BackgroundColor" value="0x000000" />
     <preference name="KeepRunning" value="true" />
     <preference name="SplashScreenDelay" value="5000" />
+    <preference name="ios-statusbarstyle" value="black-translucent" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
 
