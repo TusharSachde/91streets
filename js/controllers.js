@@ -972,20 +972,17 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.storedetails = data;
 
 
-        $scope.initEvent = function () {
 
-            var addre = "";
-            if (storedetails.address) {
-                addre = storedetails.address;
-            } else {
-                addre = storedetails.storeaddress;
-
-            }
-
-            sendtoga('Store Detail Page - ' + data.brandname + ' - ' + addre);
-
+        var addre = "";
+        if (storedetails.address) {
+            addre = storedetails.address;
+        } else {
+            addre = storedetails.storeaddress;
 
         }
+
+        sendtoga('Store Detail Page - ' + data.brandname + ' - ' + addre);
+
         for (var i = 0; i < data.length; i++) {
             if (data[i].image == null) {
                 $scope.storedetails[i].image = "logo.png";
@@ -1288,17 +1285,19 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
         $scope.newarrivals = data.newin;
 
+        var addre = "";
+        if (data.store.address) {
+            addre = data.store.address;
+        } else {
+            addre = data.store.storeaddress;
+
+        }
+
         sendtoga('Store Page Loaded - ' + data.store.brandname + ' - ' + addre);
 
         $scope.initEvent = function () {
 
-            var addre = "";
-            if (data.store.address) {
-                addre = data.store.address;
-            } else {
-                addre = data.store.storeaddress;
 
-            }
 
 
 
