@@ -45,6 +45,17 @@
             console.log(data);
         }
 
+        function sendtoga(text) {
+            if (gaPlugin) {
+                gaPlugin.trackPage(functionconsole, functionconsole, text);
+            } else {
+                if (window.plugins) {
+                    gaPlugin = window.plugins.gaPlugin;
+                    gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
+                    gaPlugin.trackPage(functionconsole, functionconsole, text);
+                }
+            }
+        }
     </script>
 
 </head>

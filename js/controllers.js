@@ -36,10 +36,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     //opensearch
     //start slide from api.....
-    gaPlugin.trackEvent(functionconsole, functionconsole, "Page", "Open", "Home Page", 101);
-    $scope.initEvent = function () {
 
-    }
+    sendtoga("HomePage");
+
     var bannersuccess = function (data, status) {
         console.log(data);
         $scope.slider = data;
@@ -298,9 +297,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         for (var i = 0; i < data.length; i++) {
             $scope.brands.push(data[i]);
         }
-        $scope.initEvent = function () {
-            gaPlugin.trackEvent(functionconsole, functionconsole, "Favorite Store", "Open", "Favorite Store Page", 102);
-        }
+
+        sendtoga("FavoriteStore");
         for (var i = 0; i < data.length; i++) {
             if (data[i].logo == "") {
                 $scope.brands[i + inibrandlength].logo = "logo.png";
@@ -375,13 +373,11 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     .controller('NotificationCtrl', function ($scope, MyServices, $ionicModal, $timeout, $location) {
         $scope.userdata = user = $.jStorage.get("user");
         console.log($scope.userdata);
+        sendtoga("Notification");
         var getnotification = function (data, status) {
             console.log(data);
             $scope.notification = data;
-            $scope.initEvent = function () {
-                gaPlugin.trackEvent(functionconsole, functionconsole, "Notification", "Open", "Notification Page", 103);
 
-            }
         };
         MyServices.notification($scope.userdata.id).success(getnotification);
     })
@@ -418,10 +414,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         };
 
 
-        $scope.initEvent = function () {
-            gaPlugin.trackEvent(functionconsole, functionconsole, "Search", "Open", "Search Page", 104);
-        }
-
+        sendtoga("SearchPage");
+    
         var brnadsuccess = function (data, status) {
 
 
@@ -488,10 +482,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.ucity = 0;
     }
 
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "In Notification ", "Open", "In Notification Page", 105);
-    }
-
+   
+    sendtoga("In Notification");
     //    end get user data
     var notificationbrand = function (data, status) {
         console.log(data);

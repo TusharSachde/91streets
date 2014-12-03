@@ -2,8 +2,7 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
-        gaPlugin = window.plugins.gaPlugin;
-        gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
+        
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
