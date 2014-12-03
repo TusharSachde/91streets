@@ -271,41 +271,49 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.brands = [];
     console.log($scope.user);
     $scope.addlike = 0;
+    $scope.checkval = 1;
+    $scope.searchdata = "";
+    $scope.showSearch = false;
+    $scope.searchinput = {
+        datasearch: ""
+    };
 
     $scope.gotofavorites = function () {
         console.log("gotofavoriteslist clicked");
         $location.url("tab/favorites");
     }
-
+    var getsearch = 0;
     var favoritelisting = function (data, status) {
-        console.log(data);
-        var inibrandlength = $scope.brands.length;
-        console.log(inibrandlength);
-        //        $scope.brands =;
-        for (var i = 0; i < data.length; i++) {
-            $scope.brands.push(data[i]);
-        }
-
-        sendtoga("FavoriteStore");
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].logo == "") {
-                $scope.brands[i + inibrandlength].logo = "logo.png";
+//        getsearch++;
+//        if ($scope.searchinput.datasearch == "" || checksearch == getsearch) {
+            console.log(data);
+            var inibrandlength = $scope.brands.length;
+            console.log(inibrandlength);
+            //        $scope.brands =;
+            for (var i = 0; i < data.length; i++) {
+                $scope.brands.push(data[i]);
             }
 
-            $scope.brands[i + inibrandlength].mylike = data[i].like.length;
-            for (var j = 0; j < data[i].like.length; j++) {
-                if (data[i].like[j].user == $scope.user.id) {
-                    $scope.brands[i + inibrandlength].userlike = 1;
-                } else {
-                    $scope.brands[i + inibrandlength].userlike = 0;
+            sendtoga("FavoriteStore");
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].logo == "") {
+                    $scope.brands[i + inibrandlength].logo = "logo.png";
+                }
+
+                $scope.brands[i + inibrandlength].mylike = data[i].like.length;
+                for (var j = 0; j < data[i].like.length; j++) {
+                    if (data[i].like[j].user == $scope.user.id) {
+                        $scope.brands[i + inibrandlength].userlike = 1;
+                    } else {
+                        $scope.brands[i + inibrandlength].userlike = 0;
+                    }
                 }
             }
-        }
-        console.log("Like");
-        console.log($scope.brands);
+            console.log("Like");
+            console.log($scope.brands);
 
-        $scope.$broadcast('scroll.infiniteScrollComplete');
-
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+//        }
     };
     MyServices.favoritebrands(0).success(favoritelisting);
 
@@ -335,9 +343,29 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var successfavorite = function (data, status) {
         console.log(data);
     };
-
-    $scope.doSearch = function (searchdata) {
-        MyServices.favoritesearch(searchdata).success(favoritelisting);
+//    var checksearch = 0;
+    $scope.doSearch = function () {
+        //console.log(searchdata);
+//        checksearch++;
+        $scope.checkval = 2;
+        $scope.searchdata = $scope.searchinput.datasearch;
+        console.log($scope.searchinput.datasearch);
+        $scope.brands = [];
+        MyServices.favoritesearch($scope.searchinput.datasearch).success(favoritelisting);
+    }
+    $scope.showsearch = function () {
+        if ($scope.showSearch == false) {
+            $scope.showSearch = true;
+        } else {
+            $scope.showSearch = false;
+            $scope.checkval = 1;
+            $scope.brands = [];
+            $scope.searchdata = "";
+            MyServices.favoritebrands(0).success(favoritelisting);
+        }
+    }
+    $scope.clearSearch = function () {
+        console.log("clearsearch");
     }
 
     //load more
@@ -348,8 +376,13 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         var totallength = $scope.brands.length;
         if (lastlength != totallength) {
             lastlength = totallength;
-
-            MyServices.favoritebrands(totallength).success(favoritelisting);
+            if ($scope.checkval == 1) {
+                MyServices.favoritebrands(totallength).success(favoritelisting);
+            }
+            //            if($scope.checkval==2)
+            //            {
+            //                MyServices.favoritesearch($scope.searchdata).success(favoritelisting);
+            //            }
 
         }
 
@@ -1359,7 +1392,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     MyServices.getbranddetails(brandId, $scope.userid).success(ongetbrandsuccess);
 
-   // MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
+    // MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
 
 
 
