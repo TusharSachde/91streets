@@ -46,13 +46,12 @@
         }
 
         function sendtoga(text) {
-            if (gaPlugin) {
-                gaPlugin.trackPage(functionconsole, functionconsole, text);
+            if (window.plugins) {
+                window.plugins.gaPlugin.trackPage(functionconsole, functionconsole, text);
             } else {
                 if (window.plugins) {
-                    gaPlugin = window.plugins.gaPlugin;
-                    gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
-                    gaPlugin.trackPage(functionconsole, functionconsole, text);
+                    window.plugins.gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
+                    window.plugins.gaPlugin.trackPage(functionconsole, functionconsole, text);
                 }
             }
         }
