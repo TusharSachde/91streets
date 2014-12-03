@@ -47,9 +47,7 @@
 
         function sendtoga(text) {
             if (window.plugins) {
-                window.plugins.gaPlugin.trackPage(functionconsole, functionconsole, text);
-            } else {
-                if (window.plugins) {
+                if (window.plugins.gaPlugin) {
                     window.plugins.gaPlugin.init(functionconsole, functionconsole, "UA-56855808-1", 10);
                     window.plugins.gaPlugin.trackPage(functionconsole, functionconsole, text);
                 }
@@ -81,7 +79,13 @@
         app.initialize();
     </script>
     <script>
-        var position={coords:{latitude:0,longitude:0}};
+        var position = {
+            coords: {
+                latitude: 0,
+                longitude: 0
+            }
+        };
+
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
