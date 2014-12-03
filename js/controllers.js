@@ -99,20 +99,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //Google Maps API Lat Long
 
 
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions:.........");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-    }
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
 
 
     console.log("my lat long");
@@ -452,21 +439,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
         //get lat long
 
-        function showPosition2(position) {
-            var latlon = position.coords.latitude + "," + position.coords.longitude;
-            console.log("Positions");
-            console.log(position.coords);
-            $scope.coords = position.coords;
-            lat = position.coords.latitude;
-            long = position.coords.longitude;
-            //        MyServices.notificationbrandid($stateParams.id).success(notificationbrand);
-        }
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition2, showError);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
 
     })
 
@@ -502,22 +475,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.$broadcast('scroll.infiniteScrollComplete');
     };
 
-    //start get location lat long
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.notificationbrandid($stateParams.id, $scope.ucity, lat, long, 0).success(notificationbrand);
-    }
+    MyServices.notificationbrandid($stateParams.id, $scope.ucity, lat, long, 0).success(notificationbrand);
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+    //start get location lat long
 
     //end get location lat long
 
@@ -854,22 +814,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var counter = 0;
     var scroll = 0;
 
+    MyServices.getallstoresdiscount($scope.city, 0, lat, long, $scope.myorder).success(getdiscount);
 
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.getallstoresdiscount($scope.city, 0, lat, long, $scope.myorder).success(getdiscount);
-    }
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
 
 
 
@@ -981,21 +927,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     //        get lat long
 
 
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Position");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.getstorebycategories($scope.user.id, $scope.ucity, 0).success(getshoppingbagg);
-    }
+    MyServices.getstorebycategories($scope.user.id, $scope.ucity, 0).success(getshoppingbagg);
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+
 
     //load more
 
@@ -1061,22 +995,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
     };
 
-
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Position");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.getstorebyid($stateParams.id).success(onestore);
-    }
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+    MyServices.getstorebyid($stateParams.id).success(onestore);
 
     // Share
     $scope.share = function () {
@@ -1189,21 +1108,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.$broadcast('scroll.infiniteScrollComplete');
         };
 
-        function showPosition2(position) {
-            var latlon = position.coords.latitude + "," + position.coords.longitude;
-            console.log("Positions:.........");
-            console.log(position.coords);
-            $scope.coords = position.coords;
-            lat = position.coords.latitude;
-            long = position.coords.longitude;
-            MyServices.getbrandsbycategory(categoryId, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
-        };
+        MyServices.getbrandsbycategory(categoryId, $scope.ucity, 0, lat, long, $scope.myorder).success(onbrandbycategorysuccess);
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition2, showError);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        };
 
 
         //    //ionic load more
@@ -1454,23 +1360,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     MyServices.getbranddetails(brandId, $scope.userid).success(ongetbrandsuccess);
 
+    MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
 
-    //    get lat log
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions:.........");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
-    }
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
 
 
     //Send to Browers
@@ -1595,7 +1486,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('BrandListCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
 
-    
+
     sendtoga("Brand List Page");
 
 
@@ -1611,7 +1502,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate, $location) {
 
-    
+
     sendtoga("Favorites Page");
 
     $scope.user = {};
@@ -1649,7 +1540,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.searchdata = "";
 
 
-   
+
     sendtoga("Mall List Page");
 
 
@@ -1795,23 +1686,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
 
+    MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
 
-    //    get lat log
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions:.........");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
-    }
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
 
 
     //Mall
@@ -1896,7 +1772,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.$broadcast('scroll.infiniteScrollComplete');
 
     };
-    
+
     sendtoga("Mall List Page");
 
     //Search
@@ -1965,43 +1841,25 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.showSearch = !$scope.showSearch;
     }
 
+    MyServices.getallmalls($scope.usercity, 0, lat, long).success(mallsuccess1);
+    //start user is not logged in get city from lat long
+
+
+    $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + long + "&key=AIzaSyDqN3t8_Nb04MF7jTufq-bkEHogZxyeUHY", {}, function (data) {
+        console.log(data);
+        data = data.results[0].address_components;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].types[0] == "locality") {
+                $scope.city = data[i].long_name;
+            }
+        }
+        console.log("location city");
+        console.log($scope.city);
+
+    });
     //    clear sech
     // malls api
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions:.........");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.getallmalls($scope.usercity, 0, lat, long).success(mallsuccess1);
-        //start user is not logged in get city from lat long
 
-
-        $.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + long + "&key=AIzaSyDqN3t8_Nb04MF7jTufq-bkEHogZxyeUHY", {}, function (data) {
-            console.log(data);
-            data = data.results[0].address_components;
-            for (var i = 0; i < data.length; i++) {
-                if (data[i].types[0] == "locality") {
-                    $scope.city = data[i].long_name;
-                }
-            }
-            console.log("location city");
-            console.log($scope.city);
-
-        });
-
-
-        //ende user is not logged in get city from lat long
-
-
-    }
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
 
 
 
@@ -2011,7 +1869,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('PageOffersCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
 
 
-   
+
     sendtoga("Page Offers");
 
     var successoffers = function (data, status) {
@@ -2055,7 +1913,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.mall.logo = "logo.png";
         }
 
-        
+
         sendtoga('Mall Page - ' + data.mall.name);
 
 
@@ -2099,22 +1957,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
 
+    MyServices.getallstoresbybrandid($stateParams.id).success(brnadsuccess);
     //map api
-    function showPosition2(position) {
-        var latlon = position.coords.latitude + "," + position.coords.longitude;
-        console.log("Positions:.........");
-        console.log(position.coords);
-        $scope.coords = position.coords;
-        lat = position.coords.latitude;
-        long = position.coords.longitude;
-        MyServices.getallstoresbybrandid($stateParams.id).success(brnadsuccess);
-    }
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition2, showError);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
 
 
     $scope.sendtowebsite = function (website) {
@@ -2137,7 +1981,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.brands = [];
 
 
-    
+
     sendtoga("BrandStore");
 
 
@@ -2176,7 +2020,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     });
 
 
-    
+
     sendtoga("PhotoSlider");
     $scope.openModal = function (index2) {
 
