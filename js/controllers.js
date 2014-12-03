@@ -1359,7 +1359,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     MyServices.getbranddetails(brandId, $scope.userid).success(ongetbrandsuccess);
 
-    MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
+   // MyServices.mallcategorystore($stateParams.id, $stateParams.mid, 0, lat, long, $scope.myorder).success(mallpagesuccess);
 
 
 
@@ -1956,7 +1956,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     };
 
 
-    MyServices.getallstoresbybrandid($stateParams.id).success(brnadsuccess);
+    //MyServices.getallstoresbybrandid($stateParams.id).success(mallsuccess);
     //map api
 
 
