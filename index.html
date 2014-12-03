@@ -85,7 +85,8 @@
                 longitude: 0
             }
         };
-
+        var lat=0;
+        var long=0;
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -97,6 +98,8 @@
         function showPosition(position) {
             var latlon = position.coords.latitude + "," + position.coords.longitude;
             console.log(position.coords);
+            lat=position.coords.latitude;
+            long=position.coords.longitude;
         }
 
         function showError(error) {
