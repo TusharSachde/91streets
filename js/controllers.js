@@ -8,6 +8,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     //Home Intro
 
+    sendtoga("Intro Page");
     $scope.next = function () {
         $ionicSlideBoxDelegate.next();
     };
@@ -415,7 +416,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
         sendtoga("SearchPage");
-    
+
         var brnadsuccess = function (data, status) {
 
 
@@ -482,7 +483,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.ucity = 0;
     }
 
-   
+
     sendtoga("In Notification");
     //    end get user data
     var notificationbrand = function (data, status) {
@@ -552,9 +553,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     };
 
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "Shopping ", "Open", "Shopping Page", 106);
-    }
+
+    sendtoga("Shopping Page");
     var getshoppingbagg = function (data, status) {
 
         console.log("inin big bag........");
@@ -800,9 +800,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.oModal4.show();
     };
 
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "Discount", "Open", "Discount Page", 107);
-    }
+
+    sendtoga("Discount Page");
     var getdiscount = function (data, status) {
 
         $scope.listing = "";
@@ -936,11 +935,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var getshoppingbagg = function (data, status) {
         console.log(data);
 
-        $scope.initEvent = function () {
-            gaPlugin.trackEvent(functionconsole, functionconsole, "Shopping Bag", "Open", "Shopping Bag Page", 108);
 
-        }
-
+        sendtoga("Shopping Bag Page");
 
 
         for (var i = 0; i < data.length; i++) {
@@ -1051,7 +1047,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 addre = storedetails.storeaddress;
 
             }
-            gaPlugin.trackEvent(functionconsole, functionconsole, 'Store Detail Page - ' + data.brandname + ' - ' + addre, "Open", 'Store Detail Page - ' + data.brandname + ' - ' + addre, 801);
+
+            sendtoga('Store Detail Page - ' + data.brandname + ' - ' + addre);
 
 
         }
@@ -1097,11 +1094,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         //        $scope.atoz=
         $scope.brands = [];
 
-        $scope.initEvent = function () {
-            gaPlugin.trackEvent(functionconsole, functionconsole, "Store List", "Open", "Store List Page", 802);
 
-        }
-
+        sendtoga("StoreList");
         $scope.userdata = user = $.jStorage.get("user");
         if ($scope.userdata) {
             $scope.ucity = $scope.userdata.city;
@@ -1388,6 +1382,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
         $scope.newarrivals = data.newin;
 
+        sendtoga('Store Page Loaded - ' + data.store.brandname + ' - ' + addre);
 
         $scope.initEvent = function () {
 
@@ -1399,7 +1394,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
             }
 
-            gaPlugin.trackEvent(functionconsole, functionconsole, "Store Page", "Open", 'Store Page Loaded - ' + data.store.brandname + ' - ' + addre, 803);
+
 
 
         }
@@ -1600,9 +1595,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('BrandListCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
     $scope.demo = "demo";
 
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "Brand List Page", "Open", "Brand List Page Loaded", 804);
-    }
+    
+    sendtoga("Brand List Page");
 
 
 
@@ -1617,10 +1611,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('FavoritesCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate, $location) {
 
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "Favorites Page", "Open", "Favories Page", 805);
-
-    }
+    
+    sendtoga("Favorites Page");
 
     $scope.user = {};
     $scope.user = MyServices.getuser();
@@ -1657,10 +1649,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.searchdata = "";
 
 
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "Mall Page List Page", "Open", "Mall Page List", 806);
-
-    }
+   
+    sendtoga("Mall List Page");
 
 
     $scope.myorder = 0;
@@ -1906,9 +1896,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.$broadcast('scroll.infiniteScrollComplete');
 
     };
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "Mall List", "Open", "Mall List", 808);
-    }
+    
+    sendtoga("Mall List Page");
 
     //Search
     var mallsuccess1 = function (data, status) {
@@ -2022,10 +2011,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 .controller('PageOffersCtrl', function ($scope, $stateParams, MyServices, $ionicModal, $ionicSlideBoxDelegate) {
 
 
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "Page Offers", "Open", "Page Offers", 810);
-
-    }
+   
+    sendtoga("Page Offers");
 
     var successoffers = function (data, status) {
         console.log(data);
@@ -2068,9 +2055,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             $scope.mall.logo = "logo.png";
         }
 
-        $scope.initEvent = function () {
-            gaPlugin.trackEvent(functionconsole, functionconsole, 'Mall Page - ' + data.mall.name, "Open", 'Mall Page Loaded - ' + data.mall.name, 811);
-        }
+        
+        sendtoga('Mall Page - ' + data.mall.name);
 
 
     };
@@ -2151,9 +2137,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.brands = [];
 
 
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "Brand Store", "Open", "Brand Store Page", 812);
-    }
+    
+    sendtoga("BrandStore");
 
 
 
@@ -2191,11 +2176,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     });
 
 
-    $scope.initEvent = function () {
-        gaPlugin.trackEvent(functionconsole, functionconsole, "Photo Slider", "Open", "Photo Slider Page", 813);
-
-    }
-
+    
+    sendtoga("PhotoSlider");
     $scope.openModal = function (index2) {
 
         $scope.modal.show();
