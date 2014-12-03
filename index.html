@@ -81,6 +81,7 @@
         app.initialize();
     </script>
     <script>
+        var position={coords:{latitude:0,longitude:0}};
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
