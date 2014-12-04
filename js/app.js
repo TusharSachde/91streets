@@ -29,16 +29,6 @@ angular.module('starter', ['ionic', 'ui.bootstrap', 'starter.controllers', 'ngCo
         templateUrl: "templates/tabs.html"
     })
 
-    .state('tab.intro', {
-        url: '/setting/intro',
-        views: {
-            'tab-setting': {
-                templateUrl: 'templates/intro.html',
-                controller: 'IntroCtrl'
-            }
-        }
-    })
-
     .state('tab.home', {
         url: '/home',
         views: {
