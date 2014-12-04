@@ -480,7 +480,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
                 MyServices.getallbrandssearch(searchdata).success(brnadsuccess);
             } else {
                 $scope.brandmalldiv = true;
-                MyServices.searchbymall($scope.ucity, searchdata).success(allmalls);
+                MyServices.searchbymall($scope.ucity, searchdata, 0, lat, long).success(allmalls);
             }
         }
 
@@ -2052,7 +2052,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         }
         console.log($scope.brands);
     }
-
+MyServices.getallstoresbybrandid($stateParams.id).success(brnadsuccess);
 
 })
 
