@@ -7,8 +7,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 
     //Home Intro
-
-    sendtoga("Intro Page");
+    $scope.startApp = function () { 
+        $scope.oModal2.hide();
+    };
     $scope.next = function () {
         $ionicSlideBoxDelegate.next();
     };
@@ -21,7 +22,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         $scope.slideIndex = index;
     };
 
-
+    
 
 })
 
