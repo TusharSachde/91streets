@@ -31,60 +31,60 @@
     <preference name="android-minSdkVersion" value="7" />
     <preference name="target-device" value="universal" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
+    <preference name="deployment-target" value="6.1" />
 
 
-    <icon src="img/logo.png" />
     <gap:splash src="img/screen.png" />
 
 
-   <platform name="ios">
-              <!-- iOS 8.0+ -->
-              <!-- iPhone 6 Plus  -->
-              <icon src="res/ios/icon-60@3x.png" width="180" height="180" />
-              <!-- iOS 7.0+ -->
-              <!-- iPhone / iPod Touch  -->
-              <icon src="res/ios/icon-60.png" width="60" height="60" />
-              <icon src="res/ios/icon-60@2x.png" width="120" height="120" />
-              <!-- iPad -->
-              <icon src="res/ios/icon-76.png" width="76" height="76" />
-              <icon src="res/ios/icon-76@2x.png" width="152" height="152" />
-              <!-- iOS 6.1 -->
-              <!-- Spotlight Icon -->
-              <icon src="res/ios/icon-40.png" width="40" height="40" />
-              <icon src="res/ios/icon-40@2x.png" width="80" height="80" />
-              <!-- iPhone / iPod Touch -->
-              <icon src="res/ios/icon.png" width="57" height="57" />
-              <icon src="res/ios/icon@2x.png" width="114" height="114" />
-              <!-- iPad -->
-              <icon src="res/ios/icon-72.png" width="72" height="72" />
-              <icon src="res/ios/icon-72@2x.png" width="144" height="144" />
-              <!-- iPhone Spotlight and Settings Icon -->
-              <icon src="res/ios/icon-small.png" width="29" height="29" />
-              <icon src="res/ios/icon-small@2x.png" width="58" height="58" />
-              <!-- iPad Spotlight and Settings Icon -->
-              <icon src="res/ios/icon-50.png" width="50" height="50" />
-              <icon src="res/ios/icon-50@2x.png" width="100" height="100" />
-     </platform>
-   
-   
-    <platform name="android">
-        <!-- you can use any density that exists in the Android project -->
-        <gap:splash src="res/screens/android/screen-port-hdpi.png" density="port-hdpi" />
-        <gap:splash src="res/screens/android/screen-port-ldpi.png" density="port-ldpi" />
-        <gap:splash src="res/screens/android/screen-port-mdpi.png" density="port-mdpi" />
-        <gap:splash src="res/screens/android/screen-port-xhdpi.png" density="port-xhdpi" />
-    </platform>
+
+    <!-- iOS 8.0+ -->
+    <!-- iPhone 6 Plus  -->
+    <icon src="res/ios/icon-60@3x.png" gap:platform="ios" width="180" height="180" />
+    <!-- iOS 7.0+ -->
+    <!-- iPhone / iPod Touch  -->
+    <icon src="res/ios/icon-60.png" gap:platform="ios" width="60" height="60" />
+    <icon src="res/ios/icon-60@2x.png" gap:platform="ios" width="120" height="120" />
+    <!-- iPad -->
+    <icon src="res/ios/icon-76.png" gap:platform="ios" width="76" height="76" />
+    <icon src="res/ios/icon-76@2x.png" gap:platform="ios" width="152" height="152" />
+    <!-- iOS 6.1 -->
+    <!-- Spotlight Icon -->
+    <icon src="res/ios/icon-40.png" gap:platform="ios" width="40" height="40" />
+    <icon src="res/ios/icon-40@2x.png" gap:platform="ios" width="80" height="80" />
+    <!-- iPhone / iPod Touch -->
+    <icon src="res/ios/icon.png" gap:platform="ios" width="57" height="57" />
+    <icon src="res/ios/icon@2x.png" gap:platform="ios" width="114" height="114" />
+    <!-- iPad -->
+    <icon src="res/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+    <icon src="res/ios/icon-72@2x.png" gap:platform="ios" width="144" height="144" />
+    <!-- iPhone Spotlight and Settings Icon -->
+    <icon src="res/ios/icon-small.png" gap:platform="ios" width="29" height="29" />
+    <icon src="res/ios/icon-small@2x.png" gap:platform="ios" width="58" height="58" />
+    <!-- iPad Spotlight and Settings Icon -->
+    <icon src="res/ios/icon-50.png" gap:platform="ios" width="50" height="50" />
+    <icon src="res/ios/icon-50@2x.png" gap:platform="ios" width="100" height="100" />
+    
+    <icon src="img/logo.png" />
+
+
+    <!-- you can use any density that exists in the Android project -->
+    <gap:splash src="res/screens/android/screen-port-hdpi.png" gap:platform="android" density="port-hdpi" />
+    <gap:splash src="res/screens/android/screen-port-ldpi.png" gap:platform="android" density="port-ldpi" />
+    <gap:splash src="res/screens/android/screen-port-mdpi.png" gap:platform="android" density="port-mdpi" />
+    <gap:splash src="res/screens/android/screen-port-xhdpi.png" gap:platform="android" density="port-xhdpi" />
+
 
     <platform name="ios">
         <!-- images are determined by width and height. The following are supported -->
-        <gap:splash src="res/screens/ios/screen~iphone.png" width="320" height="480" />
-        <gap:splash src="res/screens/ios/screen@2x~iphone.png" width="640" height="960" />
-        <gap:splash src="res/screens/ios/screen-Portrait~ipad.png" width="768" height="1024" />
-        <gap:splash src="res/screens/ios/screen-Portrait@2x~ipad.png" width="1536" height="2048" />
-        <gap:splash src="res/screens/ios/screen-568h@2x~iphone.png" width="640" height="1136" />
-        <gap:splash src="res/screens/ios/screen-568h.png" width="320" height="568" />
-        <gap:splash src="res/screens/ios/screen-667h.png" width="750" height="1334" />
-        <gap:splash src="res/screens/ios/screen-736h.png" width="1242" height="2208" />
+        <gap:splash src="res/screens/ios/screen~iphone.png" gap:platform="ios" width="320" height="480" />
+        <gap:splash src="res/screens/ios/screen@2x~iphone.png" gap:platform="ios" width="640" height="960" />
+        <gap:splash src="res/screens/ios/screen-Portrait~ipad.png" gap:platform="ios" width="768" height="1024" />
+        <gap:splash src="res/screens/ios/screen-Portrait@2x~ipad.png" gap:platform="ios" width="1536" height="2048" />
+        <gap:splash src="res/screens/ios/screen-568h@2x~iphone.png" gap:platform="ios" width="640" height="1136" />
+        <gap:splash src="res/screens/ios/screen-568h.png" gap:platform="ios" width="320" height="568" />
+        <gap:splash src="res/screens/ios/screen-667h.png" gap:platform="ios" width="750" height="1334" />
+        <gap:splash src="res/screens/ios/screen-736h.png" gap:platform="ios" width="1242" height="2208" />
     </platform>
 
 
