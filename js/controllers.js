@@ -27,7 +27,19 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('HomeCtrl', function ($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location) {
 
+    //INTRO MODAL
+    
+    $ionicModal.fromTemplateUrl('templates/intro.html', {
+            id: '2',
+            scope: $scope
+        }).then(function (modal) {
+            $scope.oModal2 = modal;
 
+        });
+    
+    $scope.showIntro = function() {
+        $scope.oModal2.show();
+    };
     //opensearch
 
     $scope.opensearch = function () {
@@ -207,7 +219,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.doLogin = function (userdata) {
         var useremail = userdata.email;
         var password = userdata.password;
-        MyServices.loginuser(useremail, password).success(loginsuccess)
+        MyServices.loginuser(useremail, password).success(loginsuccess);
+        $scope.showIntro();
     };
 
     //Logout function

@@ -5,26 +5,21 @@
     }
 </style>
 
-<ion-view title="Intro">
-<!--
-    <ion-nav-buttons side="left">
-        <button class="button button-clear no-animation" ng-click="startApp()" ng-if="!slideIndex">
-            Skip Intro
-        </button>
-        <button class="button button-clear no-animation" ng-click="previous()" ng-if="slideIndex > 0">
-            Previous Slide
-        </button>
-    </ion-nav-buttons>
--->
-    <ion-nav-buttons side="right">
-        <button class="button button-clear no-animation" ng-click="next()" ng-if="slideIndex != 2">
+
+<div class="modal" ng-controller="IntroCtrl">
+    <ion-header-bar class="bar bar-assertive">
+        <h1 class="title">Intro</h1>
+        <div class="buttons">
+            <button class="button button-clear no-animation" ng-click="next();" ng-show="slideIndex != 2">
             Next
         </button>
-        <button class="button button-clear no-animation" ng-click="startApp()" ng-if="slideIndex == 2">
+        <button class="button button-clear no-animation" ng-click="startApp();" ng-if="slideIndex == 2">
             Start using 91streets
         </button>
-    </ion-nav-buttons>
-    <ion-slide-box on-slide-changed="slideChanged($slideIndex)" show-pager="true" >
+        </div>
+    </ion-header-bar>
+    <ion-content>
+       <ion-slide-box on-slide-changed="slideChanged($slideIndex)" show-pager="true" >
 
         <ion-slide>
             <h3>Thank you for choosing us!</h3>
@@ -73,4 +68,5 @@
 
 
     </ion-slide-box>
-</ion-view>
+    </ion-content>
+</div>
