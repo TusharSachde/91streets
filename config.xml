@@ -82,6 +82,7 @@
         <gap:splash src="res/screens/ios/screen-Portrait~ipad.png" width="768" height="1024" />
         <gap:splash src="res/screens/ios/screen-Portrait@2x~ipad.png" width="1536" height="2048" />
         <gap:splash src="res/screens/ios/screen-568h@2x~iphone.png" width="640" height="1136" />
+        <gap:splash src="res/screens/ios/screen-568h.png" width="320" height="568" />
         <gap:splash src="res/screens/ios/screen-667h.png" width="750" height="1334" />
         <gap:splash src="res/screens/ios/screen-736h.png" width="1242" height="2208" />
     </platform>
