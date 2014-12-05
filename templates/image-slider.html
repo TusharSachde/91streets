@@ -1,4 +1,4 @@
-<div class="modal image-modal transparent" ng-click="closeModal()">
+<div class="modal image-modal transparent imager" ng-click="closeModal()">
     <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="false">
         <ion-slide ng-repeat="newarrival in newarrivals">
             <img ng-src="{{newarrival.image|imagepath}}" class="fullscreener" />
