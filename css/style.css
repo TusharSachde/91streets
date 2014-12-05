@@ -519,13 +519,13 @@ h3,
 }
 .fullscreener {
     display: block;
-    max-width: 100%;
-    /* width: 100%; */
+    max-width: 80%;
+    /*    width: 100%;*/
     /* height: auto; */
     max-height: 100%;
     /* bottom: 0; */
     /* left: 0; */
-    margin: 15% auto;
+    margin: 50px auto;
     overflow: auto;
     /* position: fixed; */
     right: 0;
@@ -637,4 +637,10 @@ textarea.review {
 }
 .popup ul {
     text-align: center;
+}
+@media screen and (max-width: 767px) {
+    .fullscreener {
+        max-width: 80%;
+        width: 100%;
+    }
 }
