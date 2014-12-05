@@ -1,9 +1,11 @@
 <style>
     .introd .slider-slide {
-        padding-top: 80px;
+        padding-top: 50px;
         text-align: center;
     }
-    .modal-backdrop.active {background: white;}
+    .modal-backdrop.active {
+        background: white;
+    }
 </style>
 
 
@@ -13,10 +15,10 @@
         <button class="button button-clear no-animation" ng-click="startApp();">
             Close
         </button>
-        </div>
-    </ion-header-bar>
-    <ion-content class="introd">
-       <ion-slide-box on-slide-changed="slideChanged($slideIndex)" show-pager="true" >
+</div>
+</ion-header-bar>
+<ion-content class="introd">
+    <ion-slide-box on-slide-changed="slideChanged($slideIndex)" show-pager="true">
 
         <ion-slide>
             <h5>Like <i class="ion-heart assertive"></i> your Favourite Brands to Stay updated with Offers and New Arrivals! Get some Rewards too!</h5>
@@ -24,28 +26,28 @@
                 <img src="img/intro/fav.png" class="full-image">
             </div>
         </ion-slide>
-        
+
         <ion-slide>
             <h5>Find offers and new arrivals in every store of your favourite brands &amp; malls! Like, rate, review and share!</h5>
             <div class="intro">
                 <img src="img/intro/spy.png" class="full-image">
             </div>
         </ion-slide>
-        
+
         <ion-slide>
             <h5>Check Malls in the city and browse through stores and offers in the mall.</h5>
             <div class="intro">
                 <img src="img/intro/rcity.png" class="full-image">
             </div>
         </ion-slide>
-        
+
         <ion-slide>
             <h5>Share your Shopping Plan and receive recommendations for the same.</h5>
             <div class="intro">
                 <img src="img/intro/sp.png" class="full-image">
             </div>
         </ion-slide>
-        
+
         <ion-slide>
             <h5>Find relevant stores by using category &amp; Sub-category filters (Eg: Find out stores for party wear clothing, formal clothing, sports footwear, etc. by using the category filters).</h5>
             <div class="intro">
@@ -54,5 +56,5 @@
         </ion-slide>
 
     </ion-slide-box>
-    </ion-content>
+</ion-content>
 </div>
