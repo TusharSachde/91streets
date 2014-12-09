@@ -107,8 +107,10 @@
         }
 
         function showError(error) {
+            console.log(error);
             switch (error.code) {
                 case error.PERMISSION_DENIED:
+                    
                     navigator.notification.alert(
                         'We dont have access to location services on your device. <br> Please go to settings and enable location services to get accurate results!', // message
                         alertDismissed, // callback
