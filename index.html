@@ -85,11 +85,11 @@
                 longitude: 0
             }
         };
-        var lat=0;
-        var long=0;
-        
+        var lat = 0;
+        var long = 0;
+
         getLocation();
-        
+
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -101,24 +101,44 @@
         function showPosition(position) {
             var latlon = position.coords.latitude + "," + position.coords.longitude;
             console.log(position.coords);
-            lat=position.coords.latitude;
-            long=position.coords.longitude;
+            lat = position.coords.latitude;
+            long = position.coords.longitude;
         }
 
         function showError(error) {
             switch (error.code) {
-            case error.PERMISSION_DENIED:
-                x.innerHTML = "User denied the request for Geolocation."
-                break;
-            case error.POSITION_UNAVAILABLE:
-                x.innerHTML = "Location information is unavailable."
-                break;
-            case error.TIMEOUT:
-                x.innerHTML = "The request to get user location timed out."
-                break;
-            case error.UNKNOWN_ERROR:
-                x.innerHTML = "An unknown error occurred."
-                break;
+                case error.PERMISSION_DENIED:
+                    navigator.notification.alert(
+                        'We dont have access to location services on your device. <br> Please go to settings and enable location services to get accurate results!', // message
+                        alertDismissed, // callback
+                        'Oops!', // title
+                        'Okay!' // buttonName
+                    );
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    navigator.notification.alert(
+                        'We dont have access to location services on your device. <br> Please go to settings and enable location services to get accurate results!', // message
+                        alertDismissed, // callback
+                        'Oops!', // title
+                        'Okay!' // buttonName
+                    );
+                    break;
+                case error.TIMEOUT:
+                    navigator.notification.alert(
+                        'We dont have access to location services on your device. <br> Please go to settings and enable location services to get accurate results!', // message
+                        alertDismissed, // callback
+                        'Oops!', // title
+                        'Okay!' // buttonName
+                    );
+                    break;
+                case error.UNKNOWN_ERROR:
+                    navigator.notification.alert(
+                        'We dont have access to location services on your device. <br> Please go to settings and enable location services to get accurate results!', // message
+                        alertDismissed, // callback
+                        'Oops!', // title
+                        'Okay!' // buttonName
+                    );
+                    break;
             }
 
         };
