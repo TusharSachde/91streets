@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.91streets.91streets" version="1.0.0" versionCode="1">
+<!--Use this in IOS-->
+<!--<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.91streets.91streets" version="2.0.0" versionCode="4">-->
+
+<!--Use this in Android-->
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.nintyonestreets.nintyonestreets" version="2.0.0" versionCode="4">
 
     <name>91streets</name>
 
