@@ -18,10 +18,28 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 })
 
-.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location, $ionicLoading) {
+.controller('HomeCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location, $ionicLoading, $ionicPopup) {
 
     sendtoga("Home Page");
-    
+
+    //No Location
+    $scope.locationPopup = function() {
+        $scope.data = {}
+
+        // An elaborate, custom popup
+        var myPopup = $ionicPopup.show({
+            template: '<div class="text-center"><h1 class="ion-location assertive"></h1><p>We dont have access to location services on your device. <br> Please go to settings and enable location services to get accurate results.</p>',
+            title: 'Oops!',
+            scope: $scope,
+
+        });
+        $timeout(function() {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 6000);
+    };
+
+
+
     //Loader
     $ionicLoading.show({
         template: 'Loading...',
@@ -60,7 +78,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(data);
         $scope.slider = data;
         $ionicSlideBoxDelegate.update();
-        $ionicLoading.hide();
+        $ionicLoading.hide(); 
     };
     MyServices.getbanner().success(bannersuccess);
 
@@ -269,7 +287,8 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     // Share
     $scope.share = function() {
         console.log('Share');
-        window.plugins.socialsharing.share('Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        sendtoga("App shared");
+        window.plugins.socialsharing.share('Download 91streets: http://www.91streets.com/download/');
     };
 
 })
@@ -557,14 +576,14 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     var check1 = 0;
 
 
-//Loader
+    //Loader
     $ionicLoading.show({
         template: 'Loading...',
         animation: 'fade-in',
         showBackdrop: false,
         maxWidth: 200
     });
-    
+
     var getshoppingbaggg = function(data, status) {
         $location.url('/tab/shopping');
 
