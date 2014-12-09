@@ -1,5 +1,6 @@
 var lat = 0;
 var long = 0;
+var applink = 'http://www.91streets.com/download/';
 angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
 .controller('IntroCtrl', function($scope, $stateParams, $ionicModal, $timeout, MyServices, $ionicSlideBoxDelegate, $ionicPopover, $location) {
@@ -22,6 +23,9 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     sendtoga("Home Page");
 
+    //no location
+    
+    
     //No Location
     $scope.locationPopup = function() {
         $scope.data = {}
@@ -37,8 +41,6 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
             myPopup.close(); //close the popup after 3 seconds for some reason
         }, 6000);
     };
-
-
 
     //Loader
     $ionicLoading.show({
@@ -288,7 +290,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     $scope.share = function() {
         console.log('Share');
         sendtoga("App shared");
-        window.plugins.socialsharing.share('Download 91streets: http://www.91streets.com/download/');
+        window.plugins.socialsharing.share('Download 91streets - Shopping Companion: ' +applink);
     };
 
 })
@@ -1074,7 +1076,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     // Share
     $scope.share = function() {
         console.log('Share');
-        window.plugins.socialsharing.share('Checkout ' + $scope.storedetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        window.plugins.socialsharing.share('Checkout ' + $scope.storedetails.brandname + ' on 91streets, Download 91streets: ' +applink);
     }
 
 
@@ -1503,7 +1505,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     // Share
     $scope.share = function() {
         console.log('Share');
-        window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: ' +applink);
     }
 
     // Share img
@@ -1511,7 +1513,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
         console.log(imagepath + image);
         console.log(image);
         console.log(imagepath);
-        window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets', null, imagepath + image);
+        window.plugins.socialsharing.share('Checkout ' + $scope.branddetails.brandname + ' on 91streets, Download 91streets: ' +applink, null, imagepath + image);
     }
     $scope.user = MyServices.getuser();
     //Rating
@@ -1970,7 +1972,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
 
     // Share
     $scope.share = function(name, header) {
-        window.plugins.socialsharing.share('Checkout ' + name + ', ' + header + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        window.plugins.socialsharing.share('Checkout ' + name + ', ' + header + ' on 91streets, Download 91streets: ' +applink);
     };
 
 })
@@ -2037,7 +2039,7 @@ angular.module('starter.controllers', ['ionic', 'myservices', 'ngCordova'])
     // Share
     $scope.share = function() {
         console.log('Share');
-        window.plugins.socialsharing.share('Checkout ' + $scope.mall.name + ' on 91streets, Download 91streets: https://play.google.com/store/apps/details?id=com.nintyonestreets.nintyonestreets');
+        window.plugins.socialsharing.share('Checkout ' + $scope.mall.name + ' on 91streets, Download 91streets: ' +applink);
     };
 
 
