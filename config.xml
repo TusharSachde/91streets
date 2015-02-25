@@ -98,13 +98,13 @@
     <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.file-transfer" />
     <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.0.2" />
+    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.dialogs" />
 
-    <gap:plugin name="com.adobe.plugins.gaplugin" version="2.3.1" />
+    <gap:plugin name="com.adobe.plugins.gaplugin" />
 
     <feature name="http://api.phonegap.com/1.0/file" />
     <feature name="http://api.phonegap.com/1.0/geolocation" />
