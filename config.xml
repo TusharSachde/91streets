@@ -36,6 +36,7 @@
     <preference name="target-device" value="universal" />
     <preference name="LoadUrlTimeoutValue" value="200000" />
     <preference name="deployment-target" value="6.1" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
 
 
     <!-- iOS 8.0+ -->
